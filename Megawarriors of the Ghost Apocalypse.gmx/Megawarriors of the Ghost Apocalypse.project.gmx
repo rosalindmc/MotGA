@@ -10,6 +10,9 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_mvntCrtl.gml</script>
+  </scripts>
   <help>
     <rtf>help.rtf</rtf>
   </help>
