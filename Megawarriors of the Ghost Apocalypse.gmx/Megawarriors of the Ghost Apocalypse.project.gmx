@@ -6,13 +6,34 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_anewsprite</sprite>
+    <sprite>sprites\spr_mask</sprite>
+    <sprite>sprites\spr_reticle</sprite>
+    <sprite>sprites\spr_reticle2</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_mvntCrtl.gml</script>
+    <scripts name="Character">
+      <script>scripts\characterInitialize.gml</script>
+      <script>scripts\charStep.gml</script>
+      <script>scripts\gravity.gml</script>
+      <script>scripts\isoDepth.gml</script>
+      <script>scripts\moveLimit.gml</script>
+      <script>scripts\moveStep.gml</script>
+      <script>scripts\facing.gml</script>
+      <script>scripts\playerControl.gml</script>
+      <script>scripts\rotate.gml</script>
+      <script>scripts\pcInitialize.gml</script>
+    </scripts>
   </scripts>
+  <objects name="objects">
+    <object>objects\obj_char</object>
+    <object>objects\obj_camera</object>
+    <object>objects\obj_control</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rom_game</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>

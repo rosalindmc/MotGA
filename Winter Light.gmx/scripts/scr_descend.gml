@@ -1,0 +1,3 @@
+//Victory
+global.win = true
+
