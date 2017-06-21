@@ -1,4 +1,4 @@
-//Apply Gravity
+/*Apply Gravity
 grid = collision_point(x,y,obj_grid,false,false)
 
 if instance_exists(grid)

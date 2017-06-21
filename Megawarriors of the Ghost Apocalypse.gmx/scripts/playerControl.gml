@@ -5,6 +5,9 @@ leftKey = keyboard_check(global.leftKey)
 downKey = keyboard_check(global.downKey)
 rightKey = keyboard_check(global.rightKey)
 
+//Movement
+moveControl()
+
 /*
 lftclickKey = mouse_check_button(mb_left)
 rgtclickKey = mouse_check_button(mb_right)
@@ -38,8 +41,6 @@ else
     sprinting = false
 }
 */
-//Movement
-scr_moveControl()
 /*
 //Dodge Control
 if dodgeKey = true and canMove = true and sp >= dodgeCost and point_distance(x,y,pointx,pointy) > 5

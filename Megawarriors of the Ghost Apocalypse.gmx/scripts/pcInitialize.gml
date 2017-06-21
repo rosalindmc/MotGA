@@ -1,4 +1,4 @@
-//PC
+/*PC
 pc = true
 global.pc = id
 control = playerControl

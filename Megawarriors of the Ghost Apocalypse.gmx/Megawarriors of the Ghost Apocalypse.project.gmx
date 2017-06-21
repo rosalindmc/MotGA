@@ -14,26 +14,69 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Character">
-      <script>scripts\characterInitialize.gml</script>
-      <script>scripts\charStep.gml</script>
       <script>scripts\gravity.gml</script>
-      <script>scripts\isoDepth.gml</script>
-      <script>scripts\moveLimit.gml</script>
-      <script>scripts\moveStep.gml</script>
-      <script>scripts\facing.gml</script>
-      <script>scripts\playerControl.gml</script>
+      <script>scripts\charFacing.gml</script>
       <script>scripts\rotate.gml</script>
       <script>scripts\pcInitialize.gml</script>
+      <scripts name="Control">
+        <script>scripts\playerControl.gml</script>
+        <script>scripts\moveControl.gml</script>
+        <script>scripts\moveLimit.gml</script>
+        <script>scripts\moveStep.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="Object Scripts">
+      <script>scripts\control.gml</script>
+      <script>scripts\char.gml</script>
+    </scripts>
+    <scripts name="Universal">
+      <script>scripts\isoDepth.gml</script>
+      <script>scripts\drawText.gml</script>
     </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_dmg</font>
+    <font>fonts\fnt_dmgHuge</font>
+    <font>fonts\fnt_dmgPlus</font>
+    <font>fonts\fnt_lrgMenu</font>
+    <font>fonts\fnt_menu</font>
+    <font>fonts\fnt_small</font>
+    <font>fonts\fnt_smlMenu</font>
+  </fonts>
   <objects name="objects">
-    <object>objects\obj_char</object>
-    <object>objects\obj_camera</object>
-    <object>objects\obj_control</object>
+    <objects name="Core Objects">
+      <object>objects\obj_char</object>
+      <object>objects\obj_status</object>
+      <object>objects\obj_control</object>
+    </objects>
+    <objects name="Collider Tree">
+      <object>objects\obj_hitCollider</object>
+      <object>objects\obj_meleeCollider</object>
+      <object>objects\obj_projectile</object>
+      <object>objects\obj_aoe</object>
+    </objects>
+    <objects name="Environment">
+      <object>objects\obj_solid</object>
+      <object>objects\obj_floor</object>
+      <object>objects\obj_terrain</object>
+      <object>objects\obj_wall</object>
+      <object>objects\obj_door</object>
+    </objects>
+    <objects name="Aesthetics">
+      <object>objects\obj_doodad</object>
+      <object>objects\obj_particle</object>
+    </objects>
+    <objects name="Items">
+      <object>objects\obj_interactable</object>
+      <object>objects\obj_item</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rom_game</room>
   </rooms>
+  <constants number="1">
+    <constant name="metre">20</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
