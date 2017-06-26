@@ -16,23 +16,26 @@ if canMove = true
     //Horizontal Movement
     if leftKey-rightKey = 1
     {
-        hspd = max(-moveT,hspd-(moveT*accel))
+        hspd = max(-moveT,hspd-(moveT*(accel+fric)/global.frameRate))
     }
     else if leftKey-rightKey = -1
     {
-        hspd = min(moveT,hspd+(moveT*accel))
+        hspd = min(moveT,hspd+(moveT*(accel+fric)/global.frameRate))
     }
     
     //Vertical Movement
     if upKey-downKey = 1
     {
-        vspd = max(-moveT,vspd-(moveT*accel))
+        vspd = max(-moveT,vspd-(moveT*(accel+fric)/global.frameRate))
     }
     else if upKey-downKey = -1
     {
-        vspd = min(moveT,vspd+(moveT*accel))
+        vspd = min(moveT,vspd+(moveT*(accel+fric)/global.frameRate))
     }
     
-    hspd = lengthdir_x(min(moveT,point_distance(0,0,hspd,vspd)),point_direction(0,0,hspd,vspd))
-    vspd = lengthdir_y(min(moveT,point_distance(0,0,hspd,vspd)),point_direction(0,0,hspd,vspd))
+    hT = hspd
+    vT = vspd
+    dT = point_distance(0,0,hT,vT)
+    hspd = lengthdir_x(min(moveT,dT),point_direction(0,0,hT,vT))
+    vspd = lengthdir_y(min(moveT,dT),point_direction(0,0,hT,vT))
 }

@@ -3,15 +3,15 @@
 
 #define charInitialize
 //Movement Essentials
-movement = 5        //Metres per second
+movement = 8        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
 hspd = 0
 vspd = 0
 zspd = 0
-fric = 5            //Metres per second
-accel = 1           //% max speed gained per second of acceleration
+fric = 4            //% per second
+accel = 4           //% max speed gained per second of acceleration
 
 canMove = true      //Can move check
 canAttack = true    //Can attack check
@@ -33,6 +33,18 @@ controlScript = playerControl       //Temp, replace with ai control
 #define charStep
 //Execute Control Script
 script_execute(controlScript)
+
+if mouse_wheel_down()
+{
+    global.frameRate -= 1
+    room_speed = global.frameRate
+}
+if mouse_wheel_up()
+{
+    global.frameRate += 1
+    room_speed = global.frameRate
+}
+
 
 /*
 script_execute(control)
@@ -131,17 +143,17 @@ dTerrain = grid.difficult
 
 #define charEndstep
 //Movement
-moveLimit()
 moveStep()
+moveLimit()
 isoDepth(0)
 
 #define charDestroy
 
 #define charDraw
-draw_sprite(spr_reticle,0,x,y)
-draw_set_colour(c_white)
-draw_text(x,y+10,x)
-draw_text(x,y+20,y)
-draw_text(x,y+30,hspd)
-draw_text(x,y+40,vspd)
+//Draw Character
 
+//Temp just draw random stuff
+draw_set_colour(c_white)
+draw_rectangle(round(x)-4,round(y)-16,round(x)+4,round(y),false)
+draw_text(round(x),round(y)+20,global.frameRate)
+draw_text(round(x),round(y)+30,moving*global.frameRate/metre)

@@ -14,7 +14,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Character">
-      <script>scripts\gravity.gml</script>
+      <script>scripts\applyGravity.gml</script>
       <script>scripts\charFacing.gml</script>
       <script>scripts\rotate.gml</script>
       <script>scripts\pcInitialize.gml</script>
@@ -75,7 +75,7 @@
     <room>rooms\rom_game</room>
   </rooms>
   <constants number="1">
-    <constant name="metre">20</constant>
+    <constant name="metre">12</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
