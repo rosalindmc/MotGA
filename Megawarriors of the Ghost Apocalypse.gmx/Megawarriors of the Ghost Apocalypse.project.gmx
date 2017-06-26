@@ -76,6 +76,7 @@
       <object>objects\obj_terrain</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_door</object>
+      <object>objects\obj_flag</object>
     </objects>
     <objects name="Aesthetics">
       <object>objects\obj_doodad</object>
