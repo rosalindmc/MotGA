@@ -9,6 +9,11 @@
     <sprite>sprites\spr_mask</sprite>
     <sprite>sprites\spr_reticle</sprite>
     <sprite>sprites\spr_reticle2</sprite>
+    <sprite>sprites\spr_humanoidArms</sprite>
+    <sprite>sprites\spr_humanoidLegs</sprite>
+    <sprite>sprites\spr_humanoidHead</sprite>
+    <sprite>sprites\spr_humanoidChest</sprite>
+    <sprite>sprites\spr_humanoidTorso</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
