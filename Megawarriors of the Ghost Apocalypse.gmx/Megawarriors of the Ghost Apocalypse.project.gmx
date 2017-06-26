@@ -33,6 +33,13 @@
       <script>scripts\isoDepth.gml</script>
       <script>scripts\drawText.gml</script>
     </scripts>
+    <scripts name="Level Generation">
+      <script>scripts\levelGenMaster.gml</script>
+      <script>scripts\renameThisScriptLater1.gml</script>
+      <script>scripts\renameThisScriptLater2.gml</script>
+      <script>scripts\renameThisScriptLater3.gml</script>
+      <script>scripts\biomeDungeon.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_dmg</font>
