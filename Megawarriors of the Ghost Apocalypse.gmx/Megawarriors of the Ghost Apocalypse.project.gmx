@@ -13,7 +13,7 @@
     <sprite>sprites\spr_humanoidLegs</sprite>
     <sprite>sprites\spr_humanoidHead</sprite>
     <sprite>sprites\spr_humanoidChest</sprite>
-    <sprite>sprites\spr_humanoidTorso</sprite>
+    <sprite>sprites\spr_humanoidBody</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -28,6 +28,9 @@
         <script>scripts\moveControl.gml</script>
         <script>scripts\moveLimit.gml</script>
         <script>scripts\moveStep.gml</script>
+      </scripts>
+      <scripts name="Anim Types">
+        <script>scripts\humanoid.gml</script>
       </scripts>
     </scripts>
     <scripts name="Object Scripts">

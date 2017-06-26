@@ -2,6 +2,13 @@
 
 
 #define charInitialize
+//Art Essentials
+animType = humanoid
+animUpdate = true
+
+//Temp Run animType Initialize (move to a create char script later so this can be adjusted)
+script_execute(animType,0)
+
 //Movement Essentials
 movement = 8        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
@@ -148,11 +155,20 @@ moveLimit()
 isoDepth(0)
 
 #define charDestroy
+//Clear the drawing surface
+surface_free(charSurf)
 
 #define charDraw
 //Draw Character
+if animUpdate = true
+{
+    script_execute(animType,1)
+    animUpdate = true   //switch to false after
+}
 
-//Temp just draw random stuff
+draw_surface(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75)))
+
+/*Temp just draw random stuff
 draw_set_colour(c_white)
 draw_rectangle(round(x)-4,round(y)-16,round(x)+4,round(y),false)
 draw_text(round(x),round(y)+20,global.frameRate)
