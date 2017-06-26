@@ -5,6 +5,7 @@
 //Essentials
 global.frameRate = 60
 global.timeMult = 1
+enumerators();
 
 //Controls
 global.upKey = ord('W')
@@ -14,6 +15,7 @@ global.rightKey = ord('D')
 
 //Create pc
 global.pc = instance_create(x,y,obj_char)
+
 
 /*
 x = room_width/2
@@ -99,4 +101,60 @@ if black > 0
         draw_set_font(fnt_dmgHuge)
         drawText(c_black,c_red,view_xview+(view_wview/2),view_yview+(view_hview/2),'DEAD')
     }
+}
+#define enumerators
+enum BiomeGen{
+    forest = 0,
+    swamp = 1,
+    mountain = 2,
+    plain = 3,
+    cave = 10,
+    temple = 11,
+    dungeon = 12
+}
+
+enum BiomeElem{
+    fire = 0,
+    ghost = 1,
+    metal = 2,
+    leaf = 3,
+    chaos = 10,
+    law = 11,
+    good = 12,
+    evil = 13,
+    debrah = 14
+}
+
+enum MapSize{
+    small = 40,
+    medium = 60,
+    large = 80
+}
+
+enum poiType{
+    port = 0,
+    shrine = 1,
+    site = 2,
+    miniboss = 10,
+    specItem = 11,
+    specChar = 12,
+    dungeonPort = 13
+    //Doors and Keysssss?
+}
+
+enum dmgType{
+    normal = 0,
+    rend = 1,
+    impact = 2,
+    pierce = 3,   
+    fire = 4,
+    cold = 5,
+    corrode = 6,
+    lightning = 7,
+    radiant = 8,
+    profane = 9,
+    poison = 10,
+    blood = 11,
+    mind = 12,
+    thunder = 13
 }
