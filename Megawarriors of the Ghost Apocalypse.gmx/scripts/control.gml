@@ -16,6 +16,7 @@ global.rightKey = ord('D')
 //Create pc
 global.pc = instance_create(x,y,obj_char)
 
+<<<<<<< HEAD
 //temp node
 global.currLevel = instance_create(0,0,obj_level)
 
@@ -43,6 +44,10 @@ with (global.currLevel){
     roadMaker()
 }
 
+=======
+//Camera
+shake = 0
+>>>>>>> origin/master
 
 /*
 x = room_width/2
@@ -55,29 +60,33 @@ kick = 0
 global.frameRate = 60
 
 room_speed = global.frameRate
-
-
 randomize()
 
 #define controlStep
-/*
+//Adjust Camera Position
 if instance_exists(global.pc)
 {
-ix = (global.pc.x+global.pc.x+mouse_x)*.3333
-iy = (global.pc.y+global.pc.y+mouse_y)*.3333
-x = round(((ix+x)*.5)-shake+random(shake*2))
-y = round(((iy+y)*.5)-shake+random(shake*2))
+    ix = (global.pc.x+global.pc.x+mouse_x)*.3333
+    iy = (global.pc.y+global.pc.y+mouse_y)*.3333
+    x = round(((ix+x)*.5)-shake+random(shake*2))
+    y = round(((iy+y)*.5)-shake+random(shake*2))
 }
 
+//Camera
+view_xview[0] = median(0,x-320,room_width-640)
+view_yview[0] = median(0,y-180,room_height-360)
+
+//Reduce Shake
 if shake > .1
 {
-shake -= shake*(5/global.frameRate)
+    shake -= shake*(5/global.frameRate)
 }
 else
 {
-shake = 0
+    shake = 0
 }
 
+/*
 if global.pc.vis = true and global.win = false
 {
     black -= 1/global.frameRate
@@ -131,6 +140,7 @@ if black > 0
     }
 }
 
+<<<<<<< HEAD
 */
 
 
@@ -163,6 +173,8 @@ with(global.currLevel){
 
 
 
+=======
+>>>>>>> origin/master
 #define enumerators
 enum biomeGen{
     none = 0,
@@ -222,6 +234,7 @@ enum dmgType{
     mind = 12,
     thunder = 13
 }
+<<<<<<< HEAD
 
 enum podType{
     none = 0,
@@ -238,3 +251,5 @@ enum bossType{
     champion = 1
 }
 
+=======
+>>>>>>> origin/master

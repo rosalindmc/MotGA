@@ -15,9 +15,13 @@ podSpawn = 0    //whether or not this has a pod spawn
 
 boss = 0        //whether or not this has a boss
 
+<<<<<<< HEAD
 item = 0        //whether or not this has a special item
 
 roads = 0       //whether or not this has roads
 
 
 #define script17
+=======
+roads = 0
+>>>>>>> origin/master

@@ -10,7 +10,7 @@ animUpdate = true
 script_execute(animType,0)
 
 //Movement Essentials
-movement = 8        //Metres per second
+movement = 16        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
@@ -23,15 +23,34 @@ accel = 4           //% max speed gained per second of acceleration
 canMove = true      //Can move check
 canAttack = true    //Can attack check
 
+//Animations
+animIndex[0] = 0    //Current animation (For Legs+Body)
+animStep[0] = 0     //Current animation step
+animDelay[0] = 0    //How many seconds to next step
+animSpeed[0] = 1    //Multiplier for animation speed (can be negative)
+
+animIndex[1] = 0    //Right Hand
+animStep[1] = 0     
+animDelay[1] = 0    
+animSpeed[1] = 1    
+
+animIndex[2] = 0    //Left Hand
+animStep[2] = 0     
+animDelay[2] = 0    
+animSpeed[2] = 1    
+
+bodyTwist = 0
+greatWeapon = false
+
 //Targeting Essentials
 targetX = x
 targetY = y
 
-facingV = 0
-facingH = 1
+vFacing = 0
+hFacing = 1
 facing = 0
 
-turnSpeed = 1
+turnSpeed = 360     //Degrees/second
 
 //Control Script
 pc = false
@@ -41,18 +60,26 @@ controlScript = playerControl       //Temp, replace with ai control
 //Execute Control Script
 script_execute(controlScript)
 
+//Facing
+facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
+
+//Temp Arm rotations
+handDir[1] = facing+15
+itemRot[1] = facing+45
+
+handDir[2] = facing-15
+itemRot[2] = facing-45
+
 if mouse_wheel_down()
 {
-    global.frameRate -= 1
-    room_speed = global.frameRate
+    handDist[1] += 1
+    handDist[2] += 1
 }
 if mouse_wheel_up()
 {
-    global.frameRate += 1
-    room_speed = global.frameRate
+    handDist[1] -= 1
+    handDist[2] -= 1
 }
-
-
 /*
 script_execute(control)
 charFacing()
@@ -166,7 +193,8 @@ if animUpdate = true
     animUpdate = true   //switch to false after
 }
 
-draw_surface(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75)))
+tSize = 1
+draw_surface_ext(charSurf,round(x-(charSurfSize*.5*tSize)),round(y-(charSurfSize*.75*tSize)),1*tSize,1*tSize,0,c_white,1)
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)
