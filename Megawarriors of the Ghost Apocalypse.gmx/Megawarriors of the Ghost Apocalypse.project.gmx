@@ -43,8 +43,8 @@
     </scripts>
     <scripts name="Level Generation">
       <script>scripts\levelGenMaster.gml</script>
-      <script>scripts\renameThisScriptLater1.gml</script>
-      <script>scripts\renameThisScriptLater2.gml</script>
+      <script>scripts\pointOfInterest.gml</script>
+      <script>scripts\map.gml</script>
       <script>scripts\renameThisScriptLater3.gml</script>
       <script>scripts\biomeDungeon.gml</script>
     </scripts>
@@ -85,6 +85,10 @@
     <objects name="Items">
       <object>objects\obj_interactable</object>
       <object>objects\obj_item</object>
+    </objects>
+    <objects name="MapGen">
+      <object>objects\obj_map</object>
+      <object>objects\obj_poi</object>
     </objects>
   </objects>
   <rooms name="rooms">

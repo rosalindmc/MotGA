@@ -6,6 +6,8 @@
         MapSizeY
         MapContent [MapSizeX][MapSizeY]
         
+    Give each tile a value according to variance and non-1 scaling
+        
 2) Generate PoI
     Variables
         PoILoc[] (multiple of 3 index array for location)
@@ -27,30 +29,17 @@
         area intersects with another's, reset the MapContent and move the 
         points away from eachother.
 
-3)Connect points of interest with paths and generate paths
+Connect points of interest with paths and generate paths
     Variables
         List or Array of points  
         
     Generate some extra points and add them to the PoI list as 
     Shuffle the list  
 
-    
-    *Overworld*
-        Choose two PoIs and find the middle point
-        Slightly randomize the middle
-        Connect the middle point to each PoI with paths that only turn up to 45 degrees
-            Check if roads need to be drawn for the PoI
-        Remove the PoIs from the list and add the middle point
-        Break when only 1 PoI remains
-        
-    *Dungeon*
-        Treat entrances to PoIs as doors
-        Build coridores and rooms that can only make 90 degree corners between rooms
-            If coridores overlap, either add doors or open walls in place of the walls
-        Arbitrarily choose some corners to be rooms, add all corners as points.
-            If no corner, treat middle point as a corner.
-        Arbitrarily choose and lock some doors
-        Place keys in dead ends
+    Put all PoI entrances on a list, then shuffle the list.
+    Using a* and the terrain costs, connect each PoI entrance
+        with the next one on a list. Set all the tiles used as 1s
+        (or 1s in the case of bridges)
           
         
     
@@ -96,4 +85,25 @@
 */
 
 
-#define GenMap
+#define genMap
+//Input map size for x and y and generate a map of tiles.
+map = instance_create(0,0,obj_flag)
+
+with (map){
+    mapSizeX = 40
+    mapSizeY = 40
+    mapFeats[0] = 0
+    //We need to have a list of maps so we can send their details instead of just generating them
+
+    mapContent[mapSizeX,mapSizeY] = 0
+    
+    genPoi(mapFeats)
+    
+        
+}
+
+
+
+#define genPoi
+
+

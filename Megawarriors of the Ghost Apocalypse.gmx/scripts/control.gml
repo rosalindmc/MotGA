@@ -103,7 +103,7 @@ if black > 0
     }
 }
 #define enumerators
-enum BiomeGen{
+enum biomeGen{
     forest = 0,
     swamp = 1,
     mountain = 2,
@@ -113,7 +113,7 @@ enum BiomeGen{
     dungeon = 12
 }
 
-enum BiomeElem{
+enum biomeElem{
     fire = 0,
     ghost = 1,
     metal = 2,
@@ -125,7 +125,7 @@ enum BiomeElem{
     debrah = 14
 }
 
-enum MapSize{
+enum mapSize{
     small = 40,
     medium = 60,
     large = 80
@@ -157,4 +157,4 @@ enum dmgType{
     blood = 11,
     mind = 12,
     thunder = 13
-}
+}}
