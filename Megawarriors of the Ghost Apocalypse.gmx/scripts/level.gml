@@ -15,4 +15,3 @@ specialAreas = 0
 varianceMap [levelSize.small,levelSize.small] = 0
 
 
-

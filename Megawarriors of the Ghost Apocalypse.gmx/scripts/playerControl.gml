@@ -8,6 +8,10 @@ rightKey = keyboard_check(global.rightKey)
 //Movement
 moveControl()
 
+//Targeting
+targetX = mouse_x
+targetY = mouse_y
+
 /*
 lftclickKey = mouse_check_button(mb_left)
 rgtclickKey = mouse_check_button(mb_right)
@@ -142,9 +146,7 @@ if canAttack = true and canAct = true
         scr_scrollItems(-1)
     }
 }
-//Targeting
-targetX = mouse_x
-targetY = mouse_y
+
 
 /*Adjust Camera
 obj_camera.kick = kick

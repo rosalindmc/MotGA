@@ -106,4 +106,3 @@ with (map){
 
 #define genPoi
 
-
