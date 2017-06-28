@@ -134,7 +134,7 @@ with(obj_poi){
     other.floorLayout[x,y].hasPoi = true
 }
 
-<<<<<<< HEAD
+
 /*
 //Set up the positions of the special areas (by center point)
 for(var i =0;i<specialAreas;i++){
@@ -142,5 +142,3 @@ for(var i =0;i<specialAreas;i++){
 }
 */
 
-=======
->>>>>>> origin/master

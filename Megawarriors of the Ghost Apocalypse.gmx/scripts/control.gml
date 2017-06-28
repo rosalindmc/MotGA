@@ -16,7 +16,6 @@ global.rightKey = ord('D')
 //Create pc
 global.pc = instance_create(x,y,obj_char)
 
-<<<<<<< HEAD
 //temp node
 global.currLevel = instance_create(0,0,obj_level)
 
@@ -44,10 +43,10 @@ with (global.currLevel){
     roadMaker()
 }
 
-=======
+
 //Camera
 shake = 0
->>>>>>> origin/master
+
 
 /*
 x = room_width/2
@@ -173,8 +172,8 @@ with(global.currLevel){
 
 
 
-=======
->>>>>>> origin/master
+
+
 #define enumerators
 enum biomeGen{
     none = 0,
@@ -234,7 +233,7 @@ enum dmgType{
     mind = 12,
     thunder = 13
 }
-<<<<<<< HEAD
+
 
 enum podType{
     none = 0,
@@ -251,5 +250,3 @@ enum bossType{
     champion = 1
 }
 
-=======
->>>>>>> origin/master

@@ -84,7 +84,7 @@ for(var i = 0;i<array_length_1d(pois);i++){
     }
 }
 
-<<<<<<< HEAD
+
 
 #define wipeTiles
 with (obj_floor){
@@ -113,5 +113,4 @@ else{
         ds_priority_change_priority(open, adjacent, adjacent.g);
     }
 }
-=======
->>>>>>> origin/master
+
