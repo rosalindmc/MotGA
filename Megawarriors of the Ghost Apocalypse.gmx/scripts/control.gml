@@ -16,6 +16,33 @@ global.rightKey = ord('D')
 //Create pc
 global.pc = instance_create(x,y,obj_char)
 
+//temp node
+global.currLevel = instance_create(0,0,obj_level)
+
+with (global.currLevel){
+    biomeType = 4
+    elements[0] = 0
+    sizeX = 20
+    sizeY = 20
+    
+    critPoi = 1     //the type of the critical point of interest
+    poiDensity = 4 //number of points of interest on the map
+    numEntrance = 2
+    pois[0]=0
+    
+    critPods = 0    //number of pods on the critical path
+    podDensity = 0  //number of pods on the map
+    
+    itemDensity = 0 //number of item spawns on the map
+    
+    specialAreas = 0   //number of special areas to spawn
+    
+    floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
+    
+    genLevel()
+    roadMaker()
+}
+
 
 /*
 x = room_width/2
@@ -74,6 +101,7 @@ draw_sprite(spr_backdrop,0,
 view_xview[]+(view_wview[]/2)+(480*(.5-(x/room_width))),
 view_yview[]+(view_hview[]/2)+(270*(.5-(y/room_height))))
 
+
 #define controlDrawHUD
 /*
 draw_sprite(spr_reticle,0,mouse_x,mouse_y)
@@ -102,6 +130,39 @@ if black > 0
         drawText(c_black,c_red,view_xview+(view_wview/2),view_yview+(view_hview/2),'DEAD')
     }
 }
+
+*/
+
+
+//Temp draw map for testing level gen
+
+    
+with(global.currLevel){
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+    draw_set_font(fnt_menu)
+
+    for (var i=0; i<sizeX; i++){
+        for (var j=0; j<sizeX; j++){
+            if(floorLayout[i,j].isPath == true){
+                drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,floorLayout[i,j].weight);
+            }
+            else if (floorLayout[i,j].hasPoi == true){
+                drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,floorLayout[i,j].weight);
+            }
+            else{
+                drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,floorLayout[i,j].weight);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
 #define enumerators
 enum biomeGen{
     none = 0,
@@ -160,5 +221,20 @@ enum dmgType{
     blood = 11,
     mind = 12,
     thunder = 13
+}
+
+enum podType{
+    none = 0,
+    minions = 1   
+}
+
+enum itemType{
+    none = 0,
+    knife = 1
+}
+
+enum bossType{
+    none = 0,
+    champion = 1
 }
 

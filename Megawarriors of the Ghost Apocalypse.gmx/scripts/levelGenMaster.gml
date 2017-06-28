@@ -85,25 +85,59 @@ Connect points of interest with paths and generate paths
 */
 
 
-#define genMap
-//Input map size for x and y and generate a map of tiles.
-map = instance_create(0,0,obj_flag)
+#define genLevel
 
-with (map){
-    mapSizeX = 40
-    mapSizeY = 40
-    mapFeats[0] = 0
-    //We need to have a list of maps so we can send their details instead of just generating them
+switch(biomeType){
+case 4:
+    forestGen(id)
 
-    mapContent[mapSizeX,mapSizeY] = 0
-    
-    genPoi(mapFeats)
-    
-        
 }
 
 
 
-#define genPoi
+#define forestGen
+//Generation specific to forests
 
+//Set the A* heuristic for each tile
+
+
+//floor tile setup
+for (var i=0; i<sizeX; i++){
+    for (var j=0; j<sizeY; j++){
+        floorLayout[i,j]= instance_create(i,j,obj_floor)
+        floorLayout[i,j].weight = choose(1,2,3,4,5,6,7,8)
+        floorLayout[i,j].g = 0
+        floorLayout[i,j].isPath = false
+        floorLayout[i,j].hasPoi = false
+    }
+}
+
+//set up the positions of points of interests
+pois[0] = instance_create(irandom(sizeX-5)+2,irandom(sizeY-5)+2,obj_poi)
+for (var i = 1; i<=poiDensity;i++){
+    pois[i] = instance_create(irandom(sizeX-5)+2,irandom(sizeY-5)+2,obj_poi)
+}
+for (var i = 1; i<=numEntrance;i++){
+    switch(i%4){
+        case 0:
+            pois[i+poiDensity] = instance_create(irandom(sizeX-5)+2,0,obj_poi)
+        case 1:
+            pois[i+poiDensity] = instance_create(0,irandom(sizeY-5)+2,obj_poi)
+        case 2:
+            pois[i+poiDensity] = instance_create(irandom(sizeX-5)+2,sizeY-1,obj_poi)
+        case 3:
+            pois[i+poiDensity] = instance_create(sizeX-1,irandom(sizeY-5)+2,obj_poi)
+    }
+}
+with(obj_poi){
+    other.floorLayout[x,y].weight = 10
+    other.floorLayout[x,y].hasPoi = true
+}
+
+/*
+//Set up the positions of the special areas (by center point)
+for(var i =0;i<specialAreas;i++){
+    var posX = 
+}
+*/
 

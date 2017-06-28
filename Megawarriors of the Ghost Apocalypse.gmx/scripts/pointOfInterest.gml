@@ -2,16 +2,22 @@
 
 
 #define poiInitialize
+type = poiType.none //Type of point of interest
 
-type = 0
+spaceX = 0
+spaceY = 0  //needed space
 
-critical = false
+buffer = 0  //the amount of space this has around it before it should generate walls.
 
-podSpawn = 0
+critical = false    //whether or not this is the critical PoI
 
-boss = 0
+podSpawn = 0    //whether or not this has a pod spawn
 
-item = 0
+boss = 0        //whether or not this has a boss
 
-roads = 0
+item = 0        //whether or not this has a special item
 
+roads = 0       //whether or not this has roads
+
+
+#define script17
