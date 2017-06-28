@@ -104,20 +104,22 @@ if black > 0
 }
 #define enumerators
 enum biomeGen{
-    forest = 0,
+    none = 0,
     swamp = 1,
     mountain = 2,
     plain = 3,
+    forest = 4,
     cave = 10,
     temple = 11,
     dungeon = 12
 }
 
 enum biomeElem{
-    fire = 0,
+    none = 0,
     ghost = 1,
     metal = 2,
     leaf = 3,
+    fire = 4,
     chaos = 10,
     law = 11,
     good = 12,
@@ -125,16 +127,17 @@ enum biomeElem{
     debrah = 14
 }
 
-enum mapSize{
+enum levelSize{
     small = 40,
     medium = 60,
     large = 80
 }
 
 enum poiType{
-    port = 0,
+    none = 0,
     shrine = 1,
     site = 2,
+    port = 3,
     miniboss = 10,
     specItem = 11,
     specChar = 12,
@@ -157,4 +160,5 @@ enum dmgType{
     blood = 11,
     mind = 12,
     thunder = 13
-}}
+}
+
