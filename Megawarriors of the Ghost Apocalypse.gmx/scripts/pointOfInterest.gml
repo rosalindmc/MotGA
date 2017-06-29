@@ -4,6 +4,9 @@
 #define poiInitialize
 type = poiType.none //Type of point of interest
 
+gridX = x
+gridY = y
+
 spaceX = 0
 spaceY = 0  //needed space
 
@@ -21,5 +24,4 @@ roads = 0       //whether or not this has roads
 
 
 #define script17
-
 

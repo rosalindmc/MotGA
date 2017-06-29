@@ -29,61 +29,11 @@ with (currLevel){
     floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
     
     genLevel()
-    wipeTiles()
-    roadMaker()
+    for(i = 0; i < array_length_1d(pois)-1; i++){
+        roadMaker(floorLayout[pois[i].gridX,pois[i].gridY],floorLayout[pois[i+1].gridX,pois[i+1].gridY])
+    }
     
 }
-
-
-#define roadMaker
-
-for(var i = 0;i<array_length_1d(pois);i++){
-    if (i+1 < array_length_1d(pois)){
-        var closed, start, finish
-        
-        start = floorLayout[pois[i].x,pois[i].y]
-        finish = floorLayout[pois[i+1].x,pois[i+1].y]
-                
-        open = ds_priority_create()
-        ds_priority_add(open,start,0)
-        
-        closed = ds_list_create()
-        current = start;
-        //start pathing
-        
-        while(current != finish && ds_priority_size(open)>0){
-            current = ds_priority_delete_min(open);
-            ds_list_add(closed, current);
-            
-            //step through all neighbours but only if they've you permission to pee on the lawn
-            if (current.x - 1 != -1){
-                algoCheckNeighbours(floorLayout[current.x-1, current.y]);
-            }
-            if (current.x + 1 != sizeX){
-                algoCheckNeighbours(floorLayout[current.x+1, current.y]);
-            }
-            if (current.y - 1 != -1){
-                algoCheckNeighbours(floorLayout[current.x, current.y-1]);
-            }
-            if (current.y + 1 != sizeY){
-                algoCheckNeighbours(floorLayout[current.x, current.y+1]);
-            }
-  
-        }
-
-        ds_priority_destroy(open)
-        
-        for(var i = 0; i < ds_list_size(closed); i++){
-            //get current; make it a road; where we're going, we defs need roads
-            current = ds_list_find_value(closed, i);
-            current.weight = 1;
-            current.isPath = true;
-        }
-        
-        ds_list_destroy(closed)
-    }
-}
-
 
 
 #define wipeTiles
@@ -93,24 +43,75 @@ with (obj_floor){
 }
 
 
+#define roadMaker
+wipeTiles()
+        
+var start
+
+start = argument0
+finish = argument1
+        
+open = ds_priority_create()
+ds_priority_add(open,start,0)
+
+closed = ds_list_create()
+current = start;
+//start pathing
+
+while(current != finish){
+    current = ds_priority_delete_min(open);
+    ds_list_add(closed, current);
+    
+    //step through all neighbours
+    if (current.gridX - 1 != -1){
+        algoCheckNeighbours(floorLayout[current.gridX-1, current.gridY]);
+    }
+    if (current.gridX + 1 != sizeX){
+        algoCheckNeighbours(floorLayout[current.gridX+1, current.gridY]);
+    }
+    if (current.gridY - 1 != -1){
+        algoCheckNeighbours(floorLayout[current.gridX, current.gridY-1]);
+    }
+    if (current.gridY + 1 != sizeY){
+        algoCheckNeighbours(floorLayout[current.gridX, current.gridY+1]);
+    }
+}
+
+ds_priority_destroy(open)
+ds_list_destroy(closed)
+        
+current = finish
+while(current.pathParent != noone)
+{
+    current.pathParent.weight = 1       
+    current.pathParent.isPath = true
+    current = current.pathParent
+}
+
+
+
+
 #define algoCheckNeighbours
 //TAKES AN ARGUMENT
 
 var adjacent = argument0;
 var tempG = current.g + adjacent.weight;
-//attempt to reach an unreached tile
-if(ds_priority_find_priority(open,adjacent) == 0 || ds_priority_find_priority(open,adjacent) == undefined){
-    adjacent.pathParent = current;
-    adjacent.g = tempG;
-    ds_priority_add(open, adjacent, adjacent.g);
-}
 
-//attempt to reach an already calculated tile faster
+if ds_list_find_index(closed, adjacent) < 0
+    {
+    //attempt to reach an unreached tile
+    if(ds_priority_find_priority(open,adjacent) == 0 || ds_priority_find_priority(open,adjacent) == undefined){
+        adjacent.pathParent = current;
+        adjacent.g = tempG;
+        ds_priority_add(open, adjacent, adjacent.g+point_distance(adjacent.gridX,adjacent.gridY,finish.gridX,finish.gridY)+random(.5));
+    }
+}
+/*
 else{
+//attempt to reach an already calculated tile faster
     if(tempG < adjacent.g){
         adjacent.pathParent = current;
         adjacent.g = tempG;
-        ds_priority_change_priority(open, adjacent, adjacent.g);
+        ds_priority_change_priority(open, adjacent, adjacent.g+point_distance(adjacent.gridX,adjacent.gridY,finish.gridX,finish.gridY));
     }
 }
-

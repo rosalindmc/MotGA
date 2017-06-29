@@ -86,7 +86,7 @@ Connect points of interest with paths and generate paths
 
 
 #define genLevel
-
+randomize()
 switch(biomeType){
 case 4:
     forestGen(id)
@@ -105,8 +105,10 @@ case 4:
 for (var i=0; i<sizeX; i++){
     for (var j=0; j<sizeY; j++){
         floorLayout[i,j]= instance_create(i,j,obj_floor)
-        floorLayout[i,j].weight = choose(1,2,3,4,5,6,7,8)
+        floorLayout[i,j].weight = 2 //choose(1,2,3,4,5,6,7,8)
         floorLayout[i,j].g = 0
+        floorLayout[i,j].gridX = i
+        floorLayout[i,j].gridY = j
         floorLayout[i,j].isPath = false
         floorLayout[i,j].hasPoi = false
     }
@@ -121,17 +123,21 @@ for (var i = 1; i<=numEntrance;i++){
     switch(i%4){
         case 0:
             pois[i+poiDensity] = instance_create(irandom(sizeX-5)+2,0,obj_poi)
+            break
         case 1:
             pois[i+poiDensity] = instance_create(0,irandom(sizeY-5)+2,obj_poi)
+            break
         case 2:
             pois[i+poiDensity] = instance_create(irandom(sizeX-5)+2,sizeY-1,obj_poi)
+            break
         case 3:
             pois[i+poiDensity] = instance_create(sizeX-1,irandom(sizeY-5)+2,obj_poi)
+            break
     }
 }
 with(obj_poi){
-    other.floorLayout[x,y].weight = 10
-    other.floorLayout[x,y].hasPoi = true
+    other.floorLayout[gridX,gridY].weight = 1
+    other.floorLayout[gridX,gridY].hasPoi = true
 }
 
 
@@ -141,4 +147,3 @@ for(var i =0;i<specialAreas;i++){
     var posX = 
 }
 */
-

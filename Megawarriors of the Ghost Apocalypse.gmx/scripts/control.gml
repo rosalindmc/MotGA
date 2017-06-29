@@ -26,11 +26,11 @@ with (global.currLevel){
     sizeY = 20
     
     critPoi = 1     //the type of the critical point of interest
-    poiDensity = 4 //number of points of interest on the map
-    numEntrance = 2
+    poiDensity = 5 //number of points of interest on the map
+    numEntrance = 1
     pois[0]=0
     
-    critPods = 0    //number of pods on the critical path
+    critPods =0    //number of pods on the critical path
     podDensity = 0  //number of pods on the map
     
     itemDensity = 0 //number of item spawns on the map
@@ -40,7 +40,9 @@ with (global.currLevel){
     floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
     
     genLevel()
-    roadMaker()
+    for(i = 0; i < array_length_1d(pois)-1; i++){
+        roadMaker(floorLayout[pois[i].gridX,pois[i].gridY],floorLayout[pois[i+1].gridX,pois[i+1].gridY])
+    }
 }
 
 
@@ -62,6 +64,12 @@ room_speed = global.frameRate
 randomize()
 
 #define controlStep
+//Temp Restart Button
+if keyboard_check_pressed(ord('R'))
+{
+    game_restart()
+}
+
 //Adjust Camera Position
 if instance_exists(global.pc)
 {
@@ -149,26 +157,44 @@ if black > 0
 with(global.currLevel){
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    draw_set_font(fnt_menu)
+    draw_set_font(fnt_small)
 
     for (var i=0; i<sizeX; i++){
-        for (var j=0; j<sizeX; j++){
-            if(floorLayout[i,j].isPath == true){
-                drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,floorLayout[i,j].weight);
+        for (var j=0; j<sizeY; j++){
+        
+            //if floorLayout[i,j].pathParent != noone
+            //{
+            //    draw_arrow(floorLayout[i,j].x*metre*2+15,floorLayout[i,j].y*metre*2+15,floorLayout[i,j].pathParent.x*metre*2+10,floorLayout[i,j].pathParent.y*metre*2+10,7)
+            //}
+        
+            if (floorLayout[i,j].hasPoi == true){
+                drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
             }
-            else if (floorLayout[i,j].hasPoi == true){
-                drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,floorLayout[i,j].weight);
+            else if(floorLayout[i,j].isPath == true){
+                drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,'r')//floorLayout[i,j].weight);
             }
             else{
-                drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,floorLayout[i,j].weight);
+                drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,string(floorLayout[i,j].weight));
             }
         }
     }
+
+    /*
+    if point_in_rectangle(mouse_x,mouse_y,0,0,sizeX*metre*2+10,sizeY*metre*2+10)
+    {
+        current = floorLayout[min(floor(mouse_x/(metre*2)),sizeX-1),min(floor(mouse_y/(metre*2)),sizeY-1)]
+        i= 5
+        while(current.pathParent != noone and i > 0)
+        {
+            draw_arrow(current.x*metre*2+15,current.y*metre*2+15,current.pathParent.x*metre*2+10,current.pathParent.y*metre*2+10,5)
+            //current.pathParent.weight = 1       
+            //current.pathParent.isPath = true
+            current = current.pathParent
+            i -= 1
+        }
+    }
+    */
 }
-
-
-
-
 
 
 
@@ -249,4 +275,3 @@ enum bossType{
     none = 0,
     champion = 1
 }
-
