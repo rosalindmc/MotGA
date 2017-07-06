@@ -41,18 +41,18 @@ chstXAdjust = 1
 chstYAdjust = -1
 
 shldrXAdjust[1] = 1
-shldrYAdjust[1] = 2
-shldrXAdjust[2] = 3
-shldrYAdjust[2] = 2
+shldrYAdjust[1] = 1
+shldrXAdjust[2] = 2
+shldrYAdjust[2] = 1
 
 handDist[1] = 4
 handDir[1] = 0
-handHeight[1] = 0
+handHeight[1] = 2
 itemRot[1] = 0
 itemSprite[1] = spr_sword
 handDist[2] = 4
 handDir[2] = 0
-handHeight[2] = 0
+handHeight[2] = 2
 itemRot[2] = 0
 itemSprite[2] = spr_sword
 
@@ -94,8 +94,8 @@ if surface_exists(charSurf)
     shldrX[1] = round(bodyX+lengthdir_x(shldrYAdjust[1], bodyRot+90)+lengthdir_x(shldrXAdjust[1]*bodyHFacing, bodyRot))
     shldrY[1] = round(bodyY+lengthdir_y(shldrYAdjust[1], bodyRot+90)+lengthdir_y(shldrXAdjust[1]*bodyHFacing, bodyRot))
     
-    shldrX[2] = round(bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*-bodyHFacing, bodyRot))
-    shldrY[2] = round(bodyY+lengthdir_y(shldrYAdjust[2], bodyRot+90)+lengthdir_y(shldrXAdjust[2]*-bodyHFacing, bodyRot))
+    shldrX[2] = round(bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*bodyHFacing, bodyRot+180))
+    shldrY[2] = round(bodyY+lengthdir_y(shldrYAdjust[2], bodyRot+90)+lengthdir_y(shldrXAdjust[2]*bodyHFacing, bodyRot+180))
     
     handX[1] = round(bodyX+lengthdir_x(handDist[1], handDir[1]))
     handY[1] = round(bodyY+lengthdir_y(handDist[1], handDir[1]))-handHeight[1]
@@ -118,9 +118,9 @@ if surface_exists(charSurf)
     handPoint[1] = point_direction(shldrX[1+shldrSwap],shldrY[1+shldrSwap],handX[1],handY[1])
     handPoint[2] = point_direction(shldrX[2-shldrSwap],shldrY[2-shldrSwap],handX[2],handY[2])
     armLength[1] = min(floor(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap])),armSpriteLength)
-    armStretch[1] = max(floor(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap])),armSpriteLength)/armSpriteLength
+    armStretch[1] = max(floor(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap])),armSpriteLength+1)/(armSpriteLength+1)
     armLength[2] = min(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength)
-    armStretch[2] = max(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength)/armSpriteLength
+    armStretch[2] = max(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength+1)/(armSpriteLength+1)
     
     //Hips and Legs
     draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
@@ -133,22 +133,23 @@ if surface_exists(charSurf)
     draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
     
     //Right Arm
-    //draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_red,1)
-    draw_set_colour(c_black)
-    draw_line(shldrX[1+shldrSwap],shldrY[1+shldrSwap],handX[1],handY[1])
-    draw_line(shldrX[2-shldrSwap],shldrY[2-shldrSwap],handX[2],handY[2])
+    draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
+    
     //Left Arm
-    //draw_sprite_ext(armSprite,armLength[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_green,1)
+    draw_sprite_ext(armSprite,armLength[2]+armSpriteLength+1,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_white,1)
     
     //Head
     draw_sprite_ext(headSprite,headImage+vFacing,headX,headY,hFacing,1,headRot,c_white,1)
     
-    //draw_rectangle(10,10,20,20,true)
+    //draw_set_colour(c_red)
+    //draw_point(shldrX[1+shldrSwap],shldrY[1+shldrSwap])
+    //draw_set_colour(c_green)
+    //draw_point(shldrX[2-shldrSwap],shldrY[2-shldrSwap])
+    
     surface_reset_target()
-    
-    
+        
     //Temp
-    draw_text(x,y+20,armLength[1])
+    //draw_text(x,y+20,armLength[1])
 }
 else
 {
