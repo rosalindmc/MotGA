@@ -64,10 +64,10 @@ script_execute(controlScript)
 facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
 
 //Temp Arm rotations
-handDir[1] = facing+15
+handDir[1] = facing-15
 itemRot[1] = facing+45
 
-handDir[2] = facing-15
+handDir[2] = facing+15
 itemRot[2] = facing-45
 
 if mouse_wheel_down()

@@ -24,4 +24,3 @@ roads = 0       //whether or not this has roads
 
 
 #define script17
-

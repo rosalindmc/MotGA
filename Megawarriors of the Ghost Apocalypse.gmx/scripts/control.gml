@@ -80,8 +80,8 @@ if instance_exists(global.pc)
 }
 
 //Camera
-view_xview[0] = median(0,x-320,room_width-640)
-view_yview[0] = median(0,y-180,room_height-360)
+view_xview[0] = median(0,x-(view_wview[0]/2),room_width-view_wview[0])
+view_yview[0] = median(0,y-(view_hview[0]/2),room_height-view_hview[0])
 
 //Reduce Shake
 if shake > .1
