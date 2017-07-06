@@ -22,13 +22,17 @@ global.currLevel = instance_create(0,0,obj_level)
 with (global.currLevel){
     biomeType = 4
     elements[0] = 0
-    sizeX = 20
-    sizeY = 20
+    sizeX = 50
+    sizeY = 30
     
     critPoi = 1     //the type of the critical point of interest
     poiDensity = 5 //number of points of interest on the map
     numEntrance = 1
     pois[0]=0
+    numRivers = 3
+
+    rivers[numRivers,4] = 0    
+    
     
     critPods =0    //number of pods on the critical path
     podDensity = 0  //number of pods on the map
@@ -42,6 +46,9 @@ with (global.currLevel){
     genLevel()
     for(i = 0; i < array_length_1d(pois)-1; i++){
         roadMaker(floorLayout[pois[i].gridX,pois[i].gridY],floorLayout[pois[i+1].gridX,pois[i+1].gridY])
+    }
+    for(i=0;i<numRivers;i++){
+        riverMaker(floorLayout[rivers[i,0],rivers[i,1]],floorLayout[rivers[i,2],rivers[i,3]])
     }
 }
 
@@ -166,13 +173,26 @@ with(global.currLevel){
             //{
             //    draw_arrow(floorLayout[i,j].x*metre*2+15,floorLayout[i,j].y*metre*2+15,floorLayout[i,j].pathParent.x*metre*2+10,floorLayout[i,j].pathParent.y*metre*2+10,7)
             //}
-        
-            if (floorLayout[i,j].hasPoi == true){
+            
+            if(floorLayout[i,j].isRiver == true && floorLayout[i,j].isPath == true){
+                drawText(c_black,c_orange,i*metre*2+10,j*metre*2+10,'B')
+            }
+            else if(floorLayout[i,j].isRiver == true){
+                drawText(c_black,c_blue,i*metre*2+10,j*metre*2+10,'w')
+            }
+            else if (floorLayout[i,j].hasPoi == true && floorLayout[i,j].weight==2){
+                drawText(c_black,c_yellow,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
+            }
+            else if (floorLayout[i,j].hasPoi == true){
                 drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
             }
             else if(floorLayout[i,j].isPath == true){
                 drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,'r')//floorLayout[i,j].weight);
             }
+            else if(floorLayout[i,j].weight==2){
+                drawText(c_black,c_gray,i*metre*2+10,j*metre*2+10,'g')
+            }
+           
             else{
                 drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,string(floorLayout[i,j].weight));
             }

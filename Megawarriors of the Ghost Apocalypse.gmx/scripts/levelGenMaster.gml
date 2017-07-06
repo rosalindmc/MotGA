@@ -92,33 +92,25 @@ case 4:
     forestGen(id)
 
 }
+poiGen()
+riverGen() 
 
 
 
-#define forestGen
-//Generation specific to forests
 
-//Set the A* heuristic for each tile
-
-
-//floor tile setup
-for (var i=0; i<sizeX; i++){
-    for (var j=0; j<sizeY; j++){
-        floorLayout[i,j]= instance_create(i,j,obj_floor)
-        floorLayout[i,j].weight = 2 //choose(1,2,3,4,5,6,7,8)
-        floorLayout[i,j].g = 0
-        floorLayout[i,j].gridX = i
-        floorLayout[i,j].gridY = j
-        floorLayout[i,j].isPath = false
-        floorLayout[i,j].hasPoi = false
-    }
-}
-
+#define poiGen
 //set up the positions of points of interests
+
+//critical at index 0
 pois[0] = instance_create(irandom(sizeX-5)+2,irandom(sizeY-5)+2,obj_poi)
+//pois[0] = poiImport(critPoi) // set up so we can eventually save all the PoIs on the map and import them later
+
+//others at index 1 to x
 for (var i = 1; i<=poiDensity;i++){
     pois[i] = instance_create(irandom(sizeX-5)+2,irandom(sizeY-5)+2,obj_poi)
 }
+
+//entrances from x+1 on
 for (var i = 1; i<=numEntrance;i++){
     switch(i%4){
         case 0:
@@ -135,15 +127,98 @@ for (var i = 1; i<=numEntrance;i++){
             break
     }
 }
+
 with(obj_poi){
+    for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
+        for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
+            if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
+                other.floorLayout[i,j].weight = 2
+                other.floorLayout[i,j].hasPoi = true
+                other.floorLayout[i,j].poi = id
+            }
+        }
+    }
     other.floorLayout[gridX,gridY].weight = 1
     other.floorLayout[gridX,gridY].hasPoi = true
 }
 
-
-/*
-//Set up the positions of the special areas (by center point)
-for(var i =0;i<specialAreas;i++){
-    var posX = 
+#define riverGen
+for (var i = 0;i < numRivers;i++){
+    switch(irandom(3)){
+        case 0:
+            rivers[i,0] = 0
+            rivers[i,1] = irandom(sizeY-1)
+            break
+            
+        case 1:
+            rivers[i,0] = sizeX-1
+            rivers[i,1] = irandom(sizeY-1)
+            break
+            
+        case 2:
+            rivers[i,0] = irandom(sizeX-1)
+            rivers[i,1] = 0
+            break
+        
+        case 3:
+            rivers[i,0] = irandom(sizeX-1)
+            rivers[i,1] = sizeY-1
+            break
+        }
+        
+        switch(irandom(3)){
+        case 0:
+            rivers[i,2] = irandom(sizeX-1)
+            rivers[i,3] = irandom(sizeY-1)
+            break
+            
+        default:
+            switch(irandom(3)){
+            case 0:
+                rivers[i,2] = 0
+                rivers[i,3] = irandom(sizeY-1)
+                break
+                
+            case 1:
+                rivers[i,2] = sizeX-1
+                rivers[i,3] = irandom(sizeY-1)
+                break
+                
+            case 2:
+                rivers[i,2] = irandom(sizeX-1)
+                rivers[i,3] = 0
+                break
+            
+            case 3:
+                rivers[i,2] = irandom(sizeX-1)
+                rivers[i,3] = sizeY-1
+                break
+            }
+            break
+            
+        }
+        
+        
 }
-*/
+
+
+#define forestGen
+//Generation specific to forests
+
+//Set the A* heuristic for each tile
+
+
+//floor tile setup
+for (var i=0; i<sizeX; i++){
+    for (var j=0; j<sizeY; j++){
+        floorLayout[i,j]= instance_create(i,j,obj_floor)
+        floorLayout[i,j].weight = choose(2,2,3,3,4,5,6,7,8,8)
+        floorLayout[i,j].rWeight = choose(1,1,2,2,3,3,4)
+        floorLayout[i,j].g = 0
+        floorLayout[i,j].gridX = i
+        floorLayout[i,j].gridY = j
+        floorLayout[i,j].isPath = false
+        floorLayout[i,j].isRiver = false
+        floorLayout[i,j].hasPoi = false
+    }
+}
