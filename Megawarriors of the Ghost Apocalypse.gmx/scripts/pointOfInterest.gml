@@ -23,9 +23,7 @@ item = 0        //whether or not this has a special item
 roads = 0       //whether or not this has roads
 
 
-<<<<<<< HEAD
-#define script17
-=======
+
 #define poiImport
 type = argument0.type //Type of point of interest
 
@@ -46,6 +44,3 @@ boss = argument0.boss        //whether or not this has a boss
 item = argument0.item        //whether or not this has a special item
 
 roads = argument0.roads      //whether or not this has roads
-
-
->>>>>>> origin/master
