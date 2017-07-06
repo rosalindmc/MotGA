@@ -38,6 +38,7 @@
       <scripts name="Animations">
         <script>scripts\weaponAttackAnims.gml</script>
         <script>scripts\twist.gml</script>
+        <script>scripts\animationStart.gml</script>
       </scripts>
     </scripts>
     <scripts name="Object Scripts">

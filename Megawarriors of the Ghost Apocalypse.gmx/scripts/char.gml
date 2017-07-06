@@ -24,17 +24,17 @@ canMove = true      //Can move check
 canAttack = true    //Can attack check
 
 //Animations
-animIndex[0] = 0    //Current animation (For Legs+Body)
+animIndex[0] = humanoidWalk    //Current animation (For Legs+Body)
 animStep[0] = 0     //Current animation step
 animDelay[0] = 0    //How many seconds to next step
 animSpeed[0] = 1    //Multiplier for animation speed (can be negative)
 
-animIndex[1] = 0    //Right Hand
+animIndex[1] = weaponIdle    //Right Hand
 animStep[1] = 0     
 animDelay[1] = 0    
 animSpeed[1] = 1    
 
-animIndex[2] = 0    //Left Hand
+animIndex[2] = weaponIdle    //Left Hand
 animStep[2] = 0     
 animDelay[2] = 0    
 animSpeed[2] = 1    
@@ -60,26 +60,6 @@ controlScript = playerControl       //Temp, replace with ai control
 //Execute Control Script
 script_execute(controlScript)
 
-//Facing
-facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
-
-//Temp Arm rotations
-handDir[1] = facing-15
-itemRot[1] = facing+45
-
-handDir[2] = facing+15
-itemRot[2] = facing-45
-
-if mouse_wheel_down()
-{
-    handDist[1] += 1
-    handDist[2] += 1
-}
-if mouse_wheel_up()
-{
-    handDist[1] -= 1
-    handDist[2] -= 1
-}
 /*
 script_execute(control)
 charFacing()
@@ -180,6 +160,21 @@ dTerrain = grid.difficult
 moveStep()
 moveLimit()
 isoDepth(0)
+animEndStep(0)
+animEndStep(1)
+animEndStep(2)
+
+if moving != 0
+{
+    animIndex[0] = humanoidWalk
+}
+else
+{
+    if animIndex[0] != humanoidIdle
+    {
+        animationStart(humanoidIdle,0)
+    }
+}
 
 #define charDestroy
 //Clear the drawing surface

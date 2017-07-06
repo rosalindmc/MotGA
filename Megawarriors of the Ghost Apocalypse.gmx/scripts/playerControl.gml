@@ -12,6 +12,16 @@ moveControl()
 targetX = mouse_x
 targetY = mouse_y
 
+//Facing
+facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
+
+//Temp Arm rotations
+handDir[1] = facing-15
+itemRot[1] = facing+45
+
+handDir[2] = facing+15
+itemRot[2] = facing-45
+
 /*
 lftclickKey = mouse_check_button(mb_left)
 rgtclickKey = mouse_check_button(mb_right)

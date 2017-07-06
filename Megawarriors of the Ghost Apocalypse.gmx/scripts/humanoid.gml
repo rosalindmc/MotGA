@@ -18,6 +18,9 @@ break
 charSurfSize = 28
 charSurf = surface_create(charSurfSize,charSurfSize)
 
+//Gender
+gender = 0
+
 //Bone Information
 bounce = 0
 
@@ -85,8 +88,8 @@ if surface_exists(charSurf)
     bodyX = round(hipsX+lengthdir_x(bodyYAdjust, hipsRot+90)+lengthdir_x(bodyXAdjust*bodyHFacing, hipsRot))
     bodyY = round(hipsY+lengthdir_y(bodyYAdjust, hipsRot+90)+lengthdir_y(bodyXAdjust*bodyHFacing, hipsRot))
     
-    chstX = round(bodyX+lengthdir_x(chstYAdjust, bodyRot+90)+lengthdir_x(chstXAdjust*bodyHFacing, bodyRot))
-    chstY = round(bodyY+lengthdir_y(chstYAdjust, bodyRot+90)+lengthdir_y(chstXAdjust*bodyHFacing, bodyRot))
+    chstX = round(bodyX+lengthdir_x(chstYAdjust+bounce, bodyRot+90)+lengthdir_x(chstXAdjust*bodyHFacing, bodyRot))
+    chstY = round(bodyY+lengthdir_y(chstYAdjust+bounce, bodyRot+90)+lengthdir_y(chstXAdjust*bodyHFacing, bodyRot))
     
     headX = round(bodyX+lengthdir_x(headYAdjust, bodyRot+90)+lengthdir_x(headXAdjust*bodyHFacing, bodyRot))
     headY = round(bodyY+lengthdir_y(headYAdjust, bodyRot+90)+lengthdir_y(headXAdjust*bodyHFacing, bodyRot))
@@ -127,7 +130,7 @@ if surface_exists(charSurf)
     
     //Body
     if bodyVFacing = 1{
-    draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
+    draw_sprite_ext(chstSprite,gender,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
     draw_sprite_ext(bodySprite,bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,c_white,1)
     if bodyVFacing = 0{
     draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
@@ -149,9 +152,70 @@ if surface_exists(charSurf)
     surface_reset_target()
         
     //Temp
-    //draw_text(x,y+20,armLength[1])
+    draw_text(x,y+20,animDelay[0])
+    draw_text(x,y+30,animStep[0])
+    draw_text(x,y+40,animSpeed[0])
 }
 else
 {
     charSurf = surface_create(charSurfSize,charSurfSize)
+}
+
+#define humanoidWalk
+animDelay[argument1] = .5
+animSpeed[argument1] = max(abs(moving),1)
+
+switch(argument0)
+{
+    case 0:
+    hipsImage = 4
+    humanoidWalk(3,argument1)
+    animStep[argument1] = 4
+    break
+    
+    case 1:
+    hipsImage = 6
+    bounce = 0
+    break
+    
+    case 2:
+    hipsImage = 4
+    bounce = 1
+    break
+    
+    case 3:
+    hipsImage = 2
+    bounce = 0
+    break
+    
+    case 4:
+    hipsImage = 6
+    humanoidWalk(1,argument1)
+    animStep[argument1] = 0
+    break
+}
+
+#define humanoidIdle
+animDelay[argument1] = .3
+animSpeed[argument1] = 1
+hipsImage = 2-(gender*2)
+
+switch(argument0)
+{
+    case 0:
+    
+    break
+    
+    case 1:
+    bounce = 1
+    break
+    
+    case 2:
+    bounce = 0
+    break
+    
+    case 3:
+    humanoidWalk(0,argument1)
+    animStep[argument1] = 0
+    break
 }
