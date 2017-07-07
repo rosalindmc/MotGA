@@ -9,6 +9,19 @@ break
 case 1:     //Draw Humanoid
 humanoidDraw()
 break
+
+case 2:
+return humanoidWalk
+break
+
+case 3:
+return humanoidIdle
+break
+
+case 4:
+return humanoidDodge
+break
+
 }
 
 #define humanoidInitialize
@@ -152,9 +165,9 @@ if surface_exists(charSurf)
     surface_reset_target()
         
     //Temp
-    draw_text(x,y+20,animDelay[0])
-    draw_text(x,y+30,animStep[0])
-    draw_text(x,y+40,animSpeed[0])
+    draw_text(x,y+20,hspd)
+    draw_text(x,y+30,vspd)
+    draw_text(x,y+40,moving)
 }
 else
 {
@@ -216,6 +229,42 @@ switch(argument0)
     
     case 3:
     humanoidWalk(0,argument1)
+    animStep[argument1] = 0
+    break
+}
+#define humanoidDodge
+animDelay[argument1] = .5
+animSpeed[argument1] = max(abs(moving),1)
+
+switch(argument0)
+{
+    case 0:
+    hipsImage = 4
+    humanoidWalk(3,argument1)
+    animStep[argument1] = 4
+    break
+    
+    case 1:
+    hipsImage = 6
+    hipsRot = 90
+    bounce = 0
+    break
+    
+    case 2:
+    hipsImage = 4
+    hipsRot = 180
+    bounce = 1
+    break
+    
+    case 3:
+    hipsImage = 2
+    hipsRot = 270
+    bounce = 0
+    break
+    
+    case 4:
+    hipsImage = 6
+    humanoidWalk(1,argument1)
     animStep[argument1] = 0
     break
 }

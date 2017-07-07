@@ -10,7 +10,7 @@ animUpdate = true
 script_execute(animType,0)
 
 //Movement Essentials
-movement = 16        //Metres per second
+movement = 12        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
@@ -22,6 +22,10 @@ accel = 4           //% max speed gained per second of acceleration
 
 canMove = true      //Can move check
 canAttack = true    //Can attack check
+
+dodgeCost = 2
+dodgeSpeed = 30
+dodgeTimer = 0
 
 //Animations
 animIndex[0] = humanoidWalk    //Current animation (For Legs+Body)
@@ -56,13 +60,14 @@ turnSpeed = 360     //Degrees/second
 pc = false
 controlScript = playerControl       //Temp, replace with ai control
 
-life = 20
-lifeMax = 20
+life = 12
+lifeMax = 12
 lifeRegen = 0.0 //per second
 
-stam = 10
-stamMax = 10    
-stamRegen=0.5   //per second
+stam = 4
+stamMax = 4    
+stamRegen = 2.0   //per second
+stamDelay = 0.0
 
 inventorySize = 4
 inventory[inventorySize] = noone
@@ -178,17 +183,40 @@ animEndStep(0)
 animEndStep(1)
 animEndStep(2)
 
-if moving != 0
+if canMove = true
 {
-    animIndex[0] = humanoidWalk
+    if moving != 0
+    {
+        animIndex[0] = humanoidWalk
+    }
+    else
+    {
+        if animIndex[0] != humanoidIdle
+        {
+            animationStart(humanoidIdle,0)
+        }
+    }
+}
+
+if dodgeTimer > 0
+{
+    dodgeTimer -= 1/global.frameRate
+    if dodgeTimer <= 0
+    {
+        dodgeTimer = 0
+        canMove = true
+    }
+}
+
+if stamDelay = 0
+{
+    stam = min(stamMax,stam+(stamRegen/global.frameRate))
 }
 else
 {
-    if animIndex[0] != humanoidIdle
-    {
-        animationStart(humanoidIdle,0)
-    }
+    stamDelay = max(0,stamDelay-(1/global.frameRate))
 }
+
 
 #define charDestroy
 //Clear the drawing surface

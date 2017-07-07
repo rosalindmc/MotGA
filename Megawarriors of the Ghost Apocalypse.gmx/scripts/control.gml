@@ -13,6 +13,8 @@ global.leftKey = ord('A')
 global.downKey = ord('S')
 global.rightKey = ord('D')
 
+global.dodgeKey = vk_space
+
 //Create pc
 global.pc = instance_create(x,y,obj_char)
 //later add import stats script
@@ -226,16 +228,23 @@ with(global.currLevel){
 
     //Stamina
     i = 0
-    repeat(global.pc.stamMax)
+    repeat(ceil(global.pc.stam))
     {
-        draw_sprite(spr_stamina,1,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30)
+        if global.pc.stam >= i+1
+        {
+            draw_sprite_ext(spr_stamina,0,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30,1,1,0,c_white,global.pc.stam-i)
+        }
+        else
+        {
+            draw_sprite_ext(spr_stamina,0,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30,1,1,0,c_ltgray,global.pc.stam-i)
+        }
         i += 1
     }
     
     i = 0
-    repeat(ceil(global.pc.stam))
+    repeat(global.pc.stamMax)
     {
-        draw_sprite_ext(spr_stamina,0,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30,1,1,0,c_white,global.pc.stam-i)
+        draw_sprite(spr_stamina,1,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30)
         i += 1
     }
     
