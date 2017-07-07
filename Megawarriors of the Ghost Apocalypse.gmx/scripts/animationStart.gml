@@ -15,4 +15,3 @@ if animDelay[argument0] <= 0
     animStep[argument0] += sign(animSpeed[argument0])    
     script_execute(animIndex[argument0],animStep[argument0],argument0)
 }
-

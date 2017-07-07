@@ -15,6 +15,8 @@ global.rightKey = ord('D')
 
 //Create pc
 global.pc = instance_create(x,y,obj_char)
+//later add import stats script
+
 
 //temp node
 global.currLevel = instance_create(0,0,obj_level)
@@ -161,7 +163,7 @@ if black > 0
 
 //Temp draw map for testing level gen
 
-    
+   
 with(global.currLevel){
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
@@ -199,7 +201,44 @@ with(global.currLevel){
             }
         }
     }
+    
+    
+    //HUD stuff
+    
+    i = 0
+    repeat(global.pc.lifeMax)
+    {
+        draw_sprite(spr_health,1,view_xview[0]+15+(5*i),view_yview[0]+15)
+        i += 1
+    }
+    
+    i = 0
+    repeat(ceil(global.pc.life))
+    {
+        draw_sprite_ext(spr_health,0,view_xview[0]+15+(5*i),view_yview[0]+15,1,1,0,c_white,global.pc.life-i)
+        i += 1
+    }
 
+    draw_set_valign(fa_middle)
+    draw_set_halign(fa_left)
+    draw_set_font(fnt_small)
+    drawText(c_black,c_white,view_xview[0]+20,view_yview[0]+14,string(round(global.pc.life))+" / "+string(round(global.pc.lifeMax)))
+
+    //Stamina
+    i = 0
+    repeat(global.pc.stamMax)
+    {
+        draw_sprite(spr_stamina,1,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30)
+        i += 1
+    }
+    
+    i = 0
+    repeat(ceil(global.pc.stam))
+    {
+        draw_sprite_ext(spr_stamina,0,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30,1,1,0,c_white,global.pc.stam-i)
+        i += 1
+    }
+    
     /*
     if point_in_rectangle(mouse_x,mouse_y,0,0,sizeX*metre*2+10,sizeY*metre*2+10)
     {
