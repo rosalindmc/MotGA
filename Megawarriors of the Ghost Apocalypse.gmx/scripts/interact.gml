@@ -28,4 +28,3 @@ with(obj_interactable)
 }
 
 pointInteract = targ
-

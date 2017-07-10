@@ -128,7 +128,55 @@ else
 
 
 #define controlDrawbegin
+with(global.currLevel){
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+    draw_set_font(fnt_small)
 
+    for (var i=0; i<sizeX; i++){
+        for (var j=0; j<sizeY; j++){
+        
+            //if floorLayout[i,j].pathParent != noone
+            //{
+            //    draw_arrow(floorLayout[i,j].x*metre*2+15,floorLayout[i,j].y*metre*2+15,floorLayout[i,j].pathParent.x*metre*2+10,floorLayout[i,j].pathParent.y*metre*2+10,7)
+            //}
+            
+            if(floorLayout[i,j].isRiver == true && floorLayout[i,j].isPath == true){
+                draw_sprite(spr_road,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_orange,i*metre*2+10,j*metre*2+10,'B')
+            }
+            else if(floorLayout[i,j].isRiver == true){
+                draw_sprite(spr_water,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_blue,i*metre*2+10,j*metre*2+10,'w')
+            }
+            else if (floorLayout[i,j].hasPoi == true && floorLayout[i,j].weight==2){
+                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_yellow,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
+            }
+            else if (floorLayout[i,j].hasPoi == true){
+                draw_sprite(spr_road,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
+            }
+            else if(floorLayout[i,j].isPath == true){
+                draw_sprite(spr_road,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,'r')//floorLayout[i,j].weight);
+            }
+            else if(floorLayout[i,j].weight==2){
+                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_grass,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_gray,i*metre*2+10,j*metre*2+10,'g')
+            }
+           
+            else{
+                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_grass,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_tree,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                //drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,string(floorLayout[i,j].weight));
+            }
+        }
+    }
+}
+    
 /*Draw Backdrops
 draw_sprite(spr_backdrop,0,
 view_xview[]+(view_wview[]/2)+(480*(.5-(x/room_width))),
@@ -181,46 +229,6 @@ if black > 0
 
 
 //Temp draw map for testing level gen
-
-   
-with(global.currLevel){
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-    draw_set_font(fnt_small)
-
-    for (var i=0; i<sizeX; i++){
-        for (var j=0; j<sizeY; j++){
-        
-            //if floorLayout[i,j].pathParent != noone
-            //{
-            //    draw_arrow(floorLayout[i,j].x*metre*2+15,floorLayout[i,j].y*metre*2+15,floorLayout[i,j].pathParent.x*metre*2+10,floorLayout[i,j].pathParent.y*metre*2+10,7)
-            //}
-            
-            if(floorLayout[i,j].isRiver == true && floorLayout[i,j].isPath == true){
-                drawText(c_black,c_orange,i*metre*2+10,j*metre*2+10,'B')
-            }
-            else if(floorLayout[i,j].isRiver == true){
-                drawText(c_black,c_blue,i*metre*2+10,j*metre*2+10,'w')
-            }
-            else if (floorLayout[i,j].hasPoi == true && floorLayout[i,j].weight==2){
-                drawText(c_black,c_yellow,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
-            }
-            else if (floorLayout[i,j].hasPoi == true){
-                drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
-            }
-            else if(floorLayout[i,j].isPath == true){
-                drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,'r')//floorLayout[i,j].weight);
-            }
-            else if(floorLayout[i,j].weight==2){
-                drawText(c_black,c_gray,i*metre*2+10,j*metre*2+10,'g')
-            }
-           
-            else{
-                drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,string(floorLayout[i,j].weight));
-            }
-        }
-    }
-    
     
     //HUD stuff
     
@@ -280,7 +288,6 @@ with(global.currLevel){
         }
     }
     */
-}
 
 //draw_surface_ext(application_surface,global.xOffset,global.yOffset,1,1,0,c_white,1)
 

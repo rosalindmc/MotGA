@@ -28,4 +28,3 @@ else
 {
     instance_destroy()
 }
-
