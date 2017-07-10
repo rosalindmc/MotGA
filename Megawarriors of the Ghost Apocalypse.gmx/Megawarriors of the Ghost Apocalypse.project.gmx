@@ -47,10 +47,15 @@
         <script>scripts\twist.gml</script>
         <script>scripts\animationStart.gml</script>
       </scripts>
+      <scripts name="Interactions">
+        <script>scripts\pickUp.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Object Scripts">
       <script>scripts\control.gml</script>
       <script>scripts\char.gml</script>
+      <script>scripts\interactable.gml</script>
+      <script>scripts\item.gml</script>
     </scripts>
     <scripts name="Universal">
       <script>scripts\isoDepth.gml</script>
@@ -109,8 +114,9 @@
   <rooms name="rooms">
     <room>rooms\rom_game</room>
   </rooms>
-  <constants number="1">
+  <constants number="2">
     <constant name="metre">12</constant>
+    <constant name="grav">9</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

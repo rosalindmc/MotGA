@@ -1,3 +1,15 @@
+#define moveStep
+//Gravity
+if z > floorZ = 0
+{
+    zspd -= grav/global.frameRate
+    z += zspd*metre/global.frameRate
+}
+else
+{
+    z = floorZ
+}
+
 //Horizontal Collision
 if place_meeting(x+(metre*hspd/global.frameRate),y,obj_solid) or collision_line(x,y,x+(metre*hspd/global.frameRate),y,obj_solid,false,true)
 {
@@ -38,3 +50,39 @@ else
 {
     moving = false
 }
+
+#define moveStepObject
+//Gravity
+if z > floorZ = 0
+{
+    zspd -= grav/global.frameRate
+    z += zspd*metre/global.frameRate
+}
+else
+{
+    z = floorZ
+}
+
+//Horizontal Collision
+if place_meeting(x+(metre*hspd/global.frameRate),y,obj_solid) or collision_line(x,y,x+(metre*hspd/global.frameRate),y,obj_solid,false,true)
+{
+    while !place_meeting(x+sign(hspd),y,obj_solid)
+    {
+        x += sign(hspd)
+    }
+    hspd = 0
+}
+
+x += metre*hspd/global.frameRate
+
+//Vertical Collision
+if place_meeting(x,y+(metre*vspd/global.frameRate),obj_solid) or collision_line(x,y,x,y+(metre*vspd/global.frameRate),obj_solid,false,true)
+{
+    while !place_meeting(x,y+sign(vspd),obj_solid)
+    {
+        y += sign(vspd)
+    }
+    vspd = 0
+}
+
+y += metre*vspd/global.frameRate

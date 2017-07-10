@@ -98,20 +98,20 @@ if surface_exists(charSurf)
     hipsX = round(charSurfSize*.5)
     hipsY = round(charSurfSize*.75)
     
-    bodyX = round(hipsX+lengthdir_x(bodyYAdjust, hipsRot+90)+lengthdir_x(bodyXAdjust*bodyHFacing, hipsRot))
-    bodyY = round(hipsY+lengthdir_y(bodyYAdjust, hipsRot+90)+lengthdir_y(bodyXAdjust*bodyHFacing, hipsRot))
+    bodyX = hipsX+lengthdir_x(bodyYAdjust, hipsRot+90)+lengthdir_x(bodyXAdjust*bodyHFacing, hipsRot)
+    bodyY = hipsY+lengthdir_y(bodyYAdjust, hipsRot+90)+lengthdir_y(bodyXAdjust*bodyHFacing, hipsRot)
     
-    chstX = round(bodyX+lengthdir_x(chstYAdjust+bounce, bodyRot+90)+lengthdir_x(chstXAdjust*bodyHFacing, bodyRot))
-    chstY = round(bodyY+lengthdir_y(chstYAdjust+bounce, bodyRot+90)+lengthdir_y(chstXAdjust*bodyHFacing, bodyRot))
+    chstX = bodyX+lengthdir_x(chstYAdjust+bounce, bodyRot+90)+lengthdir_x(chstXAdjust*bodyHFacing, bodyRot)
+    chstY = bodyY+lengthdir_y(chstYAdjust+bounce, bodyRot+90)+lengthdir_y(chstXAdjust*bodyHFacing, bodyRot)
     
-    headX = round(bodyX+lengthdir_x(headYAdjust, bodyRot+90)+lengthdir_x(headXAdjust*bodyHFacing, bodyRot))
-    headY = round(bodyY+lengthdir_y(headYAdjust, bodyRot+90)+lengthdir_y(headXAdjust*bodyHFacing, bodyRot))
+    headX = bodyX+lengthdir_x(headYAdjust, bodyRot+90)+lengthdir_x(headXAdjust*bodyHFacing, bodyRot)
+    headY = bodyY+lengthdir_y(headYAdjust, bodyRot+90)+lengthdir_y(headXAdjust*bodyHFacing, bodyRot)
     
-    shldrX[1] = round(bodyX+lengthdir_x(shldrYAdjust[1], bodyRot+90)+lengthdir_x(shldrXAdjust[1]*bodyHFacing, bodyRot))
-    shldrY[1] = round(bodyY+lengthdir_y(shldrYAdjust[1], bodyRot+90)+lengthdir_y(shldrXAdjust[1]*bodyHFacing, bodyRot))
+    shldrX[1] = bodyX+lengthdir_x(shldrYAdjust[1], bodyRot+90)+lengthdir_x(shldrXAdjust[1]*bodyHFacing, bodyRot)
+    shldrY[1] = bodyY+lengthdir_y(shldrYAdjust[1], bodyRot+90)+lengthdir_y(shldrXAdjust[1]*bodyHFacing, bodyRot)
     
-    shldrX[2] = round(bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*bodyHFacing, bodyRot+180))
-    shldrY[2] = round(bodyY+lengthdir_y(shldrYAdjust[2], bodyRot+90)+lengthdir_y(shldrXAdjust[2]*bodyHFacing, bodyRot+180))
+    shldrX[2] = bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*bodyHFacing, bodyRot+180)
+    shldrY[2] = bodyY+lengthdir_y(shldrYAdjust[2], bodyRot+90)+lengthdir_y(shldrXAdjust[2]*bodyHFacing, bodyRot+180)
     
     handX[1] = round(bodyX+lengthdir_x(handDist[1], handDir[1]))
     handY[1] = round(bodyY+lengthdir_y(handDist[1], handDir[1]))-handHeight[1]
@@ -165,8 +165,8 @@ if surface_exists(charSurf)
     surface_reset_target()
         
     //Temp
-    draw_text(x,y+20,hspd)
-    draw_text(x,y+30,vspd)
+    draw_text(x,y+20,view_xview)
+    draw_text(x,y+30,view_yview)
     draw_text(x,y+40,moving)
 }
 else

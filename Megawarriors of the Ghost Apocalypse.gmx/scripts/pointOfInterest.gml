@@ -18,7 +18,7 @@ podSpawn = 0    //whether or not this has a pod spawn
 
 boss = 0        //whether or not this has a boss
 
-item = 0        //whether or not this has a special item
+loot = 0        //whether or not this has a special item
 
 roads = 0       //whether or not this has roads
 
@@ -41,6 +41,6 @@ podSpawn = argument0.podspawn    //whether or not this has a pod spawn
 
 boss = argument0.boss        //whether or not this has a boss
 
-item = argument0.item        //whether or not this has a special item
+loot = argument0.loot        //whether or not this has a special item
 
 roads = argument0.roads      //whether or not this has roads

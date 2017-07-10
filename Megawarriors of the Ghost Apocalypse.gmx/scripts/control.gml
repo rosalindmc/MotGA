@@ -4,8 +4,12 @@
 #define controlInitialize
 //Essentials
 global.frameRate = 60
+room_speed = global.frameRate
 global.timeMult = 1
 enumerators();
+
+//Screen Stuff (later handle in main menu)
+screenScale()
 
 //Controls
 global.upKey = ord('W')
@@ -91,9 +95,8 @@ if instance_exists(global.pc)
 }
 
 //Camera
-view_xview[0] = median(0,x-(view_wview[0]/2),room_width-view_wview[0])
-view_yview[0] = median(0,y-(view_hview[0]/2),room_height-view_hview[0])
-
+view_xview[0] = round(median(0,x-(view_wview[0]/2),room_width-view_wview[0]))
+view_yview[0] = round(median(0,y-(view_hview[0]/2),room_height-view_hview[0]))
 
 //Reduce Shake
 if shake > .1
@@ -123,7 +126,10 @@ else
     }
 }
 
+
+
 #define controlDrawbegin
+
 /*Draw Backdrops
 draw_sprite(spr_backdrop,0,
 view_xview[]+(view_wview[]/2)+(480*(.5-(x/room_width))),
@@ -131,6 +137,7 @@ view_yview[]+(view_hview[]/2)+(270*(.5-(y/room_height))))
 
 
 #define controlDrawHUD
+
 /*
 draw_sprite(spr_reticle,0,mouse_x,mouse_y)
 draw_sprite_ext(spr_reticle2,0,mouse_x-kick,mouse_y-kick,1,1,0,c_white,1)
@@ -265,8 +272,7 @@ with(global.currLevel){
     */
 }
 
-
-
+//draw_surface_ext(application_surface,global.xOffset,global.yOffset,1,1,0,c_white,1)
 
 
 #define enumerators
@@ -344,3 +350,18 @@ enum bossType{
     none = 0,
     champion = 1
 }
+#define screenScale
+//application_surface_draw_enable(false)
+window_set_fullscreen(true)
+
+global.monitorW = display_get_width()
+global.monitorH = display_get_height()
+
+global.viewW = 480
+global.viewH = 270
+
+global.viewScale = min(floor(global.monitorW/global.viewW),floor(global.monitorH/global.viewH))
+
+//surface_resize(application_surface,(global.viewW*global.viewScale),(global.viewH*global.viewScale))
+global.xOffset=(global.monitorW-(global.viewW*global.viewScale))/2
+global.yOffset=(global.monitorH-(global.viewH*global.viewScale))/2

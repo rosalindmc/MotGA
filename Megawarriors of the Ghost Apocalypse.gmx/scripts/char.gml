@@ -14,6 +14,8 @@ movement = 12        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
+floorZ = 0
+z = 0
 hspd = 0
 vspd = 0
 zspd = 0
@@ -183,6 +185,7 @@ animEndStep(0)
 animEndStep(1)
 animEndStep(2)
 
+//Animation Control (clean up and move somewhere else)
 if canMove = true
 {
     if moving != 0
@@ -198,6 +201,7 @@ if canMove = true
     }
 }
 
+//Misc Timers
 if dodgeTimer > 0
 {
     dodgeTimer -= 1/global.frameRate
@@ -208,6 +212,7 @@ if dodgeTimer > 0
     }
 }
 
+//Stamina Regeneration
 if stamDelay = 0
 {
     stam = min(stamMax,stam+(stamRegen/global.frameRate))
