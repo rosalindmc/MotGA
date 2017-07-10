@@ -83,8 +83,6 @@ headRot = 0
 
 #define humanoidDraw
 //Establish bone information
-var hipsX, hipsY, bodyX, bodyY, chstX, chstY
-
 //Draw All Details to Char Surface
 if surface_exists(charSurf)  
 {        

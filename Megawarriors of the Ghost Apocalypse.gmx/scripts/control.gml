@@ -23,6 +23,10 @@ global.dodgeKey = vk_space
 global.pc = instance_create(x,y,obj_char)
 //later add import stats script
 
+repeat(10)
+{
+    createItem(random(100),random(100),sword,noone)
+}
 
 //temp node
 global.currLevel = instance_create(0,0,obj_level)
@@ -351,6 +355,9 @@ enum bossType{
     champion = 1
 }
 #define screenScale
+//This is supposed to allow us to do good screen scaling for multiple devices later, 
+//still don't know how it works
+
 //application_surface_draw_enable(false)
 window_set_fullscreen(true)
 

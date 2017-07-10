@@ -235,8 +235,7 @@ if animUpdate = true
     animUpdate = true   //switch to false after
 }
 
-tSize = 1
-draw_surface_ext(charSurf,round(x-(charSurfSize*.5*tSize)),round(y-(charSurfSize*.75*tSize)),1*tSize,1*tSize,0,c_white,1)
+draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75)),1,1,0,c_white,1)
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)

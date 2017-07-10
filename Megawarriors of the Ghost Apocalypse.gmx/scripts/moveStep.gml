@@ -53,7 +53,7 @@ else
 
 #define moveStepObject
 //Gravity
-if z > floorZ = 0
+if z > floorZ
 {
     zspd -= grav/global.frameRate
     z += zspd*metre/global.frameRate
