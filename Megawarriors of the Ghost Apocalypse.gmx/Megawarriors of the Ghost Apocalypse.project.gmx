@@ -38,6 +38,7 @@
         <script>scripts\moveStep.gml</script>
         <script>scripts\dodgeRoll.gml</script>
         <script>scripts\useEquip.gml</script>
+        <script>scripts\interact.gml</script>
       </scripts>
       <scripts name="Anim Types">
         <script>scripts\humanoid.gml</script>

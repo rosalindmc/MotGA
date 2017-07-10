@@ -5,7 +5,8 @@ leftKey = keyboard_check(global.leftKey)
 downKey = keyboard_check(global.downKey)
 rightKey = keyboard_check(global.rightKey)
 
-dodgeKey = keyboard_check(global.dodgeKey)
+interactKey = keyboard_check_pressed(global.interactKey)
+dodgeKey = keyboard_check_pressed(global.dodgeKey)
 
 //Movement
 moveControl()
@@ -14,6 +15,14 @@ moveControl()
 if (dodgeKey = true and canMove = true and stam >= dodgeCost and (moving != 0))
 {
     dodgeRoll(point_direction(0,0,hspd,vspd))  
+}
+
+//Interact Control
+interactSearch()
+
+if interactKey = true and canAttack = true
+{
+    interact()  
 }
 
 //Targeting
@@ -39,7 +48,6 @@ lftreleaseKey = mouse_check_button_released(mb_left)
 rgtreleaseKey = mouse_check_button_released(mb_right)
 dodgeKey = keyboard_check_pressed(global.dodgeKey)
 sprintKey = keyboard_check(global.sprintKey)
-interactKey = keyboard_check_pressed(global.interactKey)
 reloadKey = keyboard_check_pressed(global.reloadKey)
 throwKey = keyboard_check_pressed(global.throwKey)
 throwReleasedKey = keyboard_check_released(global.throwKey)

@@ -62,6 +62,7 @@ turnSpeed = 360     //Degrees/second
 pc = false
 controlScript = playerControl       //Temp, replace with ai control
 
+//Vitals
 life = 12
 lifeMax = 12
 lifeRegen = 0.0 //per second
@@ -71,11 +72,13 @@ stamMax = 4
 stamRegen = 2.0   //per second
 stamDelay = 0.0
 
+//Inventory
 inventorySize = 4
 inventory[inventorySize] = noone
+handItem[1] = noone
+handItem[2] = noone
 
-
-
+pointInteract = noone
 
 #define charStep
 //Execute Control Script

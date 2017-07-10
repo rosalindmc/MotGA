@@ -1,5 +1,6 @@
 #define interactable
 
+
 #define interactableInitialize
 name = 'Interact'
 useType = pickUp    //Script executed on interact

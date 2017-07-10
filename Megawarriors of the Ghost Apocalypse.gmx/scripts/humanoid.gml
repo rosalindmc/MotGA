@@ -161,11 +161,6 @@ if surface_exists(charSurf)
     //draw_point(shldrX[2-shldrSwap],shldrY[2-shldrSwap])
     
     surface_reset_target()
-        
-    //Temp
-    draw_text(x,y+20,view_xview)
-    draw_text(x,y+30,view_yview)
-    draw_text(x,y+40,moving)
 }
 else
 {

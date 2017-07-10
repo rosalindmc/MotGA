@@ -19,8 +19,9 @@ if argument3 = noone
 {
     ii = instance_create(i.x,i.y,obj_interactable)
     ii.name = i.name
-    ii.owner = i.owner
+    ii.owner = i
     ii.useType = pickUp
+    i.interactId = ii
 }
 
 #define itemInitialize
@@ -38,6 +39,7 @@ floorZ = 0
 z = 0
 spin = 0
 
+interactId = noone
 
 #define itemStep
 if owner != noone
@@ -47,8 +49,9 @@ if owner != noone
     {
         if hand != 0
         {
-            x = owner.handX[hand].x+owner.x-(owner.charSurfSize*.5)
-            y = owner.handY[hand].y+owner.y-(owner.charSurfSize*.75)
+            x = owner.handX[hand]+owner.x-(owner.charSurfSize*.5)
+            y = owner.handY[hand]+owner.y-(owner.charSurfSize*.75)
+            image_index = 0 
         }
     }
 }

@@ -12,12 +12,7 @@ enumerators();
 screenScale()
 
 //Controls
-global.upKey = ord('W')
-global.leftKey = ord('A')
-global.downKey = ord('S')
-global.rightKey = ord('D')
-
-global.dodgeKey = vk_space
+controls()
 
 //Create pc
 global.pc = instance_create(x,y,obj_char)
@@ -141,6 +136,17 @@ view_yview[]+(view_hview[]/2)+(270*(.5-(y/room_height))))
 
 
 #define controlDrawHUD
+//Draw Interact Tooltip
+if global.pc.pointInteract != noone
+{    
+    with(global.pc.pointInteract)
+    {
+        //draw_set_font(fnt_menu)
+        draw_set_halign(fa_center)
+        drawText(c_black,c_white,x,y-15,name)
+    }
+}
+
 
 /*
 draw_sprite(spr_reticle,0,mouse_x,mouse_y)
@@ -354,6 +360,15 @@ enum bossType{
     none = 0,
     champion = 1
 }
+#define controls
+global.upKey = ord('W')
+global.leftKey = ord('A')
+global.downKey = ord('S')
+global.rightKey = ord('D')
+
+global.interactKey = ord('E')
+global.dodgeKey = vk_space
+
 #define screenScale
 //This is supposed to allow us to do good screen scaling for multiple devices later, 
 //still don't know how it works
