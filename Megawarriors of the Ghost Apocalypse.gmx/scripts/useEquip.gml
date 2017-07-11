@@ -1,4 +1,0 @@
-#define useEquip
-
-
-#define attack

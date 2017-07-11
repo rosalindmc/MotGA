@@ -1,4 +1,3 @@
-#define playerControl
 //Move Control
 upKey = keyboard_check(global.upKey)
 leftKey = keyboard_check(global.leftKey)
@@ -178,39 +177,3 @@ if canAttack = true and canAct = true
 obj_camera.kick = kick
 obj_camera.h = targetH
 
-
-#define scrollItems
-/*
-invSelect += argument0
-
-if invSelect > array_length_1d(invSlot)-2
-{
-    invSelect = 1 
-}
-if invSelect < 1
-{
-    invSelect = array_length_1d(invSlot)-1
-}
-
-
-repeat(array_length_1d(invSlot)-2)
-{
-    if !instance_exists(invSlot[invSelect])
-    {
-        invSelect += argument0
-        
-        if invSelect > array_length_1d(invSlot)-2
-        {
-            invSelect = 1 
-        }
-        if invSelect < 1
-        {
-            invSelect = array_length_1d(invSlot)-1
-        }
-    }   
-}   
-        
-if instance_exists(invSlot[invSelect])
-{
-    anim[1] = invSlot[invSelect].anim[0]
-}
