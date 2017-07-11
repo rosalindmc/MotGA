@@ -7,18 +7,25 @@ if throwKey = true
 {
     //Add Throw hold and charge later
     //Temp just drop
-    dropItem(argument0)
-    temporary = argument1
+    throwItem(argument0,argument1)
 }
 else
 {
-    //Use Item as intended
+    if handItem[argument0] != noone
+    {
+        script_execute(handItem[argument0].useScript[min(1+greatWeapon,argument0)],argument0,argument1)
+    }
+    else
+    {
+        //Add unarmed punch anim later
+    }
 }
 
 #define melee
 switch(argument0)
 {
 case 0:     //Click
+show_message('Melee Click')
 //check if you can swing
 //can attack? at least 1 stamina? not alreayd holding an attack?
 //check range and context and run appropriate hold anim
