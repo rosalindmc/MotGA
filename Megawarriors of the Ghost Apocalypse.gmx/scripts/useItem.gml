@@ -104,17 +104,9 @@ if (strike = 1){
         i.h = h
         i.dmgType = handItem[argument0].meleeType
         i.sprite_index = handItem[argument0].attackMask
-        i.image_yscale = handItem[argument0].meleeSize*owner.meleeSwings    //fix this variable name please someone
+        i.image_yscale = handItem[argument0].meleeSize*owner.meleeSwing    //fix this variable name please someone
         i.image_xscale = handItem[argument0].meleeSize
     }    
 }
 
 #define perfectHitSheen
-
-#define meleeSwing
-animStep[1] += 1
-switch(animStep[1]){
-
-
-
-}
