@@ -5,7 +5,6 @@ if inventoryKey = true
 {
     var p = (point_direction(view_xview+(view_wview/2),view_yview+(view_hview/2), -mouse_x + view_wview, mouse_y)+280)%360
     
-<<<<<<< HEAD
     hoverItem = floor(p/(360/inventorySize))
     
     if lftclickedKey = true
@@ -17,7 +16,6 @@ if inventoryKey = true
     {
         switchItem(hoverItem,2)
     }   
-=======
     hoverItem = floor((p/(360/inventorySize)))
 }
 
@@ -27,7 +25,6 @@ if lftclickedKey = true
 
 if rgtclickedKey = true
 {
->>>>>>> origin/master
 }
 
 //While switch Items is on, divide screen radially
@@ -66,7 +63,7 @@ surface_reset_target()
 draw_set_blend_mode(bm_normal)
 draw_surface(invCircle,view_xview+(view_wview/2)-100,view_yview+(view_hview/2)-100)
 
-<<<<<<< HEAD
+
 for(i = 0; i < inventorySize; i++)
 {
     ix = view_xview+(view_wview/2)+lengthdir_x(65,(360/(inventorySize*2))+(i*(360/inventorySize)))
@@ -81,13 +78,12 @@ for(i = 0; i < inventorySize; i++)
     {
         drawText(c_black,c_red,ix,iy+30,'Left Hand')
     }
-=======
+}
 
 for(i = 1; i <= inventorySize; i++)
 {
     ix = view_xview+(view_wview/2)+lengthdir_x(45,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
     iy = view_yview+(view_hview/2)+lengthdir_y(45,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
->>>>>>> origin/master
     
     if inventory[inventorySize-i] != noone
     { 
@@ -113,6 +109,7 @@ for(i = 1; i <= inventorySize; i++)
         }
     }
 }
+
 
 #define scrollItems
 if mouse_wheel_up()
@@ -212,6 +209,4 @@ else
 {
     greatWeapon = false
 }
-=======
-}
->>>>>>> origin/master
+
