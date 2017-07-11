@@ -51,7 +51,8 @@ if owner != noone
         {
             x = owner.handX[hand]+owner.x-(owner.charSurfSize*.5)
             y = owner.handY[hand]+owner.y-(owner.charSurfSize*.75)
-            image_index = 0 
+            image_index = 0
+            image_angle = owner.itemRot[hand]
         }
     }
 }
