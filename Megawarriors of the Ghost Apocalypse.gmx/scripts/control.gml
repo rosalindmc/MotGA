@@ -30,13 +30,16 @@ with (global.currLevel){
     biomeType = 4
     elements[0] = 0
     sizeX = 50
-    sizeY = 30
+    sizeY = 50
+    
+    room_height = sizeY*18
+    room_width = sizeX*18
     
     critPoi = 1     //the type of the critical point of interest
-    poiDensity = 5 //number of points of interest on the map
-    numEntrance = 1
+    poiDensity = 25 //number of points of interest on the map
+    numEntrance = 3
     pois[0]=0
-    numRivers = 3
+    numRivers = 4
 
     rivers[numRivers,4] = 0    
     
@@ -48,7 +51,12 @@ with (global.currLevel){
     
     specialAreas = 0   //number of special areas to spawn
     
-    floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
+    for (i = 0; i < sizeX; i++){
+        for(j = 0; j < sizeY; j++){
+            floorLayout[i,j] = 0    //the map of floors and walls
+        }
+    }
+            
     
     genLevel()
     for(i = 0; i < array_length_1d(pois)-1; i++){

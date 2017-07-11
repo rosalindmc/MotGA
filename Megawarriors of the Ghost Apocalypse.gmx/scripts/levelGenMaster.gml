@@ -125,10 +125,82 @@ for (var i = 1; i<=numEntrance;i++){
         case 3:
             pois[i+poiDensity] = instance_create(sizeX-1,irandom(sizeY-5)+2,obj_poi)
             break
+            
+    }
+}
+
+
+for(i =0;i <= ceil(sizeX/5)- 2;i++){
+        for(j = 0;j <= floor(sizeY/5) - 2;j++){ //create an array of points for POIs to generate on that is set to available
+            poiPoints[i,j] = floorLayout[(i*5)+5 ,(j*5)+5];
+            poiPoints[i,j].available = true 
     }
 }
 
 with(obj_poi){
+
+    genned = false    
+    while (genned = false){
+    
+        tempX = irandom(array_height_2d(other.poiPoints)-1)
+        tempY = irandom(array_length_2d(other.poiPoints,0)-1)
+        
+        if(other.poiPoints[tempX,tempY].available = true){
+            
+            gridX = (tempX*5)+5
+            gridY = (tempY*5)+5
+        
+            other.floorLayout[gridX,gridY].weight = 1
+            other.floorLayout[gridX,gridY].hasPoi = true
+            other.floorLayout[gridX,gridY].poi = id
+            
+            for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
+                for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
+                    if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
+                        other.floorLayout[i,j].weight = 2
+                        other.floorLayout[i,j].hasPoi = true
+                        other.floorLayout[i,j].poi = id
+                    }
+                }
+            }
+            genned = true
+            
+            other.poiPoints[tempX,tempY].available = false
+            
+            if(tempX-1 >= 0){
+                other.poiPoints[tempX-1,tempY].available = false
+            }
+            
+            if(tempX+1 <= array_height_2d(other.poiPoints)-1){
+                other.poiPoints[tempX+1,tempY].available = false
+            }
+            
+            if(tempY-1 >= 0){   
+                other.poiPoints[tempX,tempY-1].available = false
+            }
+                
+            if(tempY+1 <= array_length_2d(other.poiPoints,0)-1){
+                other.poiPoints[tempX,tempY+1].available = false
+            }
+            
+        }
+        
+        else{           
+            for(i = 0;i < array_height_2d(other.poiPoints);i++){
+                for(j = 0;j < array_length_2d(other.poiPoints,0);j++){
+                    if(other.poiPoints[i,j].available = true){
+                        tempX = i
+                        tempY = j
+                        break 
+                        break
+                    }
+                }
+            }        
+        }   
+    }
+}
+
+/*with(obj_poi){
     for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
         for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
             if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
@@ -140,7 +212,7 @@ with(obj_poi){
     }
     other.floorLayout[gridX,gridY].weight = 1
     other.floorLayout[gridX,gridY].hasPoi = true
-}
+}*/
 
 #define riverGen
 for (var i = 0;i < numRivers;i++){

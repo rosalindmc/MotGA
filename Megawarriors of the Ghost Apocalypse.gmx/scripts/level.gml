@@ -90,7 +90,7 @@ while(current.pathParent != noone)
         }
     }
     
-    if(current.gridX+1 >= 0){
+    if(current.gridX+1 < sizeX){
         if (floorLayout[current.gridX+1, current.gridY].weight > 2){
             floorLayout[current.gridX+1, current.gridY].weight = 2
         }
@@ -102,7 +102,7 @@ while(current.pathParent != noone)
         }
     }
         
-    if(current.gridY+1 >= 0){
+    if(current.gridY+1 < sizeY){
         if (floorLayout[current.gridX, current.gridY+1].weight > 2){
             floorLayout[current.gridX, current.gridY+1].weight = 2
         }
