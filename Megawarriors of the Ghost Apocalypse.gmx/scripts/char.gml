@@ -37,12 +37,12 @@ animSpeed[0] = 1    //Multiplier for animation speed (can be negative)
 
 animIndex[1] = weaponIdle    //Right Hand
 animStep[1] = 0     
-animDelay[1] = 0    
+animDelay[1] = 1    
 animSpeed[1] = 1    
 
 animIndex[2] = weaponIdle    //Left Hand
 animStep[2] = 0     
-animDelay[2] = 0    
+animDelay[2] = 1    
 animSpeed[2] = 1    
 
 bodyTwist = 0
@@ -103,12 +103,10 @@ script_execute(controlScript)
 //Facing
 facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
 
-//Temp Arm rotations
-handDir[1] = facing-15
-itemRot[1] = facing+45
-
-handDir[2] = facing+15
-itemRot[2] = facing-45
+//Movement
+moveStep()
+moveLimit()
+isoDepth(0)
 
 /*
 script_execute(control)
@@ -206,10 +204,7 @@ if hp <= 0
 dTerrain = grid.difficult
 
 #define charEndstep
-//Movement
-moveStep()
-moveLimit()
-isoDepth(0)
+//Animate
 animEndStep(0)
 animEndStep(1)
 animEndStep(2)

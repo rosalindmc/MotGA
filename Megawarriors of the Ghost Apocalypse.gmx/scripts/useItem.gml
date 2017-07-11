@@ -32,13 +32,34 @@ switch(argument1)
         fumble = false
         hold[argument0] = 1
         
-        //start Hold Animation as determined by weapon and context
-        moveMult = min(1-handItem[argument0].useSlow)
-        
-        if sweetSpot = true
+        //Start Hold Animation as determined by weapon and context
+        if argument0 = 2 and greatWeapon = true
         {
-            meleeSwing[argument0] *= -1
+            //Alt Attack
+            animationStart(handItem[argument0].anim[1],argument0)
         }
+        else if dodgeTimer != 0
+        {
+            //Roll Attack
+            animationStart(handItem[argument0].anim[2],argument0)
+        }
+        else if point_distance(x,y,targetX,targetY) < 10 //Replace with var
+        {
+            //Close Attack
+            animationStart(handItem[argument0].anim[3],argument0)
+        }
+        else
+        {
+            //Normal Attack
+            animationStart(handItem[argument0].anim[0],argument0)
+        }
+        
+        //moveMult = min(1-handItem[argument0].meleeSlow)
+        
+        //if sweetSpot = true
+        //{
+        //    meleeSwing[argument0] *= -1
+        //}
     }
     else
     {

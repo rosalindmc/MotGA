@@ -34,10 +34,15 @@ switch(argument0)
     anim[1] = weaponSlash   //Basic Attack
     anim[2] = weaponSlash   //Power Attack
     anim[3] = weaponSlash   //Alternate Attack (2h)
-    anim[4] = weaponStab    //Roll Attack
-    anim[5] = weaponHilt    //Close attack    
-    anim[6] = weaponHilt    //Special Slot, called by some items
-    anim[7] = throwHold     //Throw
+    anim[4] = weaponSlash    //Roll Attack
+    anim[5] = weaponSlash    //Close attack    
+    anim[6] = weaponSlash    //Special Slot, called by some items
+    anim[7] = throwAnim     //Throw
+    animHold[0] = weaponHold//Basic Hold Anim (basic+power)
+    animHold[1] = weaponHold//Alt Hold Anim 
+    animHold[2] = weaponHold//Roll Hold Anim 
+    animHold[3] = weaponHold//Close Hold Anim 
+    animHold[4] = throwHold //Throw Hold Anim 
     
     for(i = 1; i < 7; i++)
     {

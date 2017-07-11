@@ -111,21 +111,21 @@ if surface_exists(charSurf)
     shldrX[2] = bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*bodyHFacing, bodyRot+180)
     shldrY[2] = bodyY+lengthdir_y(shldrYAdjust[2], bodyRot+90)+lengthdir_y(shldrXAdjust[2]*bodyHFacing, bodyRot+180)
     
-    handX[1] = round(bodyX+lengthdir_x(handDist[1], handDir[1]))
-    handY[1] = round(bodyY+lengthdir_y(handDist[1], handDir[1]))-handHeight[1]
+    handX[1] = round(bodyX+lengthdir_x(handDist[1], (round(facing/15)*15)+handDir[1]))
+    handY[1] = round(bodyY+lengthdir_y(handDist[1], (round(facing/15)*15)+handDir[1]))-handHeight[1]
     
-    handX[2] = round(bodyX+lengthdir_x(handDist[2], handDir[2]))
-    handY[2] = round(bodyY+lengthdir_y(handDist[2], handDir[2]))-handHeight[2]    
+    handX[2] = round(bodyX+lengthdir_x(handDist[2], (round(facing/15)*15)+handDir[2]))
+    handY[2] = round(bodyY+lengthdir_y(handDist[2], (round(facing/15)*15)+handDir[2]))-handHeight[2]    
     
     //Hand Shenanigans
     //If using a great weapon, move second hand
     if greatWeapon = true
     {
-        handX[2] = round(handX[1]+lengthdir_x(greatWeaponSize*((shldrSwap*2)-1), (itemRot[1])))
-        handY[2] = round(handY[1]+lengthdir_y(greatWeaponSize*((shldrSwap*2)-1), (itemRot[1])))
+        handX[2] = round(handX[1]+lengthdir_x(greatWeaponSize*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
+        handY[2] = round(handY[1]+lengthdir_y(greatWeaponSize*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
         
-        handX[1] = round(handX[1]+lengthdir_x(greatWeaponSize*-1*((shldrSwap*2)-1), (itemRot[1])))
-        handY[1] = round(handY[1]+lengthdir_y(greatWeaponSize*-1*((shldrSwap*2)-1), (itemRot[1])))
+        handX[1] = round(handX[1]+lengthdir_x(greatWeaponSize*-1*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
+        handY[1] = round(handY[1]+lengthdir_y(greatWeaponSize*-1*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
     }
     
     //Arm Directions
