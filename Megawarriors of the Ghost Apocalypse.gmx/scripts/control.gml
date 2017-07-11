@@ -375,6 +375,13 @@ global.rightKey = ord('D')
 
 global.interactKey = ord('E')
 global.dodgeKey = vk_space
+global.castKey = ord('Q')
+global.reloadKey = ord('R')
+global.throwKey = ord('T')
+global.sneakKey = vk_lcontrol
+global.castKey = ord('Q')
+global.inventoryKey = vk_lshift
+
 
 #define screenScale
 //This is supposed to allow us to do good screen scaling for multiple devices later, 

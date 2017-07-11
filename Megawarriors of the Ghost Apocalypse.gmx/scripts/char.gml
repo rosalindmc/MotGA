@@ -84,6 +84,16 @@ pointInteract = noone
 //Execute Control Script
 script_execute(controlScript)
 
+//Facing
+facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
+
+//Temp Arm rotations
+handDir[1] = facing-15
+itemRot[1] = facing+45
+
+handDir[2] = facing+15
+itemRot[2] = facing-45
+
 /*
 script_execute(control)
 charFacing()

@@ -4,8 +4,22 @@ leftKey = keyboard_check(global.leftKey)
 downKey = keyboard_check(global.downKey)
 rightKey = keyboard_check(global.rightKey)
 
+lftclickKey = mouse_check_button(mb_left)
+rgtclickKey = mouse_check_button(mb_right)
+lftclickedKey = mouse_check_button_pressed(mb_left)
+rgtclickedKey = mouse_check_button_pressed(mb_right)
+lftreleaseKey = mouse_check_button_released(mb_left)
+rgtreleaseKey = mouse_check_button_released(mb_right)
 interactKey = keyboard_check_pressed(global.interactKey)
+castKey = keyboard_check_pressed(global.castKey)
+castReleasedKey = keyboard_check_released(global.castKey)
 dodgeKey = keyboard_check_pressed(global.dodgeKey)
+reloadKey = keyboard_check_pressed(global.reloadKey)
+throwKey = keyboard_check_pressed(global.throwKey)
+throwReleasedKey = keyboard_check_released(global.throwKey)
+sneakKey = keyboard_check_pressed(global.sneakKey)
+inventoryKey = keyboard_check_pressed(global.inventoryKey)
+inventoryReleasedKey = keyboard_check_released(global.inventoryKey)
 
 //Movement
 moveControl()
@@ -16,27 +30,43 @@ if (dodgeKey = true and canMove = true and stam >= dodgeCost and (moving != 0))
     dodgeRoll(point_direction(0,0,hspd,vspd))  
 }
 
-//Interact Control
-interactSearch()
-
-if interactKey = true and canAttack = true
+if canAttack = true
 {
-    interact()  
+    //Interact Control
+    interactSearch()
+    
+    if interactKey = true
+    {
+        interact()  
+    }
+    
+    //Use Item
+    if lftclickedKey = true
+    {
+        useItem(1,0)  
+    }
+    if rgtclickedKey = true
+    {
+        useItem(2,0)  
+    }
 }
+
+//Release Use Item
+if lftreleaseKey = true
+{
+    useItem(1,1)  
+}
+if rgtreleaseKey = true
+{
+    useItem(2,1)  
+}
+
+//Throw
+
 
 //Targeting
 targetX = mouse_x
 targetY = mouse_y
-
-//Facing
-facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
-
-//Temp Arm rotations
-handDir[1] = facing-15
-itemRot[1] = facing+45
-
-handDir[2] = facing+15
-itemRot[2] = facing-45
 
 /*
 lftclickKey = mouse_check_button(mb_left)
