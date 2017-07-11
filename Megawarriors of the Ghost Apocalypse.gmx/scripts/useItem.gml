@@ -89,5 +89,32 @@ strike[argument0] = 1
 
 
 #define meleeHit
+// Make melee collider
+
+if (strike = 1){
+    strike = 0
+    
+    with (handItem[argument0]){
+        
+        i = instance_create(owner.x+lengthdir_x(length+handItem[argument0].itemDist,owner.facing),owner.y+lengthdir_y(length+handItem[argument0].itemDist,owner.facing),obj_meleeHit)
+        i.owner = owner
+        i.image_angle = owner.facing
+        i.dmg = handItem[argument0].meleeDmg*owner.charge[argument0]
+        i.impact = handItem[argument0].meleeImpact*owner.Charge[argument0]
+        i.h = h
+        i.dmgType = handItem[argument0].meleeType
+        i.sprite_index = handItem[argument0].attackMask
+        i.image_yscale = handItem[argument0].meleeSize*owner.meleeSwings    //fix this variable name please someone
+        i.image_xscale = handItem[argument0].meleeSize
+    }    
+}
 
 #define perfectHitSheen
+
+#define meleeSwing
+animStep[1] += 1
+switch(animStep[1]){
+
+
+
+}
