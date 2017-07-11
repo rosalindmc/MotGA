@@ -72,6 +72,17 @@ stamMax = 4
 stamRegen = 2.0   //per second
 stamDelay = 0.0
 
+//Fighting
+hold[1] = 0
+hold[2] = 0
+charge[1] = 0
+charge[2] = 0
+meleeSwing[1] = 1
+meleeSwing[2] = -1
+sweetSpot = false
+fumble = false
+
+
 //Inventory
 inventorySize = 10
 for(i = 0; i < inventorySize; i++)

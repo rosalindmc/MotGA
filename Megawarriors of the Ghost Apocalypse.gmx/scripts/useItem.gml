@@ -22,17 +22,51 @@ else
 }
 
 #define melee
-switch(argument0)
+switch(argument1)
 {
-case 0:     //Click
-show_message('Melee Click')
-//check if you can swing
-//can attack? at least 1 stamina? not alreayd holding an attack?
-//check range and context and run appropriate hold anim
-break
-
-case 1:     //Release
-//check if charging an attack
-//execute attack animation corresponding to hold animation
-break
+    case 0:     //Click
+    if ((canAttack = true and hold[argument0] = 0) or (sweetSpot = true and fumble = false)) and stam >= 1
+    {
+        //Begin Hold
+        charge[argument0] = 1
+        fumble = false
+        hold[argument0] = 1
+        
+        //start Hold Animation as determined by weapon and context
+        moveMult = min(1-handItem[argument0].useSlow)
+        
+        if sweetSpot = true
+        {
+            meleeSwing[argument0] *= -1
+        }
+    }
+    else
+    {
+        fumble = true
+    }
+    break
+    
+    case 1:     //Release
+    if charge[argument0] != 0 and canAttack = true
+    {
+        //Play corresponding attack anim     
+        meleeAttack(argument0)     
+    }
+    break
 }
+
+#define meleeAttack
+//Play relevent animation
+//Set Stamina Delay
+//Spend Stamina
+
+sweetSpot = false
+hold[argument0] = 0
+strike[argument0] = 1
+
+//Add Lunge animations
+
+
+#define meleeHit
+
+#define perfectHitSheen
