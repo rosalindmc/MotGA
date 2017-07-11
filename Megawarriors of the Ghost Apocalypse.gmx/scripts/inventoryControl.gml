@@ -64,17 +64,17 @@ draw_set_blend_mode(bm_normal)
 draw_surface(invCircle,view_xview+(view_wview/2)-100,view_yview+(view_hview/2)-100)
 
 
-for(i = 0; i < inventorySize; i++)
+for(i = 1; i <= inventorySize; i++)
 {
-    ix = view_xview+(view_wview/2)+lengthdir_x(65,(360/(inventorySize*2))+(i*(360/inventorySize)))
-    iy = view_yview+(view_hview/2)+lengthdir_y(65,(360/(inventorySize*2))+(i*(360/inventorySize)))
+    ix = view_xview+(view_wview/2)+lengthdir_x(75,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
+    iy = view_yview+(view_hview/2)+lengthdir_y(75,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
     
-    if handItemSlot[1] = i
+    if handItemSlot[1] = inventorySize- i
     {
         drawText(c_black,c_green,ix,iy+20,'Right Hand')
     }
     
-    if handItemSlot[2] = i
+    if handItemSlot[2] = inventorySize- i
     {
         drawText(c_black,c_red,ix,iy+30,'Left Hand')
     }
@@ -82,8 +82,8 @@ for(i = 0; i < inventorySize; i++)
 
 for(i = 1; i <= inventorySize; i++)
 {
-    ix = view_xview+(view_wview/2)+lengthdir_x(45,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
-    iy = view_yview+(view_hview/2)+lengthdir_y(45,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
+    ix = view_xview+(view_wview/2)+lengthdir_x(75,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
+    iy = view_yview+(view_hview/2)+lengthdir_y(75,(360/(inventorySize*2))+(i*(360/inventorySize))+(360/inventorySize)*round(inventorySize/4))
     
     if inventory[inventorySize-i] != noone
     { 
@@ -209,4 +209,3 @@ else
 {
     greatWeapon = false
 }
-
