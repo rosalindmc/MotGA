@@ -1,17 +1,21 @@
 #define inventoryControl
+scrollItems()
+
 if inventoryKey = true
 {
     var p = point_direction(view_xview+(view_wview/2),view_yview+(view_hview/2),mouse_x,mouse_y)
     
     hoverItem = floor(p/(360/inventorySize))
-}
-
-if lftclickedKey = true
-{
-}
-
-if rgtclickedKey = true
-{
+    
+    if lftclickedKey = true
+    {
+        switchItem(hoverItem,1)
+    }
+    
+    if rgtclickedKey = true
+    {
+        switchItem(hoverItem,2)
+    }   
 }
 
 //While switch Items is on, divide screen radially
@@ -50,11 +54,20 @@ surface_reset_target()
 draw_set_blend_mode(bm_normal)
 draw_surface(invCircle,view_xview+(view_wview/2)-100,view_yview+(view_hview/2)-100)
 
-
 for(i = 0; i < inventorySize; i++)
 {
-    ix = view_xview+(view_wview/2)+lengthdir_x(45,(360/(inventorySize*2))+(i*(360/inventorySize)))
-    iy = view_yview+(view_hview/2)+lengthdir_y(45,(360/(inventorySize*2))+(i*(360/inventorySize)))
+    ix = view_xview+(view_wview/2)+lengthdir_x(65,(360/(inventorySize*2))+(i*(360/inventorySize)))
+    iy = view_yview+(view_hview/2)+lengthdir_y(65,(360/(inventorySize*2))+(i*(360/inventorySize)))
+    
+    if handItemSlot[1] = i
+    {
+        drawText(c_black,c_green,ix,iy+20,'Right Hand')
+    }
+    
+    if handItemSlot[2] = i
+    {
+        drawText(c_black,c_red,ix,iy+30,'Left Hand')
+    }
     
     if inventory[i] != noone
     { 
@@ -82,6 +95,22 @@ for(i = 0; i < inventorySize; i++)
 }
 
 #define scrollItems
+if mouse_wheel_up()
+{
+    for(i = handItemSlot[1]; i < inventorySize; i++)
+    {
+        if inventory[i] != noone
+        {
+            switchItem(i,1)
+            break
+        }
+        
+        switchItem(-1,1)
+    }
+}
+
+
+
 //Mouse Wheel up to make right hand switch to next item, cycling
 //Mouse Wheel down to cycle left hand
 
@@ -118,4 +147,47 @@ repeat(array_length_1d(invSlot)-2)
 if instance_exists(invSlot[invSelect])
 {
     anim[1] = invSlot[invSelect].anim[0]
+}
+
+#define switchItem
+//Clear item currently held in hand
+if handItem[argument1] != noone
+{
+    if greatWeapon = false
+    {
+        handItem[argument1].hand = 0
+    }
+    else
+    {
+        handItem[argument1].hand = 3-argument1
+    }
+}
+
+if argument0 != -1
+{
+    //Switch to new item
+    handItem[argument1] = inventory[argument0]
+    
+    //Assign new item to hand and hand to new item
+    if handItem[argument1] != noone
+    {
+        handItemSlot[argument1] = argument0
+        inventory[argument0].hand = argument1
+    }
+    else
+    {
+        handItemSlot[argument1] = -1
+    }
+}
+
+//If both hands are on the same item wield it in two hands
+if handItemSlot[1] = handItemSlot[2] and handItem[1] != noone
+{
+    greatWeapon = true
+    greatWeaponSize = 1
+    handItem[1].hand = 1
+}
+else
+{
+    greatWeapon = false
 }

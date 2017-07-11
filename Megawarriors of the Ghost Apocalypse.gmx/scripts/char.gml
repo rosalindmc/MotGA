@@ -79,7 +79,9 @@ for(i = 0; i < inventorySize; i++)
     inventory[i] = noone
 }
 handItem[1] = noone
+handItemSlot[1] = -1
 handItem[2] = noone
+handItemSlot[2] = -1
 
 pointInteract = noone
 

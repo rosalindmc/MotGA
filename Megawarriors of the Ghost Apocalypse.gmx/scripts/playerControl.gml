@@ -18,6 +18,7 @@ reloadKey = keyboard_check_pressed(global.reloadKey)
 throwKey = keyboard_check(global.throwKey)
 sneakKey = keyboard_check_pressed(global.sneakKey)
 inventoryKey = keyboard_check(global.inventoryKey)
+
 //Movement
 moveControl()
 
@@ -30,7 +31,7 @@ if (dodgeKey = true and canMove = true and stam >= dodgeCost and (moving != 0))
     dodgeRoll(point_direction(0,0,hspd,vspd))  
 }
 
-if canAttack = true
+if canAttack = true and inventoryKey = false
 {
     //Interact Control
     interactSearch()

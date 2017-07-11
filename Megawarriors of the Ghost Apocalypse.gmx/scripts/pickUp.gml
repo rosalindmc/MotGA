@@ -7,6 +7,7 @@ for(i = 0; i < argument0.inventorySize; i++)
         if argument0.handItem[1] = noone
         {
             owner.hand = 1
+            argument0.handItemSlot[1] = i
             argument0.handItem[1] = owner
         }
         
