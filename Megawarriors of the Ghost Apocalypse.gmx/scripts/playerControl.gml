@@ -15,14 +15,14 @@ castKey = keyboard_check_pressed(global.castKey)
 castReleasedKey = keyboard_check_released(global.castKey)
 dodgeKey = keyboard_check_pressed(global.dodgeKey)
 reloadKey = keyboard_check_pressed(global.reloadKey)
-throwKey = keyboard_check_pressed(global.throwKey)
-throwReleasedKey = keyboard_check_released(global.throwKey)
+throwKey = keyboard_check(global.throwKey)
 sneakKey = keyboard_check_pressed(global.sneakKey)
-inventoryKey = keyboard_check_pressed(global.inventoryKey)
-inventoryReleasedKey = keyboard_check_released(global.inventoryKey)
-
+inventoryKey = keyboard_check(global.inventoryKey)
 //Movement
 moveControl()
+
+//Switch Items
+inventoryControl()
 
 //Dodge Control
 if (dodgeKey = true and canMove = true and stam >= dodgeCost and (moving != 0))
@@ -60,9 +60,6 @@ if rgtreleaseKey = true
 {
     useItem(2,1)  
 }
-
-//Throw
-
 
 //Targeting
 targetX = mouse_x

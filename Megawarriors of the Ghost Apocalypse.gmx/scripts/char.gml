@@ -73,8 +73,11 @@ stamRegen = 2.0   //per second
 stamDelay = 0.0
 
 //Inventory
-inventorySize = 4
-inventory[inventorySize] = noone
+inventorySize = 10
+for(i = 0; i < inventorySize; i++)
+{
+    inventory[i] = noone
+}
 handItem[1] = noone
 handItem[2] = noone
 

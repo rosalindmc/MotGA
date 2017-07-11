@@ -3,6 +3,18 @@
 //Run the second use script if right clicking w/ two hands
 //Input argument 1 to script for press vs release
 
+if throwKey = true
+{
+    //Add Throw hold and charge later
+    //Temp just drop
+    dropItem(argument0)
+    temporary = argument1
+}
+else
+{
+    //Use Item as intended
+}
+
 #define melee
 switch(argument0)
 {

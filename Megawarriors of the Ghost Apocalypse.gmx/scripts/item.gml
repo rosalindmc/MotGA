@@ -25,7 +25,7 @@ if argument3 = noone
 }
 
 #define itemInitialize
-hand = 0            //0 = inInventory, 1/2 equal corresponding hand
+hand = 0            //0 = inInventory, 1/2 equal corresponding hand, 3 is held in both hands
 owner = noone       //Who currently owns/wields this item
 
 type = sword
@@ -64,4 +64,7 @@ else
 }
 
 #define itemDraw
-draw_sprite_ext(sprite_index,image_index,round(x),round(y-z),1,1,image_angle,c_white,1)
+if owner = noone or hand != 0
+{
+    draw_sprite_ext(sprite_index,image_index,round(x),round(y-z),1,1,image_angle,c_white,1)
+}

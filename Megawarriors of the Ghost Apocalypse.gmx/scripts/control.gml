@@ -36,7 +36,7 @@ with (global.currLevel){
     room_width = sizeX*18
     
     critPoi = 1     //the type of the critical point of interest
-    poiDensity = 25 //number of points of interest on the map
+    poiDensity = 13 //number of points of interest on the map
     numEntrance = 3
     pois[0]=0
     numRivers = 4
@@ -203,6 +203,13 @@ if global.pc.pointInteract != noone
     }
 }
 
+if global.pc.inventoryKey = true
+{
+    with(global.pc)
+    {
+        inventoryControlHUD()
+    }
+}
 
 /*
 draw_sprite(spr_reticle,0,mouse_x,mouse_y)
@@ -395,6 +402,7 @@ global.inventoryKey = vk_lshift
 //This is supposed to allow us to do good screen scaling for multiple devices later, 
 //still don't know how it works
 
+/*
 //application_surface_draw_enable(false)
 window_set_fullscreen(true)
 
