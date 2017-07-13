@@ -11,7 +11,8 @@ switch(argument0)
     useScript[2] = melee
     
     //Item Stats
-    length = 12
+    length = 25
+    holdPoint = 7
     
     //Weapon Stats
     meleePow = 1
@@ -52,7 +53,7 @@ switch(argument0)
         meleeLungeMult[i] = 1
         meleeSlowMult[i] = 1
         meleeSizeMult[i] = 1
-        meleeCoseMulte[i] = 1
+        meleeCoseMult[i] = 1
     }
     break
 }

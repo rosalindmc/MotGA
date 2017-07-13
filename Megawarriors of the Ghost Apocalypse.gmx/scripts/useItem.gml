@@ -36,22 +36,26 @@ switch(argument1)
         if argument0 = 2 and greatWeapon = true
         {
             //Alt Attack
-            animationStart(handItem[argument0].anim[1],argument0)
+            queuedAnim[argument0] = 3
+            animationStart(handItem[argument0].animHold[1],argument0)
         }
         else if dodgeTimer != 0
         {
             //Roll Attack
-            animationStart(handItem[argument0].anim[2],argument0)
+            queuedAnim[argument0] = 4
+            animationStart(handItem[argument0].animHold[2],argument0)
         }
         else if point_distance(x,y,targetX,targetY) < 10 //Replace with var
         {
             //Close Attack
-            animationStart(handItem[argument0].anim[3],argument0)
+            queuedAnim[argument0] = 5
+            animationStart(handItem[argument0].animHold[3],argument0)
         }
         else
         {
             //Normal Attack
-            animationStart(handItem[argument0].anim[0],argument0)
+            queuedAnim[argument0] = 1
+            animationStart(handItem[argument0].animHold[0],argument0)
         }
         
         //moveMult = min(1-handItem[argument0].meleeSlow)
@@ -84,8 +88,15 @@ switch(argument1)
 sweetSpot = false
 hold[argument0] = 0
 strike[argument0] = 1
+animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
+
+stam -= handItem[argument0].meleeCost*handItem[argument0].meleeCoseMult[queuedAnim[argument0]]
+stamDelay = .1+abs(min(0,stam))
+stam = max(stam,0)
 
 //Add Lunge animations
+
+//Lunge
 
 
 #define meleeHit
@@ -108,5 +119,9 @@ if (strike = 1){
         i.image_xscale = handItem[argument0].meleeSize
     }    
 }
+
+#define meleeEnd
+charge[argument0] = 0
+animationReset(argument0)
 
 #define perfectHitSheen

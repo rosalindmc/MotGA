@@ -1,5 +1,6 @@
 #define item
 
+
 #define createItem
 //item creation requires special steps so instead of using create object
 //you must use createItem(x,y,type,owner)
@@ -49,10 +50,12 @@ if owner != noone
     {
         if hand != 0
         {
-            x = owner.handX[hand]+owner.x-(owner.charSurfSize*.5)
-            y = owner.handY[hand]+owner.y-(owner.charSurfSize*.75)
-            image_index = 0
             image_angle = (round(owner.facing/15)*15)+owner.itemRot[hand]
+            x = owner.handX[hand]+owner.x-(owner.charSurfSize*.5)+lengthdir_x(holdPoint,image_angle)
+            y = owner.handY[hand]+owner.y-(owner.charSurfSize*.75)+owner.handHeight[hand]+lengthdir_y(holdPoint,image_angle)
+            z = owner.handHeight[hand] 
+            image_index = 0
+            isoDepth(0)
         }
     }
 }
@@ -61,6 +64,7 @@ else
     //Resolve Unowned
     image_angle += spin/global.frameRate
     moveStepObject()
+    isoDepth(10)
 }
 
 #define itemDraw

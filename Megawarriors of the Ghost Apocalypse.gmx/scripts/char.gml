@@ -79,9 +79,10 @@ charge[1] = 0
 charge[2] = 0
 meleeSwing[1] = 1
 meleeSwing[2] = -1
+queuedAnim[1] = -4
+queuedAnim[2] = -4
 sweetSpot = false
 fumble = false
-
 
 //Inventory
 inventorySize = 10
@@ -94,6 +95,7 @@ handItemSlot[1] = -1
 handItem[2] = noone
 handItemSlot[2] = -1
 
+hoverItem = 0
 pointInteract = noone
 
 #define charStep
@@ -260,6 +262,10 @@ if animUpdate = true
 }
 
 draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75)),1,1,0,c_white,1)
+
+draw_text(x,y+10,animStep[1])
+draw_text(x,y+20,animIndex[1])
+draw_text(x,y+30,hoverItem)
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)

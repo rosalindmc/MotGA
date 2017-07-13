@@ -3,9 +3,13 @@ scrollItems()
 
 if inventoryKey = true
 {
-    var p = (point_direction(view_xview+(view_wview/2),view_yview+(view_hview/2), -mouse_x + view_wview, mouse_y)+280)%360
+    var p = point_direction(view_xview+(view_wview/2),view_yview+(view_hview/2), mouse_x, mouse_y)
     
-    hoverItem = floor(p/(360/inventorySize))
+    hoverItem = floor(inventorySize-(((p-90-(180/inventorySize)))/(360/inventorySize)))
+    if hoverItem >= inventorySize
+    {
+        hoverItem -= inventorySize
+    }
     
     if lftclickedKey = true
     {
@@ -15,24 +19,9 @@ if inventoryKey = true
     if rgtclickedKey = true
     {
         switchItem(hoverItem,2)
-    }   
-    hoverItem = floor((p/(360/inventorySize)))
+    }
 }
 
-if lftclickedKey = true
-{
-}
-
-if rgtclickedKey = true
-{
-}
-
-//While switch Items is on, divide screen radially
-//Set a hoverItem variable to current section
-//Left click to assign right hand to current section
-//Right click to assign left hand to current section
-
-//Will need corresponding code Draw HUD, set a variable to do this
 
 #define inventoryControlHUD
 //While switch Items is on, divide screen radially

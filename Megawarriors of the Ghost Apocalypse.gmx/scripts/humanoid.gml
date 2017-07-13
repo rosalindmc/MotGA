@@ -62,14 +62,23 @@ shldrXAdjust[2] = 2
 shldrYAdjust[2] = 1
 
 handDist[1] = 4
+handDistDest[1] = 4
 handDir[1] = 0
+handDirDest[1] = 0
 handHeight[1] = 2
+handHeightdest[1] = 2
 itemRot[1] = 0
+itemRotDest[1] = 0
 itemSprite[1] = spr_sword
+
 handDist[2] = 4
+handDistDest[2] = 4
 handDir[2] = 0
+handDirDest[2] = 0
 handHeight[2] = 2
+handHeightDest[2] = 2
 itemRot[2] = 0
+itemRotDest[2] = 0
 itemSprite[2] = spr_sword
 
 armSprite = spr_humanoidArms
