@@ -87,6 +87,7 @@ switch(argument0)
     itemRotDest[argument1] = (0*meleeSwing[argument1])
     animDelay[argument1] = .04
     //HIT
+    meleeHit(argument1,queuedAnim[argument1])
     break
     
     case 3:

@@ -47,6 +47,8 @@ switch(argument0)
     
     for(i = 1; i < 7; i++)
     {
+        meleeType[i] = 1
+        meleeAttackMask[i] = spr_slash
         meleePowMult[i] = 1
         meleeRateMulte[i] = 1
         meleeImpactMult[i] = 1

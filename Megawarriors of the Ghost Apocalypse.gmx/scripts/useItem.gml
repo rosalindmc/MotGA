@@ -101,23 +101,18 @@ stam = max(stam,0)
 
 #define meleeHit
 // Make melee collider
-
-if (strike = 1){
-    strike = 0
+with(handItem[argument0]){
     
-    with (handItem[argument0]){
-        
-        i = instance_create(owner.x+lengthdir_x(length+handItem[argument0].itemDist,owner.facing),owner.y+lengthdir_y(length+handItem[argument0].itemDist,owner.facing),obj_meleeHit)
-        i.owner = owner
-        i.image_angle = owner.facing
-        i.dmg = handItem[argument0].meleeDmg*owner.charge[argument0]
-        i.impact = handItem[argument0].meleeImpact*owner.Charge[argument0]
-        i.h = h
-        i.dmgType = handItem[argument0].meleeType
-        i.sprite_index = handItem[argument0].attackMask
-        i.image_yscale = handItem[argument0].meleeSize*owner.meleeSwing    //fix this variable name please someone
-        i.image_xscale = handItem[argument0].meleeSize
-    }    
+    i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],owner.facing),owner.y+lengthdir_y(length+owner.handDist[argument0],owner.facing),obj_meleeCollider)
+    i.owner = owner
+    i.image_angle = owner.facing
+    i.dmg = meleePow*meleePowMult[argument1]*owner.charge[argument0]
+    i.impact = meleeImpact*meleeImpactMult[argument1]*owner.charge[argument0]
+    i.z = z
+    i.dmgType = meleeType[argument1]
+    i.sprite_index = meleeAttackMask[argument1]
+    i.image_yscale = meleeSize*meleeSizeMult[argument1]*owner.meleeSwing[argument0]
+    i.image_xscale = meleeSize*meleeSizeMult[argument1]
 }
 
 #define meleeEnd
