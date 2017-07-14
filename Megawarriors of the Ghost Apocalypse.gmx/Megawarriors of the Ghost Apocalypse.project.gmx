@@ -54,6 +54,7 @@
           <script>scripts\aiMaster.gml</script>
           <script>scripts\aiOrder.gml</script>
           <script>scripts\aiAttackPattern.gml</script>
+          <script>scripts\ai.gml</script>
         </scripts>
       </scripts>
       <scripts name="Anim Types">
