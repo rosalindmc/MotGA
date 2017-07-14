@@ -1,6 +1,8 @@
 #define char
 
 
+#define charCreate
+
 #define charInitialize
 //Art Essentials
 animType = humanoid
