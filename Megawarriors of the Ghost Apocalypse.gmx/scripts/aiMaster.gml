@@ -49,7 +49,10 @@ three levels
         chooses an action
 
         if no leader
-            choose an action without waiting for an order
+            if no nearby leader
+                choose an action without waiting for an order
+            else
+                choose a new leader, choose an action without waiting for an order
         if leader is present
             if no enemy
                 enter idle state and wait for new order
@@ -62,7 +65,7 @@ three levels
                 enter fight state
         
         
-    order - state machine
+    action - state machine
     
     runs after master, is just the current action the character is currently doing
     

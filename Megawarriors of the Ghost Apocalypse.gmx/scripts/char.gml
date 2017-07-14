@@ -74,6 +74,9 @@ stamMax = 4
 stamRegen = 2.0   //per second
 stamDelay = 0.0
 
+//Character stats
+stealth = 1
+
 //Fighting
 hold[1] = 0
 hold[2] = 0
@@ -99,6 +102,8 @@ handItemSlot[2] = -1
 
 hoverItem = 0
 pointInteract = noone
+
+
 
 #define charStep
 //Execute Control Script
