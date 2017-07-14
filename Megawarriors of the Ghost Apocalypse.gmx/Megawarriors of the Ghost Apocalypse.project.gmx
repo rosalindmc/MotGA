@@ -50,6 +50,11 @@
         <script>scripts\interact.gml</script>
         <script>scripts\dropItem.gml</script>
         <script>scripts\inventoryControl.gml</script>
+        <scripts name="AI">
+          <script>scripts\aiMaster.gml</script>
+          <script>scripts\aiOrder.gml</script>
+          <script>scripts\aiAttackPattern.gml</script>
+        </scripts>
       </scripts>
       <scripts name="Anim Types">
         <script>scripts\humanoid.gml</script>
