@@ -18,6 +18,8 @@ controls()
 global.pc = instance_create(x,y,obj_char)
 //later add import stats script
 
+global.timer = 0
+
 repeat(10)
 {
     createItem(random(100),random(100),sword,noone)
@@ -114,6 +116,8 @@ else
 {
     shake = 0
 }
+
+global.timer++
 
 /*
 if global.pc.vis = true and global.win = false

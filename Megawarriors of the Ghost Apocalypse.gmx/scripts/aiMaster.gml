@@ -14,7 +14,36 @@
 #define aiMasterSearch
 //needs timer variable
 
-
+if(global.timer % (responceTime*global.frameRate) == 0){
+    var i = -1
+    var ret = 0
+    do{
+        i++
+        switch(alertState){
+        case 'green':
+            ret = script_execute(aiMasterListGreen[i], 0)   
+            break 
+        case 'yellow':
+            ret = script_execute(aiMasterListYellow[i], 0)   
+            break 
+        case 'red':
+            ret = script_execute(aiMasterListRed[i], 0)   
+            break 
+        }
+    }until (ret !=0)
+    
+    switch(alertState){
+        case 'green':
+            ret = script_execute(aiMasterListGreen[i], 1)   
+            break 
+        case 'yellow':
+            ret = script_execute(aiMasterListYellow[i], 1)   
+            break 
+        case 'red':
+            ret = script_execute(aiMasterListRed[i], 1)   
+            break 
+        }
+}
 
 /*
 runs for every npc every x frames based on some AI thought speed variable AND 
@@ -38,8 +67,6 @@ runs for every npc every x frames based on some AI thought speed variable AND
 
 #define tempAiFullPlan
 /*
-
-
 three levels
     master - behavior tree
     
@@ -125,6 +152,7 @@ Detection
         
         red
             the ai already has a target, and persues them until they escape or are killed
+            once an AI enters red they can never return to green
     
     two types of detection
         Sound
