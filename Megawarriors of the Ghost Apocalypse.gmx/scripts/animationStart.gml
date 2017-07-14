@@ -33,12 +33,12 @@ switch(argument0)
 {
     case 0:
     animIndex[argument0] = humanoid(3)  //Replace with animType(3)
-    script_execute(animIndex[argument0],0)
+    script_execute(animIndex[argument0],0,argument0)
     break
     
     case 1:
     case 2:
     animIndex[argument0] = weaponIdle   //Replace with checking weapon anim
-    script_execute(animIndex[argument0],0)
+    script_execute(animIndex[argument0],0,argument0)
     break
 }

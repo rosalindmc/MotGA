@@ -154,7 +154,7 @@ with(global.currLevel){
             //}
             
             if(floorLayout[i,j].isRiver == true && floorLayout[i,j].isPath == true){
-                draw_sprite(spr_road,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_bridge,i+j,i*metre*1.5+10,j*metre*1.5+10)
                 //drawText(c_black,c_orange,i*metre*2+10,j*metre*2+10,'B')
             }
             else if(floorLayout[i,j].isRiver == true){
@@ -166,7 +166,7 @@ with(global.currLevel){
                 //drawText(c_black,c_yellow,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
             }
             else if (floorLayout[i,j].hasPoi == true){
-                draw_sprite(spr_road,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
                 //drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
             }
             else if(floorLayout[i,j].isPath == true){

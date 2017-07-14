@@ -13,7 +13,7 @@ itemRotDest[argument1] = 30*meleeSwing[argument1]
 #define weaponHold
 switch(argument0)
 {
-    case 0:
+    case 0:    
     handDistDest[argument1] = 4
     handDirDest[argument1] = (90*meleeSwing[argument1])
     handHeightDest[argument1] = 4
@@ -34,7 +34,7 @@ switch(argument0)
     handDirDest[argument1] = (135*meleeSwing[argument1])
     handHeightDest[argument1] = 4
     itemRotDest[argument1] = (225*meleeSwing[argument1])
-    animDelay[argument1] = .2
+    animDelay[argument1] = .3
     
     charge[argument1] = 2
     if queuedAnim[argument0] = 1
@@ -49,7 +49,7 @@ switch(argument0)
     handDirDest[argument1] = (150*meleeSwing[argument1])
     handHeightDest[argument1] = 5
     itemRotDest[argument1] = (225*meleeSwing[argument1])
-    animDelay[argument1] = .1
+    animDelay[argument1] = 1.0
     
     sweetSpot = false
     break
@@ -122,6 +122,7 @@ switch(argument0)
 }
 
 #define weaponStab
+
 
 #define weaponHilt
 

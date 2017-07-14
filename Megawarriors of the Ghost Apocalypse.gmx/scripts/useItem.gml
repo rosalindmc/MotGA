@@ -25,12 +25,18 @@ else
 switch(argument1)
 {
     case 0:     //Click
-    if ((canAttack = true and hold[argument0] = 0) or (sweetSpot = true and fumble = false)) and stam >= 1
+    if canAttack = true and (charge[argument0] = 0 or (sweetSpot = true and fumble = false)) and stam >= 1
     {
         //Begin Hold
         charge[argument0] = 1
         fumble = false
         hold[argument0] = 1
+        
+        //Combo Flip
+        if sweetSpot = true
+        {
+            meleeSwing[argument0] *= -1
+        }
         
         //Start Hold Animation as determined by weapon and context
         if argument0 = 2 and greatWeapon = true
@@ -59,11 +65,6 @@ switch(argument1)
         }
         
         //moveMult = min(1-handItem[argument0].meleeSlow)
-        
-        //if sweetSpot = true
-        //{
-        //    meleeSwing[argument0] *= -1
-        //}
     }
     else
     {
@@ -72,7 +73,7 @@ switch(argument1)
     break
     
     case 1:     //Release
-    if charge[argument0] != 0 and canAttack = true
+    if hold[argument0] != 0 and canAttack = true
     {
         //Play corresponding attack anim     
         meleeAttack(argument0)     
@@ -86,12 +87,12 @@ switch(argument1)
 //Spend Stamina
 
 sweetSpot = false
-hold[argument0] = 0
 strike[argument0] = 1
+hold[argument0] = 0
 animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
 
 stam -= handItem[argument0].meleeCost*handItem[argument0].meleeCoseMult[queuedAnim[argument0]]
-stamDelay = .1+abs(min(0,stam))
+stamDelay = .5+abs(min(0,stam))
 stam = max(stam,0)
 
 //Add Lunge animations
@@ -101,8 +102,8 @@ stam = max(stam,0)
 
 #define meleeHit
 // Make melee collider
-with(handItem[argument0]){
-    
+with(handItem[argument0])
+{    
     i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],owner.facing),owner.y+lengthdir_y(length+owner.handDist[argument0],owner.facing),obj_meleeCollider)
     i.owner = owner
     i.image_angle = owner.facing
