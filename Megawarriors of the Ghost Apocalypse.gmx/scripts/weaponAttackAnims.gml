@@ -129,5 +129,3 @@ switch(argument0)
 
 #define throwHold
 
-
-#define throwAnim

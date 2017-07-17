@@ -4,5 +4,3 @@
 #define projectileColliderInitialize
 
 #define projectileColliderDraw
-
-#define projectileColliderStep

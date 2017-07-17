@@ -5,5 +5,3 @@
 #define particleStep
 
 #define particleDraw
-
-#define particleDestroy

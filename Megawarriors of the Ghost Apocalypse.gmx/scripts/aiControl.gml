@@ -1,7 +1,7 @@
 #define aiControl
 
 
-if ((global.timer+responseStart) % (responseTime/responseMod) <= 1/frameRate){
+if ((global.timer+responseStart) % (responseTime/responseMod) <= 1/global.frameRate){
     aiMaster()
 }
 
@@ -15,7 +15,7 @@ called by charCreate
 */
 
 responseStart = 0
-responseMod = 0
+responseMod = 1
 
 responseTime = 1 
 aiMasterListGreen[0] = 0
