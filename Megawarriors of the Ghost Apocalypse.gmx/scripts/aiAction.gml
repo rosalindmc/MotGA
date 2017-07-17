@@ -24,7 +24,7 @@ case 0:
         //pathFind to the spot and check if you can get there
         return 1;
     }
-    else(){
+    else{
         
         return 1;
     }
