@@ -1,13 +1,23 @@
 #define aiControl
 
 
+if ((global.timer+responseStart) % (responseTime/responseMod) <= 1/frameRate){
+    aiMaster()
+}
+
+aiAction()
+
+
+
 #define aiInitialize
 /*
 called by charCreate
 */
 
+responseStart = 0
+responseMod = 0
 
-respoinceTime = 1 
+responseTime = 1 
 aiMasterListGreen[0] = 0
 aiMasterListYellow[0] = 0
 aiMasterListRed[0] = 0

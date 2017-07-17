@@ -1,7 +1,30 @@
 #define char
 
 
-#define charCreate
+#define createChar
+/*
+use as createChar(x,y,type, leader)
+pods should generate from leader down, creating the leader with the pod ID and the mooks with the leader ID
+summons should just be given their leader's ID
+
+*/
+
+var i,ii;
+
+i = instance_create(argument0, argument1, obj_char)
+i.type = argument2
+with(i){
+    aiInitialize()
+    script_execute(argument2,0)
+    
+    if (argument3 != noone){
+        leader = argument3
+        leader.subordinate[array_length_1d(leader.subordinate[])] = id
+    }
+}
+
+
+
 
 #define charInitialize
 //Art Essentials
@@ -63,6 +86,7 @@ turnSpeed = 360     //Degrees/second
 //Control Script
 pc = false
 controlScript = playerControl       //Temp, replace with ai control
+player = true                       //Change to false in type script
 
 //Vitals
 life = 12

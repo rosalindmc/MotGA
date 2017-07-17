@@ -1,5 +1,5 @@
 #define aiAction
-
+script_execute(currentAction,2)
 
 #define actionIdle
 //argument0 is the check/set order/run switch
@@ -17,7 +17,10 @@ case 2:
 }
 
 #define actionMove
-//argument0 is the check/set order/run switch
+/*
+argument0 is the check/set order/run switch
+
+*/
 switch (argument0){
 case 0:
     if(actionTargetX !=0 && actionTargetY != 0){
@@ -25,8 +28,10 @@ case 0:
         return 1;
     }
     else{
+        actionTargetX = x + random(3) - 2
+        actionTargetY = y + random(3) - 2    
         
-        return 1;
+        return 1             
     }
     
     break;
@@ -36,6 +41,18 @@ case 1:
     break;
     
 case 2:
+    
+    if (facing != point_direction(x,y,actionTargetX,actionTargetY)){
+        facing = rotate(facing,point_direction(x,y,actionTargetX,actionTargetY),turnSpeed/global.frameRate)        
+    }
+    else{
+        var moveT = (movement*moveMult)
+        moveT = moveT/(1+moveDT)
+        
+        hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetX,actionTargetY))
+        vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetX,actionTargetY))
+    }
+    
     break;
 }
 
@@ -55,6 +72,14 @@ case 2:
 
 #define actionHide
 
+#define actionSearch
+
 #define actionFollowOrders
 
-#define actionLeaderAttack
+#define actionOrderAttack
+
+#define actionOrderFormation
+
+#define actionOrderGuard
+
+#define actionOrderSearch

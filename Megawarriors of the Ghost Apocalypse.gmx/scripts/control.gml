@@ -117,7 +117,10 @@ else
     shake = 0
 }
 
-global.timer++
+global.timer += 1/global.frameRate
+if (global.timer > 30){
+    global.timer -= 30
+}
 
 /*
 if global.pc.vis = true and global.win = false
