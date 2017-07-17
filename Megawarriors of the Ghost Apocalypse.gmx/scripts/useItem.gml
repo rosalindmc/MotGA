@@ -106,6 +106,7 @@ with(handItem[argument0])
 {    
     i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],owner.facing),owner.y+lengthdir_y(length+owner.handDist[argument0],owner.facing),obj_meleeCollider)
     i.owner = owner
+    i.dist = length+owner.handDist[argument0]
     i.image_angle = owner.facing
     i.dmg = meleePow*meleePowMult[argument1]*owner.charge[argument0]
     i.impact = meleeImpact*meleeImpactMult[argument1]*owner.charge[argument0]

@@ -6,6 +6,7 @@ animDelay[argument1] = 1
 animSpeed[argument1] = 1
 
 handDirDest[argument1] = 15*meleeSwing[argument1]
+handHeightDest[argument1] = 0
 itemRotDest[argument1] = 30*meleeSwing[argument1]
 
 

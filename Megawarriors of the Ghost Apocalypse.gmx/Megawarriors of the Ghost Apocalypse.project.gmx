@@ -30,6 +30,7 @@
     </sprites>
     <sprite>sprites\spr_slash</sprite>
     <sprite>sprites\spr_stab</sprite>
+    <sprite>sprites\spr_shadow</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\temp_bg</background>
