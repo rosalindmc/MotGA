@@ -70,5 +70,6 @@ else
 #define itemDraw
 if owner = noone or hand != 0
 {
+    //draw_sprite_ext(sprite_index,image_index,round(x),round(y),1,1,image_angle,c_black,.3)
     draw_sprite_ext(sprite_index,image_index,round(x),round(y-z),1,1,image_angle,c_white,1)  
 }

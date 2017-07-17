@@ -31,6 +31,7 @@
     <sprite>sprites\spr_slash</sprite>
     <sprite>sprites\spr_stab</sprite>
     <sprite>sprites\spr_shadow</sprite>
+    <sprite>sprites\spr_sheen</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\temp_bg</background>
@@ -70,6 +71,17 @@
       <scripts name="Interactions">
         <script>scripts\pickUp.gml</script>
       </scripts>
+      <scripts name="Units">
+        <scripts name="Allies">
+          <script>scripts\ally.gml</script>
+        </scripts>
+        <scripts name="Megawarriors">
+          <script>scripts\megawarrior.gml</script>
+        </scripts>
+        <scripts name="Monsters">
+          <script>scripts\monster.gml</script>
+        </scripts>
+      </scripts>
     </scripts>
     <scripts name="Object Scripts">
       <script>scripts\control.gml</script>
@@ -80,6 +92,7 @@
       <script>scripts\projectileCollider.gml</script>
       <script>scripts\hitCollider.gml</script>
       <script>scripts\aoeCollider.gml</script>
+      <script>scripts\particle.gml</script>
     </scripts>
     <scripts name="Universal">
       <script>scripts\isoDepth.gml</script>
