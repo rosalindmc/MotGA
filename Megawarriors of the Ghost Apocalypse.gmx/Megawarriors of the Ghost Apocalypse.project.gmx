@@ -80,7 +80,7 @@
         </scripts>
         <scripts name="Monsters">
           <script>scripts\monster.gml</script>
-          <script>scripts\behaviorFlags.gml</script>
+          <script>scripts\behaviorTags.gml</script>
           <script>scripts\behaviorTypes.gml</script>
         </scripts>
       </scripts>
