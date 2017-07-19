@@ -81,7 +81,7 @@
         </scripts>
         <scripts name="Monsters">
           <script>scripts\monster.gml</script>
-          <script>scripts\behaviorTags.gml</script>
+          <script>scripts\&lt;undefined&gt;.gml</script>
           <script>scripts\behaviorTypes.gml</script>
         </scripts>
       </scripts>

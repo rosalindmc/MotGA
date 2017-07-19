@@ -17,4 +17,3 @@ sideVisionRange = 5
 
 responseTime = 1
 responseStart = global.timer
-

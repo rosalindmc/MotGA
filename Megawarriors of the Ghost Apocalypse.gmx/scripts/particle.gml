@@ -28,9 +28,6 @@ if life <= 0
 }
 
 #define particleDraw
-<<<<<<< HEAD
 draw_sprite(sprite_index,image_index,x,y-z)
 
 #define particleDestroy
-=======
->>>>>>> origin/master
