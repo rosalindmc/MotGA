@@ -122,6 +122,7 @@ with(handItem[argument0])
 #define meleeEnd
 charge[argument0] = 0
 animationReset(argument0)
+<<<<<<< HEAD
 
 #define perfectHitSheen
 if fumble = false
@@ -132,3 +133,5 @@ if fumble = false
         i.z = z
     }
 }
+=======
+>>>>>>> origin/master

@@ -416,6 +416,7 @@ switch(argument0)
 
 #define throwHold
 
+<<<<<<< HEAD
 
 #define throwAnim
 
@@ -556,3 +557,5 @@ switch(argument0)
     meleeEnd(argument1)
     break
 }
+=======
+>>>>>>> origin/master
