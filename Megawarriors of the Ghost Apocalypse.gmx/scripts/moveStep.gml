@@ -1,12 +1,13 @@
 #define moveStep
 //Gravity
-if z > floorZ = 0
+if z+max(0,zspd) > floorZ
 {
     zspd -= grav/global.frameRate
     z += zspd*metre/global.frameRate
 }
 else
 {
+    zspd = 0
     z = floorZ
 }
 
@@ -39,11 +40,11 @@ if canMove = true and point_distance(x,y,xprevious,yprevious) > 0
 {
     if abs(angle_difference(point_direction(x,y,targetX,targetY),point_direction(xprevious,yprevious,x,y))) < 90
     {
-        moving = point_distance(x,y,xprevious,yprevious)
+        moving = point_distance(x,y,xprevious,yprevious)*global.frameRate/metre
     }
     else
     {
-        moving = -point_distance(x,y,xprevious,yprevious)
+        moving = -point_distance(x,y,xprevious,yprevious)*global.frameRate/metre
     }
 }
 else
@@ -53,13 +54,14 @@ else
 
 #define moveStepObject
 //Gravity
-if z > floorZ
+if z+max(0,zspd) > floorZ
 {
     zspd -= grav/global.frameRate
     z += zspd*metre/global.frameRate
 }
 else
 {
+    zspd = 0
     z = floorZ
 }
 

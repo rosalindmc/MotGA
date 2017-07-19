@@ -19,9 +19,12 @@ return humanoidIdle
 break
 
 case 4:
-return humanoidDodge
+return humanoidShortDodge
 break
 
+case 5:
+return humanoidDodge
+break
 }
 
 #define humanoidInitialize
@@ -90,6 +93,9 @@ headXAdjust = 0
 headYAdjust = 4
 headRot = 0
 
+xAdj = 0
+yAdj = 0
+
 #define humanoidDraw
 //Establish bone information
 //Draw All Details to Char Surface
@@ -102,8 +108,8 @@ if surface_exists(charSurf)
     twist(bodyTwist)
     
     //Bone Locations
-    hipsX = round(charSurfSize*.5)
-    hipsY = round(charSurfSize*.75)
+    hipsX = round(charSurfSize*.5)+xAdj
+    hipsY = round(charSurfSize*.75)-yAdj
     
     bodyX = hipsX+lengthdir_x(bodyYAdjust, hipsRot+90)+lengthdir_x(bodyXAdjust*bodyHFacing, hipsRot)
     bodyY = hipsY+lengthdir_y(bodyYAdjust, hipsRot+90)+lengthdir_y(bodyXAdjust*bodyHFacing, hipsRot)
@@ -145,9 +151,6 @@ if surface_exists(charSurf)
     armLength[2] = min(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength)
     armStretch[2] = max(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength+1)/(armSpriteLength+1)
     
-    //Shadow
-    draw_sprite(spr_shadow,0,hipsX,hipsY)
-    
     //Hips and Legs
     draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
     
@@ -180,8 +183,15 @@ else
 }
 
 #define humanoidWalk
-animDelay[argument1] = .5
+animDelay[argument1] = 2
 animSpeed[argument1] = max(abs(moving),1)
+xAdj = 0
+yAdj = 0
+
+hipsRot = 0
+bodyRot = 0
+hairRot = 0
+headRot = 0
 
 switch(argument0)
 {
@@ -217,6 +227,13 @@ switch(argument0)
 animDelay[argument1] = .3
 animSpeed[argument1] = 1
 hipsImage = 2-(gender*2)
+xAdj = 0
+yAdj = 0
+
+hipsRot = 0
+bodyRot = 0
+hairRot = 0
+headRot = 0
 
 switch(argument0)
 {
@@ -237,39 +254,164 @@ switch(argument0)
     animStep[argument1] = 0
     break
 }
-#define humanoidDodge
-animDelay[argument1] = .5
+
+#define humanoidShortDodge
 animSpeed[argument1] = max(abs(moving),1)
 
 switch(argument0)
 {
     case 0:
+    z += 4
+    zspd += 2
+    hipsImage = 2
+    hairRot = -45*hFacing
+    
+    animDelay[argument1] = .1
+    break
+    
+    case 1:
     hipsImage = 4
-    humanoidWalk(3,argument1)
-    animStep[argument1] = 4
+    hipsRot = -30*hFacing
+    bodyRot = -30*hFacing
+    hairRot = -90*hFacing
+    headRot = 0
+    
+    animDelay[argument1] = .1
+    break
+    
+    case 2:
+    hipsImage = 10
+    hipsRot = 0
+    hairRot = -45*hFacing
+    animDelay[argument1] = .1
+    
+    //Hit Ground
+    if player = true
+    {
+        obj_control.shake += 1
+    }
+    break
+    
+    case 3:
+    animationReset(0)
+    break
+}
+
+#define humanoidDodge
+animSpeed[argument1] = max(abs(moving),1)
+
+switch(argument0)
+{
+    case 0:
+    z += 4
+    zspd += 2
+    hipsImage = 2
+    hipsRot = -15*hFacing
+    bodyRot = -30*hFacing
+    hairRot = -45*hFacing
+    animDelay[argument1] = .05
     break
     
     case 1:
     hipsImage = 6
-    hipsRot = 90
-    bounce = 0
+    hipsRot = -90+facing
+    bodyRot = -90+facing
+    hairRot = -90+facing
+    headRot = -90+facing
+    
+    xAdj = lengthdir_x(-5,facing)
+    yAdj = 6
+    
+    animDelay[argument1] = .25
     break
     
     case 2:
-    hipsImage = 4
-    hipsRot = 180
-    bounce = 1
+    hipsImage = 10
+    hipsRot = -150*hFacing
+    bodyRot = -240*hFacing
+    hairRot = -240*hFacing
+    headRot = -270*hFacing
+    animDelay[argument1] = .04
+    
+    xAdj = -3*hFacing
+    yAdj = 10
+    
+    hspd = lengthdir_x(dodgeSpeed,facing)
+    vspd = lengthdir_y(dodgeSpeed,facing)
+    
+    //Hit Ground
+    if player = true
+    {
+        obj_control.shake += 1
+    }
     break
     
     case 3:
-    hipsImage = 2
-    hipsRot = 270
-    bounce = 0
+    hipsImage = 10
+    hipsRot = -180*hFacing
+    bodyRot = -270*hFacing
+    hairRot = -270*hFacing
+    headRot = -300*hFacing
+    
+    xAdj = 0
+    yAdj = 10
+    
+    animDelay[argument1] = .04
     break
     
     case 4:
-    hipsImage = 6
-    humanoidWalk(1,argument1)
-    animStep[argument1] = 0
+    hipsImage = 10
+    hipsRot = -210*hFacing
+    bodyRot = -300*hFacing
+    hairRot = -300*hFacing
+    headRot = -330*hFacing
+    
+    xAdj = 3*hFacing
+    yAdj = 9
+    
+    animDelay[argument1] = .04
+    break
+    
+    case 5:
+    hipsImage = 10
+    hipsRot = -240*hFacing
+    bodyRot = -330*hFacing
+    hairRot = -330*hFacing
+    headRot = 0
+    
+    xAdj = 7*hFacing
+    yAdj = 6
+    
+    animDelay[argument1] = .04
+    break
+    
+    case 6:
+    hipsImage = 4
+    hipsRot = -270*hFacing
+    bodyRot = 0
+    hairRot = -270*hFacing
+    headRot = -30*hFacing
+    
+    xAdj = 8*hFacing
+    yAdj = 3
+    
+    animDelay[argument1] = .04
+    break
+    
+    case 7:
+    hipsImage = 2
+    hipsRot = 30*hFacing
+    bodyRot = 0
+    hairRot = -90*hFacing
+    headRot = 0
+    
+    xAdj = 5*hFacing
+    yAdj = 1
+    
+    animDelay[argument1] = .1
+    break
+    
+    case 8:
+    animationReset(0)
     break
 }

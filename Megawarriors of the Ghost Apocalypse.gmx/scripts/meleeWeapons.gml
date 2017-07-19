@@ -34,15 +34,15 @@ switch(argument0)
     anim[0] = weaponIdle    //Idle Anim
     anim[1] = weaponSlash   //Basic Attack
     anim[2] = weaponSlash   //Power Attack
-    anim[3] = weaponSlash   //Alternate Attack (2h)
-    anim[4] = weaponSlash    //Roll Attack
-    anim[5] = weaponSlash    //Close attack    
+    anim[3] = weaponChop   //Alternate Attack (2h)
+    anim[4] = weaponStab    //Roll Attack
+    anim[5] = weaponHilt    //Close attack    
     anim[6] = weaponSlash    //Special Slot, called by some items
     anim[7] = throwAnim     //Throw
-    animHold[0] = weaponHold//Basic Hold Anim (basic+power)
-    animHold[1] = weaponHold//Alt Hold Anim 
-    animHold[2] = weaponHold//Roll Hold Anim 
-    animHold[3] = weaponHold//Close Hold Anim 
+    animHold[0] = weaponSlashHold//Basic Hold Anim (basic+power)
+    animHold[1] = weaponChopHold//Alt Hold Anim 
+    animHold[2] = weaponStabHold//Roll Hold Anim 
+    animHold[3] = weaponHiltHold//Close Hold Anim 
     animHold[4] = throwHold //Throw Hold Anim 
     
     for(i = 1; i < 7; i++)
@@ -50,12 +50,16 @@ switch(argument0)
         meleeType[i] = 1
         meleeAttackMask[i] = spr_slash
         meleePowMult[i] = 1
-        meleeRateMulte[i] = 1
+        meleeChargePowMult[i] = 1.5
+        meleeRateMult[i] = 1
         meleeImpactMult[i] = 1
         meleeLungeMult[i] = 1
         meleeSlowMult[i] = 1
         meleeSizeMult[i] = 1
-        meleeCoseMult[i] = 1
+        meleeCostMult[i] = 1
     }
+    
+    meleeAttackMask[3] = spr_stab
+    meleeAttackMask[4] = spr_stab
     break
 }

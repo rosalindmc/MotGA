@@ -35,7 +35,7 @@ animUpdate = true
 script_execute(animType,0)
 
 //Movement Essentials
-movement = 12        //Metres per second
+movement = 10        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
@@ -50,9 +50,10 @@ accel = 4           //% max speed gained per second of acceleration
 canMove = true      //Can move check
 canAttack = true    //Can attack check
 
-dodgeCost = 2
-dodgeSpeed = 30
+dodgeCost = 1
+dodgeSpeed = 25
 dodgeTimer = 0
+recentDodge = 0
 
 //Animations
 animIndex[0] = humanoidWalk    //Current animation (For Legs+Body)
@@ -84,7 +85,6 @@ facing = 0
 turnSpeed = 360     //Degrees/second
 
 //Control Script
-pc = false
 controlScript = playerControl       //Temp, replace with ai control
 player = true                       //Change to false in type script
 
@@ -95,7 +95,7 @@ lifeRegen = 0.0 //per second
 
 stam = 4
 stamMax = 4    
-stamRegen = 2.0   //per second
+stamRegen = 3.0   //per second
 stamDelay = 0.0
 
 //Character stats
@@ -110,8 +110,12 @@ meleeSwing[1] = 1
 meleeSwing[2] = -1
 queuedAnim[1] = -4
 queuedAnim[2] = -4
+strike[1] = 0
+strike[2] = 0
 sweetSpot = false
 fumble = false
+perfectTimeMod = .5
+kick = 0
 
 //Inventory
 inventorySize = 10
@@ -130,15 +134,26 @@ pointInteract = noone
 
 
 #define charStep
+//MoveLimit
+moveLimit()
+
 //Execute Control Script
 script_execute(controlScript)
 
 //Facing
-facing = rotate(facing,point_direction(x,y,targetX,targetY),turnSpeed/global.frameRate)
+var tS = turnSpeed;
+
+tS /= 1+max(charge[1],charge[2])
+
+if max(strike[1],strike[2]) = 1 or dodgeTimer != 0
+{
+    tS = 0
+}
+
+facing = rotate(facing,point_direction(x,y,targetX,targetY),tS/global.frameRate)
 
 //Movement
 moveStep()
-moveLimit()
 isoDepth(0)
 
 /*
@@ -248,6 +263,10 @@ if canMove = true
     if moving != 0
     {
         animIndex[0] = humanoidWalk
+        if animStep[0] > 4
+        {
+            animStep[0] = 1
+        }
     }
     else
     {
@@ -259,6 +278,8 @@ if canMove = true
 }
 
 //Misc Timers
+recentDodge = max(recentDodge-1/global.frameRate,0)
+
 if dodgeTimer > 0
 {
     dodgeTimer -= 1/global.frameRate
@@ -267,6 +288,8 @@ if dodgeTimer > 0
     {
         dodgeTimer = 0
         canMove = true
+        recentDodge = .3
+        facing = point_direction(x,y,targetX,targetY)
     }
 }
 
@@ -274,6 +297,11 @@ if dodgeTimer > 0
 if stamDelay = 0
 {
     stam = min(stamMax,stam+(stamRegen/global.frameRate))
+    
+    if moving = 0
+    {
+        stam = min(stamMax,stam+(stamRegen/global.frameRate))
+    }
 }
 else
 {
@@ -292,7 +320,11 @@ if animUpdate = true
     animUpdate = true   //switch to false after
 }
 
-draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75)),1,1,0,c_white,1)
+//Shadow
+draw_sprite(spr_shadow,0,round(x),round(y))
+
+//Draw Surface
+draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75))-z,1,1,0,c_white,1)
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)

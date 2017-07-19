@@ -71,7 +71,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>particleDestroy()
+            <string>particleStep()
 </string>
           </argument>
         </arguments>

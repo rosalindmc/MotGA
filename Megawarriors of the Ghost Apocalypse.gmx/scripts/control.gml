@@ -10,6 +10,7 @@ enumerators();
 
 //Screen Stuff (later handle in main menu)
 screenScale()
+window_set_cursor(cr_none)
 
 //Controls
 controls()
@@ -72,6 +73,7 @@ with (global.currLevel){
 
 //Camera
 shake = 0
+kick = 0
 
 
 /*
@@ -99,8 +101,10 @@ if instance_exists(global.pc)
 {
     ix = (global.pc.x+global.pc.x+mouse_x)*.3333
     iy = (global.pc.y+global.pc.y+mouse_y)*.3333
-    x = round(((ix+x)*.5)-shake+random(shake*2))
-    y = round(((iy+y)*.5)-shake+random(shake*2))
+    x = floor(((ix+x)*.5)-shake+random(shake*2))
+    y = floor(((iy+y)*.5)-shake+random(shake*2))
+    
+    kick = global.pc.kick
 }
 
 //Camera
@@ -199,6 +203,7 @@ view_yview[]+(view_hview[]/2)+(270*(.5-(y/room_height))))
 
 
 #define controlDrawHUD
+
 //Draw Interact Tooltip
 if global.pc.pointInteract != noone
 {    
@@ -210,6 +215,7 @@ if global.pc.pointInteract != noone
     }
 }
 
+//Draw Inventory
 if global.pc.inventoryKey = true
 {
     with(global.pc)
@@ -217,6 +223,13 @@ if global.pc.inventoryKey = true
         inventoryControlHUD()
     }
 }
+
+//Draw Cursor
+draw_sprite(spr_reticle,0,mouse_x,mouse_y-5)
+draw_sprite_ext(spr_reticle2,0,mouse_x-kick,mouse_y-8-kick,1,1,0,c_white,1)
+draw_sprite_ext(spr_reticle2,0,mouse_x-kick,mouse_y-8+kick,1,1,90,c_white,1)
+draw_sprite_ext(spr_reticle2,0,mouse_x+kick,mouse_y-8+kick,1,1,180,c_white,1)
+draw_sprite_ext(spr_reticle2,0,mouse_x+kick,mouse_y-8-kick,1,1,270,c_white,1)
 
 /*
 draw_sprite(spr_reticle,0,mouse_x,mouse_y)
@@ -252,22 +265,19 @@ if black > 0
 
 //Temp draw map for testing level gen
     
-    //HUD stuff
-    
-    i = 0
-    repeat(global.pc.lifeMax)
-    {
-        draw_sprite(spr_health,1,view_xview[0]+15+(5*i),view_yview[0]+15)
-        i += 1
-    }
-    
+//HUD stuff
+    //Draw Health        
     i = 0
     repeat(ceil(global.pc.life))
     {
         draw_sprite_ext(spr_health,0,view_xview[0]+15+(5*i),view_yview[0]+15,1,1,0,c_white,global.pc.life-i)
         i += 1
     }
-
+    
+    //Outline
+    draw_set_colour(c_black)
+    draw_rectangle(view_xview[0]+15,view_yview[0]+9,view_xview[0]+15+(5*global.pc.lifeMax),view_yview[0]+20,true)
+        
     draw_set_valign(fa_middle)
     draw_set_halign(fa_left)
     draw_set_font(fnt_small)
@@ -275,23 +285,22 @@ if black > 0
 
     //Stamina
     i = 0
-    repeat(ceil(global.pc.stam))
+    repeat(ceil(global.pc.stamMax))
     {
-        if global.pc.stam >= i+1
-        {
-            draw_sprite_ext(spr_stamina,0,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30,1,1,0,c_white,global.pc.stam-i)
-        }
-        else
-        {
-            draw_sprite_ext(spr_stamina,0,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30,1,1,0,c_ltgray,global.pc.stam-i)
-        }
-        i += 1
-    }
-    
-    i = 0
-    repeat(global.pc.stamMax)
-    {
-        draw_sprite(spr_stamina,1,view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+30)
+        draw_set_colour(c_green)
+        draw_rectangle(view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+24,view_xview[0]+15+(10*median(0,global.pc.stam-i,1))+(10*i)+(5*floor(i*.5)),view_yview[0]+29,false)
+
+        //if global.pc.stam-i > 0
+        //{
+        //    draw_set_alpha(.2)
+        //    draw_set_colour(c_black)
+        //    draw_rectangle(view_xview[0]+17+(10*i)+(5*floor(i*.5)),view_yview[0]+28,view_xview[0]+17+(6*median(0,global.pc.stam-i,1))+(10*i)+(5*floor(i*.5)),view_yview[0]+32,false)
+        //    draw_set_alpha(1)
+        //}
+        
+        draw_set_colour(c_black)
+        draw_rectangle(view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+24,view_xview[0]+25+(10*i)+(5*floor(i*.5)),view_yview[0]+29,true)
+        
         i += 1
     }
     

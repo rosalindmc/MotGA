@@ -53,6 +53,7 @@
         <script>scripts\interact.gml</script>
         <script>scripts\dropItem.gml</script>
         <script>scripts\inventoryControl.gml</script>
+        <script>scripts\spendStamina.gml</script>
         <scripts name="AI">
           <script>scripts\aiMaster.gml</script>
           <script>scripts\aiAction.gml</script>
@@ -156,7 +157,7 @@
   </rooms>
   <constants number="2">
     <constant name="metre">12</constant>
-    <constant name="grav">9</constant>
+    <constant name="grav">20</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

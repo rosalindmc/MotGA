@@ -13,7 +13,7 @@ rgtreleaseKey = mouse_check_button_released(mb_right)
 interactKey = keyboard_check_pressed(global.interactKey)
 castKey = keyboard_check_pressed(global.castKey)
 castReleasedKey = keyboard_check_released(global.castKey)
-dodgeKey = keyboard_check_pressed(global.dodgeKey)
+dodgeKey = keyboard_check_released(global.dodgeKey)
 reloadKey = keyboard_check_pressed(global.reloadKey)
 throwKey = keyboard_check(global.throwKey)
 sneakKey = keyboard_check_pressed(global.sneakKey)
@@ -26,7 +26,7 @@ moveControl()
 inventoryControl()
 
 //Dodge Control
-if (dodgeKey = true and canMove = true and stam >= dodgeCost and (moving != 0))
+if (dodgeKey = true and canMove = true and stam >= 1 and (moving != 0))
 {
     dodgeRoll(point_direction(0,0,hspd,vspd))  
 }

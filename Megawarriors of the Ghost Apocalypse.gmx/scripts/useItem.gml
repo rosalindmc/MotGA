@@ -25,33 +25,34 @@ else
 switch(argument1)
 {
     case 0:     //Click
-    if canAttack = true and (charge[argument0] = 0 or (sweetSpot = true and fumble = false)) and stam >= 1
+    if canAttack = true and (charge[min(argument0,2-greatWeapon)] = 0 or (sweetSpot = true and fumble = false)) and stam >= 1
     {
         //Begin Hold
-        charge[argument0] = 1
+        charge[min(argument0,2-greatWeapon)] = 1
         fumble = false
-        hold[argument0] = 1
+        hold[min(argument0,2-greatWeapon)] = 1
+        stamDelay = max(stamDelay,1)
         
         //Combo Flip
         if sweetSpot = true
         {
-            meleeSwing[argument0] *= -1
+            meleeSwing[min(argument0,2-greatWeapon)] *= -1
         }
         
         //Start Hold Animation as determined by weapon and context
         if argument0 = 2 and greatWeapon = true
         {
             //Alt Attack
-            queuedAnim[argument0] = 3
-            animationStart(handItem[argument0].animHold[1],argument0)
+            queuedAnim[1] = 3
+            animationStart(handItem[1].animHold[1],1)
         }
-        else if dodgeTimer != 0
+        else if recentDodge != 0 or dodgeTimer != 0
         {
             //Roll Attack
             queuedAnim[argument0] = 4
             animationStart(handItem[argument0].animHold[2],argument0)
         }
-        else if point_distance(x,y,targetX,targetY) < 10 //Replace with var
+        else if point_distance(x,y,targetX,targetY) < handItem[argument0].length+10 //Replace with var
         {
             //Close Attack
             queuedAnim[argument0] = 5
@@ -73,10 +74,10 @@ switch(argument1)
     break
     
     case 1:     //Release
-    if hold[argument0] != 0 and canAttack = true
+    if hold[min(argument0,2-greatWeapon)] != 0 and canAttack = true
     {
-        //Play corresponding attack anim     
-        meleeAttack(argument0)     
+        //Play corresponding attack anim   
+        meleeAttack(min(argument0,2-greatWeapon))     
     }
     break
 }
@@ -86,14 +87,14 @@ switch(argument1)
 //Set Stamina Delay
 //Spend Stamina
 
+//Stamina Cost
+spendStamina(handItem[argument0].meleeCost*handItem[argument0].meleeCostMult[queuedAnim[argument0]]/(1+(sweetSpot*perfectTimeMod)),1)
+
+//Anim and Essentials
 sweetSpot = false
 strike[argument0] = 1
 hold[argument0] = 0
 animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
-
-stam -= handItem[argument0].meleeCost*handItem[argument0].meleeCoseMult[queuedAnim[argument0]]
-stamDelay = .5+abs(min(0,stam))
-stam = max(stam,0)
 
 //Add Lunge animations
 
@@ -102,13 +103,14 @@ stam = max(stam,0)
 
 #define meleeHit
 // Make melee collider
+strike[argument0] = 0
 with(handItem[argument0])
 {    
     i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],owner.facing),owner.y+lengthdir_y(length+owner.handDist[argument0],owner.facing),obj_meleeCollider)
     i.owner = owner
-    i.dist = length+owner.handDist[argument0]
+    i.dist = (length/2)+owner.handDist[argument0]+holdPoint
     i.image_angle = owner.facing
-    i.dmg = meleePow*meleePowMult[argument1]*owner.charge[argument0]
+    i.dmg = meleePow*meleePowMult[argument1]*(1+((owner.charge[argument0]-1)*meleeChargePowMult[argument1]))
     i.impact = meleeImpact*meleeImpactMult[argument1]*owner.charge[argument0]
     i.z = z
     i.dmgType = meleeType[argument1]
@@ -122,3 +124,11 @@ charge[argument0] = 0
 animationReset(argument0)
 
 #define perfectHitSheen
+if fumble = false
+{
+    with(handItem[argument0])
+    {    
+        i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],image_angle),owner.y+lengthdir_y(length+owner.handDist[argument0],image_angle),obj_particle)
+        i.z = z
+    }
+}

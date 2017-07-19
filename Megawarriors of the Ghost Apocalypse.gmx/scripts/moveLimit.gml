@@ -8,7 +8,6 @@ else
     f = (movement*fric)
 }
 
-
 //Apply Friction
 if hspd != 0 or vspd != 0
 {
@@ -18,7 +17,6 @@ if hspd != 0 or vspd != 0
     hspd = lengthdir_x(max(0,dT-(f/global.frameRate)),point_direction(0,0,hT,vT))
     vspd = lengthdir_y(max(0,dT-(f/global.frameRate)),point_direction(0,0,hT,vT))
 }
-
 
 /*
 //Apply Friction
