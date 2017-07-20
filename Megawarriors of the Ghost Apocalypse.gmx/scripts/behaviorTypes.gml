@@ -2,6 +2,7 @@
 
 
 #define testBehavior
-aiMasterListGreen[0] = actionChase
-aiMasterListGreen[1] = actionMove
-aiMasterListGreen[2] = actionIdle
+aiMasterListGreen[0] = actionDistance
+aiMasterListGreen[1] = actionChase
+aiMasterListGreen[2] = actionMove
+aiMasterListGreen[3] = actionIdle

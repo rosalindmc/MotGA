@@ -1,3 +1,5 @@
+if (canMove = true and stam >= 1)
+{
 facing = argument0
 
 //Replace with anim type check
@@ -37,5 +39,8 @@ sweetSpot = false
 fumble = false
 
 canMove = false
+
+}
+
 
 
