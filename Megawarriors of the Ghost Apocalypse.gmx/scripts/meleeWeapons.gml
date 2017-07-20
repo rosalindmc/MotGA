@@ -18,7 +18,7 @@ switch(argument0)
     meleePow = 1
     meleeRate = 1
     meleeImpact = 1
-    meleeLunge = 1
+    meleeLunge = 4
     meleeSlow = .5
     meleeSize = 1
     meleeCost = 1
@@ -61,5 +61,8 @@ switch(argument0)
     
     meleeAttackMask[3] = spr_stab
     meleeAttackMask[4] = spr_stab
+    meleeLungeMult[3] = 0
+    meleeRateMult[4] = 2
+    meleeLungeMult[4] = 9
     break
 }

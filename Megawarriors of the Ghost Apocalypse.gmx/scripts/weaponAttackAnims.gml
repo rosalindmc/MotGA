@@ -6,9 +6,12 @@ animSpeed[argument1] = 1
 
 handDirDest[argument1] = 15*meleeSwing[argument1]
 handHeightDest[argument1] = 0
-itemRotDest[argument1] = 30*meleeSwing[argument1]
+itemRotDest[argument1] = ((120*greatWeapon)+30)*meleeSwing[argument1]
 
-meleeSwing[argument1] = 3-(argument1*2)
+if greatWeapon = false
+{
+    meleeSwing[argument1] = 3-(argument1*2)
+}
 
 #define weaponSlashHold
 s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
@@ -299,6 +302,7 @@ s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argumen
 switch(argument0)
 {
     case 0:    
+    meleeSwing[argument1] = 3-(argument1*2)
     handDistDest[argument1] = 4
     handDirDest[argument1] = (90*meleeSwing[argument1])
     handHeightDest[argument1] = 4

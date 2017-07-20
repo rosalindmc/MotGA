@@ -34,7 +34,7 @@ animUpdate = true
 script_execute(animType,0)
 
 //Movement Essentials
-movement = 6        //Metres per second
+movement = 8        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
@@ -50,7 +50,7 @@ canMove = true      //Can move check
 canAttack = true    //Can attack check
 
 dodgeCost = 1
-dodgeSpeed = 15
+dodgeSpeed = 20
 dodgeTimer = 0
 recentDodge = 0
 
@@ -290,6 +290,19 @@ if dodgeTimer > 0
         canMove = true
         recentDodge = .3
         facing = point_direction(x,y,targetX,targetY)
+        
+        //Special: make dodge attacks easier for players to use
+        if player = true
+        {
+            if hold[1] != 0 and lftclickKey = false
+            {
+                useItem(1,1)  
+            }
+            if hold[2] != 0 and rgtclickKey = false
+            {
+                useItem(2,1)  
+            }
+        }
     }
 }
 

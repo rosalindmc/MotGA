@@ -74,7 +74,7 @@ switch(argument1)
     break
     
     case 1:     //Release
-    if hold[min(argument0,2-greatWeapon)] != 0 and canAttack = true
+    if hold[min(argument0,2-greatWeapon)] != 0 and dodgeTimer = 0 and canAttack = true
     {
         //Play corresponding attack anim   
         meleeAttack(min(argument0,2-greatWeapon))     
@@ -96,9 +96,9 @@ strike[argument0] = 1
 hold[argument0] = 0
 animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
 
-//Add Lunge animations
-
 //Lunge
+hspd += lengthdir_x((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge)),facing)
+vspd += lengthdir_y((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge)),facing)
 
 
 #define meleeHit

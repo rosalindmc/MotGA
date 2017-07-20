@@ -35,8 +35,8 @@ with (global.currLevel){
     sizeX = 50
     sizeY = 50
     
-    room_height = sizeY*18
-    room_width = sizeX*18
+    room_height = sizeY*metre
+    room_width = sizeX*metre
     
     critPoi = 1     //the type of the critical point of interest
     poiDensity = 13 //number of points of interest on the map
