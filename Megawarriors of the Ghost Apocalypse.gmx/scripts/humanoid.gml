@@ -266,16 +266,16 @@ switch(argument0)
     z += 4
     zspd += 2
     hipsImage = 2
-    hairRot = -45*hFacing
+    hairRot = -45*sign(hspd)
     
     animDelay[argument1] = .1
     break
     
     case 1:
     hipsImage = 4
-    hipsRot = -30*hFacing
-    bodyRot = -30*hFacing
-    hairRot = -90*hFacing
+    hipsRot = -30*sign(hspd)
+    bodyRot = -30*sign(hspd)
+    hairRot = -90*sign(hspd)
     headRot = 0
     
     animDelay[argument1] = .1
@@ -284,7 +284,7 @@ switch(argument0)
     case 2:
     hipsImage = 10
     hipsRot = 0
-    hairRot = -45*hFacing
+    hairRot = -45*sign(hspd)
     animDelay[argument1] = .1
     
     //Hit Ground

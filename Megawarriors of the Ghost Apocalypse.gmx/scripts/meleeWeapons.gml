@@ -17,7 +17,7 @@ switch(argument0)
     //Weapon Stats
     meleePow = 1
     meleeRate = 1
-    meleeImpact = 1
+    meleeImpact = 5
     meleeLunge = 4
     meleeSlow = .5
     meleeSize = 1
@@ -63,6 +63,6 @@ switch(argument0)
     meleeAttackMask[4] = spr_stab
     meleeLungeMult[3] = 0
     meleeRateMult[4] = 2
-    meleeLungeMult[4] = 9
+    meleeLungeMult[4] = 3
     break
 }

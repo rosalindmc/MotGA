@@ -34,7 +34,7 @@ animUpdate = true
 script_execute(animType,0)
 
 //Movement Essentials
-movement = 8        //Metres per second
+movement = 7        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
@@ -47,10 +47,11 @@ fric = 4            //% per second
 accel = 4           //% max speed gained per second of acceleration
 
 canMove = true      //Can move check
+moveTimer = 0
 canAttack = true    //Can attack check
 
 dodgeCost = 1
-dodgeSpeed = 20
+dodgeSpeed = 16
 dodgeTimer = 0
 recentDodge = 0
 
@@ -287,7 +288,6 @@ if dodgeTimer > 0
     if dodgeTimer <= 0
     {
         dodgeTimer = 0
-        canMove = true
         recentDodge = .3
         facing = point_direction(x,y,targetX,targetY)
         
@@ -303,6 +303,16 @@ if dodgeTimer > 0
                 useItem(2,1)  
             }
         }
+    }
+}
+
+if moveTimer > 0
+{
+    moveTimer -= 1/global.frameRate
+    
+    if moveTimer <= 0
+    {
+        canMove = true        
     }
 }
 
@@ -339,8 +349,9 @@ draw_sprite(spr_shadow,0,round(x),round(y))
 //Draw Surface
 draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75))-z,1,1,0,c_white,1)
 
-draw_text(x,y+10,string(floor(x/metre))+string('m'))
-draw_text(x,y+20,string(floor(point_distance(x,y,targetX,targetY)/metre))+string('m'))
+draw_text(x,y+10,string(floor(hspd))+string('m'))
+draw_text(x,y+20,string(floor(vspd))+string('m'))
+draw_text(x,y+30,canMove)
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)

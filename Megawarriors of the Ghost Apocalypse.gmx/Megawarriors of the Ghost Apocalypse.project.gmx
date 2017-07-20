@@ -90,8 +90,8 @@
       <script>scripts\char.gml</script>
       <script>scripts\interactable.gml</script>
       <script>scripts\item.gml</script>
-      <script>scripts\meleeCollider.gml</script>
       <script>scripts\projectileCollider.gml</script>
+      <script>scripts\meleeCollider.gml</script>
       <script>scripts\hitCollider.gml</script>
       <script>scripts\aoeCollider.gml</script>
       <script>scripts\particle.gml</script>

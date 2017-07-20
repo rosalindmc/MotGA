@@ -99,7 +99,8 @@ animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
 //Lunge
 hspd += lengthdir_x((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge)),facing)
 vspd += lengthdir_y((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge)),facing)
-
+moveTimer = .1
+canMove = false
 
 #define meleeHit
 // Make melee collider
@@ -108,6 +109,8 @@ with(handItem[argument0])
 {    
     i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],owner.facing),owner.y+lengthdir_y(length+owner.handDist[argument0],owner.facing),obj_meleeCollider)
     i.owner = owner
+    i.originX = x
+    i.originY = y
     i.dist = (length/2)+owner.handDist[argument0]+holdPoint
     i.image_angle = owner.facing
     i.dmg = meleePow*meleePowMult[argument1]*(1+((owner.charge[argument0]-1)*meleeChargePowMult[argument1]))

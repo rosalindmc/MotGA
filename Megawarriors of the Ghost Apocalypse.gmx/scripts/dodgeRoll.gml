@@ -1,20 +1,22 @@
-facing = argument0
-
 //Replace with anim type check
 if recentDodge = 0
 {
     animationStart(humanoid(4),0)
     dodgeTimer = .3
+    moveTimer = .3
     
-    hspd = lengthdir_x(dodgeSpeed,facing)
-    vspd = lengthdir_y(dodgeSpeed,facing)
+    hspd = lengthdir_x(dodgeSpeed,argument0)
+    vspd = lengthdir_y(dodgeSpeed,argument0)
     
     spendStamina(dodgeCost,.3)
 }
 else
 {
+    facing = argument0
+    
     animationStart(humanoid(5),0)
     dodgeTimer = .6
+    moveTimer = .6
 
     hspd = lengthdir_x(dodgeSpeed,facing)
     vspd = lengthdir_y(dodgeSpeed,facing)
