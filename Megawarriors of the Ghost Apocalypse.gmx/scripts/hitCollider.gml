@@ -24,3 +24,5 @@ audio_play_sound(snd_swing,0,false)
 
 
 //draw this collider
+#define hitColliderStep
+
