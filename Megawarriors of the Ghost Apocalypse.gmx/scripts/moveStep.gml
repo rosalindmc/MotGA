@@ -1,4 +1,5 @@
 #define moveStep
+if (canMove = true){
 //Gravity
 if z+max(0,zspd) > floorZ
 {
@@ -50,6 +51,7 @@ if canMove = true and point_distance(x,y,xprevious,yprevious) > 0
 else
 {
     moving = false
+}
 }
 
 #define moveStepObject

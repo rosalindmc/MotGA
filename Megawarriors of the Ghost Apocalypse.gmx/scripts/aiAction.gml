@@ -25,14 +25,14 @@ switch (argument0){
 case 0:
     if(actionTargetX !=0 && actionTargetY != 0){
         //pathFind to the spot and check if you can get there
-        actionTargetX = ceil(x + irandom(4)*metre - 2*metre)
-        actionTargetY = ceil(y + irandom(4)*metre - 2*metre)
+        actionTargetX = ceil(x + irandom(4*metre) - 2*metre)
+        actionTargetY = ceil(y + irandom(4*metre) - 2*metre)
         
         return 1;
     }
     else{
-        actionTargetX = ceil(x + irandom(4)*metre - 2*metre)
-        actionTargetY = ceil(y + irandom(4)*metre - 2*metre)  
+        actionTargetX = ceil(x + irandom(4*metre) - 2*metre)
+        actionTargetY = ceil(y + irandom(4*metre) - 2*metre)  
              
         
         return 0;  
@@ -50,15 +50,16 @@ case 2:
         facing = rotate(facing,point_direction(x,y,actionTargetX,actionTargetY),turnSpeed/global.frameRate)        
     }
     
-    var moveT = (movement*moveMult)
-    moveT = moveT/(1+moveDT)
-    
-    hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetX,actionTargetY))
-    vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetX,actionTargetY))
-    
-    targetX = actionTargetX
-    targetY = actionTargetY 
-    
+    if(point_direction(x,y,actionTargetX,actionTargetY) > 1*metre){
+        var moveT = (movement*moveMult)
+        moveT = moveT/(1+moveDT)
+        
+        hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetX,actionTargetY))
+        vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetX,actionTargetY))
+        
+        targetX = actionTargetX
+        targetY = actionTargetY 
+    }
     break;
 }
 
@@ -180,3 +181,4 @@ case 2:
 #define actionOrderGuard
 
 #define actionOrderSearch
+
