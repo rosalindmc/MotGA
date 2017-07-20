@@ -1,5 +1,5 @@
 #define aiMaster
-
+aiMasterSearch()
 
 
 
@@ -14,36 +14,37 @@
 #define aiMasterSearch
 //needs timer variable
 
-if(global.timer % (responceTime*global.frameRate) == 0){
-    var i = -1
-    var ret = 0
-    do{
-        i++
-        switch(alertState){
-        case 'green':
-            ret = script_execute(aiMasterListGreen[i], 0)   
-            break 
-        case 'yellow':
-            ret = script_execute(aiMasterListYellow[i], 0)   
-            break 
-        case 'red':
-            ret = script_execute(aiMasterListRed[i], 0)   
-            break 
-        }
-    }until (ret !=0)
-}
-
-switch(alertState){
+var i = -1
+var ret = 0
+do{
+    i++
+    switch(alertState){
     case 'green':
-        ret = script_execute(aiMasterListGreen[i], 1)   
+        ret = script_execute(aiMasterListGreen[i], 0)  
         break 
     case 'yellow':
-        ret = script_execute(aiMasterListYellow[i], 1)   
+        ret = script_execute(aiMasterListYellow[i], 0)   
         break 
     case 'red':
-        ret = script_execute(aiMasterListRed[i], 1)   
+        ret = script_execute(aiMasterListRed[i], 0)   
         break 
+    }
+}until (ret !=0)
+
+
+
+switch(alertState){
+case 'green':
+    script_execute(aiMasterListGreen[i], 1)   
+    break 
+case 'yellow':
+    script_execute(aiMasterListYellow[i], 1)   
+    break 
+case 'red':
+    script_execute(aiMasterListRed[i], 1)   
+    break 
 }
+
 
 /*
 runs for every npc every x frames based on some AI thought speed variable AND 

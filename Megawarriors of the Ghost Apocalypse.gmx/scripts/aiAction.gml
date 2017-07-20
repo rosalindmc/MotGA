@@ -9,7 +9,7 @@ case 0:
     break;
     
 case 1:
-    currentAction = 'actionIdle'
+    currentAction = actionIdle
     break;
     
 case 2:
@@ -23,13 +23,17 @@ argument0 is the check/set order/run switch
 */
 switch (argument0){
 case 0:
-    if(actionTargetX !=0 && actionTargetY != 0){
+    if(actionTargetX !=0 && actionTargetY != 0 && moved == false){
         //pathFind to the spot and check if you can get there
+        
+        moved = true
         return 1;
     }
     else{
-        actionTargetX = x + random(2) - 1
-        actionTargetY = y + random(2) - 1          
+        actionTargetX = x + random(2*metre) - metre
+        actionTargetY = y + random(2*metre) - metre  
+        
+        moved = false      
         
         return 0;  
     }
@@ -37,7 +41,7 @@ case 0:
     break;
     
 case 1:
-    currentAction = 'actionMove'
+    currentAction = actionMove
     break;
     
 case 2:
@@ -51,8 +55,9 @@ case 2:
     
     hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetX,actionTargetY))
     vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetX,actionTargetY))
-
-    actionTargetX=0    
+    
+    targetX = actionTargetX
+    targetY = actionTargetY 
     
     break;
 }
@@ -72,12 +77,12 @@ argument0 is the check/set order/run switch
 */
 switch (argument0){
 case 0:
-    if(actionTargetId != noone){
+    if(actionTargetId != noone && point_distance(x,y,actionTargetId.x,actionTargetId.y) < 10*metre){
         //pathFind to the spot and check if you can get there
         return 1;
     }
     else{
-        actionTargetId = global.player 
+        actionTargetId = global.pc
         
         return 0;           
     }
@@ -85,7 +90,7 @@ case 0:
     break;
     
 case 1:
-    currentAction = 'actionChase'
+    currentAction = actionChase
     break;
     
 case 2:
@@ -100,8 +105,9 @@ case 2:
     hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
     vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
 
+    targetX = actionTargetId.x
+    targetY = actionTargetId.y   
     
-    actionTargetId = noone    
     break;
 }
 

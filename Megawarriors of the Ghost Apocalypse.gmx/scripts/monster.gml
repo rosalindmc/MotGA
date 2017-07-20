@@ -6,7 +6,7 @@ controlScript = aiControl
 player = false
 controlScript = aiControl
 
-behaviorType = 'testBehavior'
+behaviorType = testBehavior
 
 life = 5
 stam = 2

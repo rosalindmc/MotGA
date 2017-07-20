@@ -18,16 +18,16 @@ responseStart = 0
 responseMod = 1
 
 responseTime = 1 
-aiMasterListGreen[0] = 0
-aiMasterListYellow[0] = 0
-aiMasterListRed[0] = 0
+aiMasterListGreen[0] = actionIdle
+aiMasterListYellow[0] = actionIdle
+aiMasterListRed[0] = actionIdle
 
 attackPattern[0] = 0
 
 leader = noone
 subordinate[0] = noone
 
-currentAction = 0
+currentAction = actionIdle
 actionTargetX = 0
 actionTargetY = 0
 actionTargetId = noone
