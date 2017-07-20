@@ -17,9 +17,9 @@ switch(argument0)
 {
     case 0:    
     handDistDest[argument1] = 4
-    handDirDest[argument1] = (90*meleeSwing[argument1])
+    handDirDest[argument1] = (45*meleeSwing[argument1])
     handHeightDest[argument1] = 4
-    itemRotDest[argument1] = (135*meleeSwing[argument1])
+    itemRotDest[argument1] = (90*meleeSwing[argument1])
     animDelay[argument1] = .1*s
     break
 
@@ -427,25 +427,25 @@ switch(argument0)
     meleeSwing[argument1] = 3-(argument1*2)
     
     handDistDest[argument1] = 4
-    handDirDest[argument1] = (90*meleeSwing[argument1])
+    handDirDest[argument1] = (0*meleeSwing[argument1])
     handHeightDest[argument1] = 2
-    itemRotDest[argument1] = (45*meleeSwing[argument1])
+    itemRotDest[argument1] = (45*meleeSwing[argument1])+30*hFacing
     animDelay[argument1] = .1*s
     break
 
     case 1:
     handDistDest[argument1] = 3
-    handDirDest[argument1] = (135*meleeSwing[argument1])
+    handDirDest[argument1] = (0*meleeSwing[argument1])
     handHeightDest[argument1] = 3
-    itemRotDest[argument1] = (15*meleeSwing[argument1])+30*hFacing
+    itemRotDest[argument1] = (15*meleeSwing[argument1])+90*hFacing
     animDelay[argument1] = .3*s
     break
 
     case 2:
     handDistDest[argument1] = 2
-    handDirDest[argument1] = (135*meleeSwing[argument1])
+    handDirDest[argument1] = (45*meleeSwing[argument1])
     handHeightDest[argument1] = 4
-    itemRotDest[argument1] = (-15*meleeSwing[argument1])+90*hFacing
+    itemRotDest[argument1] = (-15*meleeSwing[argument1])+180*hFacing
     animDelay[argument1] = .3*s
     break
     
@@ -453,7 +453,7 @@ switch(argument0)
     handDistDest[argument1] = 3
     handDirDest[argument1] = (150*meleeSwing[argument1])
     handHeightDest[argument1] = 5
-    itemRotDest[argument1] = (-15*meleeSwing[argument1])+150*hFacing
+    itemRotDest[argument1] = (-15*meleeSwing[argument1])+210*hFacing
     animDelay[argument1] = .3
     
     charge[argument1] = 2
@@ -469,7 +469,7 @@ switch(argument0)
     handDistDest[argument1] = 4
     handDirDest[argument1] = (150*meleeSwing[argument1])
     handHeightDest[argument1] = 6
-    itemRotDest[argument1] = (-15*meleeSwing[argument1])+210*hFacing
+    itemRotDest[argument1] = (-15*meleeSwing[argument1])+225*hFacing
     animDelay[argument1] = 1*s
     
     sweetSpot = false
