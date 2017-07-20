@@ -1,6 +1,6 @@
 //Replace with anim type check
 if (canMove && stam >= 1){
-if recentDodge = 0
+if (recentDodge = 0 || canRoll = false)
 {
     animationStart(humanoid(4),0)
     dodgeTimer = .3

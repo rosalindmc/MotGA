@@ -1,11 +1,16 @@
 #define aiControl
-
-
 if ((global.timer+responseStart) % (responseTime/responseMod) <= 1/global.frameRate){
     aiMaster()
+    aiActionReset()
 }
 
-aiAction()
+if (attackPattern = attackIdle){
+    aiAction()
+}
+else if (attackPattern != attackIdle){
+    aiAttackPattern()
+}
+
 
 
 
@@ -22,7 +27,11 @@ aiMasterListGreen[0] = actionIdle
 aiMasterListYellow[0] = actionIdle
 aiMasterListRed[0] = actionIdle
 
-attackPattern[0] = 0
+attackPattern = attackIdle
+
+hasDodged = false
+
+attackStep = 0
 
 leader = noone
 subordinate[0] = noone
@@ -44,3 +53,5 @@ sideVisionRange = 0
 
 #define aiDestroy
 ds_priority_destroy(alertness)
+#define aiActionReset
+hasDodged = false

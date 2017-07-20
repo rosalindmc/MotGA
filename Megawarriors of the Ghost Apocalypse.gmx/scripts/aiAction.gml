@@ -69,6 +69,7 @@ switch (argument0){
 case 0:
     if(actionTargetId != noone && point_distance(x,y,actionTargetId.x,actionTargetId.y) < 4*metre /*&& (life < lifeMax/2 || stam < stamMax/2)*/){
         //pathFind to the spot and check if you can get there
+        
         return 1;
     }
     else{
@@ -84,33 +85,26 @@ case 1:
 case 2:
 
     if (canMove){
-    if(actionTargetId.charge[1]>1 || actionTargetId.charge[2]>1){
-        var moveT = (movement*moveMult)
-        moveT = moveT/(1+moveDT)
-        
-        hspd = -lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
-        vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
-        
-        targetX = actionTargetId.x - hspd*2
-        targetY = actionTargetId.y - vspd*2
-        
-        dodgeRoll(facing)
+        if((actionTargetId.charge[1]>1 || actionTargetId.charge[2]>1) && hasDodged != true){
+            attackPattern = attackDodgeStep
+            hasDodged = true
+        }
+        else{
+            var moveT = (movement*moveMult)
+            moveT = moveT/(1+moveDT)
+            
+            if (point_distance(x,y,actionTargetId.x,actionTargetId.y)<3*metre){
+            
+            hspd = -lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+            vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+            
+            }
+        }
     }
-    else{
-    var moveT = (movement*moveMult)
-    moveT = moveT/(1+moveDT)
     
-    if (point_distance(x,y,actionTargetId.x,actionTargetId.y)<3*metre){
-    
-    hspd = -lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
-    vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
-    
-    }
-    }
-
     targetX = actionTargetId.x
     targetY = actionTargetId.y
-    }
+    
     break;
 }
 
@@ -179,4 +173,3 @@ case 2:
 #define actionOrderGuard
 
 #define actionOrderSearch
-
