@@ -157,7 +157,7 @@
     <room>rooms\rom_game</room>
   </rooms>
   <constants number="2">
-    <constant name="metre">12</constant>
+    <constant name="metre">18</constant>
     <constant name="grav">20</constant>
   </constants>
   <help>

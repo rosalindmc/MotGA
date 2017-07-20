@@ -1,6 +1,5 @@
 #define char
 
-
 #define createChar
 /*
 use as createChar(x,y,type, leader)
@@ -35,7 +34,7 @@ animUpdate = true
 script_execute(animType,0)
 
 //Movement Essentials
-movement = 10        //Metres per second
+movement = 6        //Metres per second
 moveMult = 1        //Malleable multiplier for movement speed
 moveDT = 0          //Difficult terrain divider
 
@@ -51,7 +50,7 @@ canMove = true      //Can move check
 canAttack = true    //Can attack check
 
 dodgeCost = 1
-dodgeSpeed = 25
+dodgeSpeed = 15
 dodgeTimer = 0
 recentDodge = 0
 
@@ -328,6 +327,7 @@ draw_sprite(spr_shadow,0,round(x),round(y))
 draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75))-z,1,1,0,c_white,1)
 
 draw_text(x,y+10,string(floor(x/metre))+string('m'))
+draw_text(x,y+20,string(floor(point_distance(x,y,targetX,targetY)/metre))+string('m'))
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)

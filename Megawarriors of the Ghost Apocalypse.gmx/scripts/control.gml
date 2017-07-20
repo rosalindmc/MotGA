@@ -167,35 +167,35 @@ with(global.currLevel){
             //}
             
             if(floorLayout[i,j].isRiver == true && floorLayout[i,j].isPath == true){
-                draw_sprite(spr_bridge,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_bridge,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_orange,i*metre*2+10,j*metre*2+10,'B')
             }
             else if(floorLayout[i,j].isRiver == true){
-                draw_sprite(spr_water,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_water,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_blue,i*metre*2+10,j*metre*2+10,'w')
             }
             else if (floorLayout[i,j].hasPoi == true && floorLayout[i,j].weight==2){
-                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_tile,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_yellow,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
             }
             else if (floorLayout[i,j].hasPoi == true){
-                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_tile,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_green,i*metre*2+10,j*metre*2+10,'P')//string(floorLayout[i,j].weight));
             }
             else if(floorLayout[i,j].isPath == true){
-                draw_sprite(spr_road,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_road,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_red,i*metre*2+10,j*metre*2+10,'r')//floorLayout[i,j].weight);
             }
             else if(floorLayout[i,j].weight==2){
-                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
-                draw_sprite(spr_grass,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_tile,i+j,i*metre+10,j*metre+10)
+                draw_sprite(spr_grass,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_gray,i*metre*2+10,j*metre*2+10,'g')
             }
            
             else{
-                draw_sprite(spr_tile,i+j,i*metre*1.5+10,j*metre*1.5+10)
-                draw_sprite(spr_grass,i+j,i*metre*1.5+10,j*metre*1.5+10)
-                draw_sprite(spr_tree,i+j,i*metre*1.5+10,j*metre*1.5+10)
+                draw_sprite(spr_tile,i+j,i*metre+10,j*metre+10)
+                draw_sprite(spr_grass,i+j,i*metre+10,j*metre+10)
+                draw_sprite(spr_tree,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_white,i*metre*2+10,j*metre*2+10,string(floorLayout[i,j].weight));
             }
         }
