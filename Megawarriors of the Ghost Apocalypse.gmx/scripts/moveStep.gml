@@ -1,5 +1,4 @@
 #define moveStep
-if (canMove = true){
 //Gravity
 if z+max(0,zspd) > floorZ
 {
@@ -52,7 +51,7 @@ else
 {
     moving = false
 }
-}
+
 
 #define moveStepObject
 //Gravity

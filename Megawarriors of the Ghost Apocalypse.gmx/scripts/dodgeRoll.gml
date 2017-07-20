@@ -1,4 +1,5 @@
 //Replace with anim type check
+if (canMove && stam >= 1){
 if recentDodge = 0
 {
     animationStart(humanoid(4),0)
@@ -39,5 +40,4 @@ sweetSpot = false
 fumble = false
 
 canMove = false
-
-
+}

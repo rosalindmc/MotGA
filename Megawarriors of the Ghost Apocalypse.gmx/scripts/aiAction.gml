@@ -45,21 +45,21 @@ case 1:
     break;
     
 case 2:
+
     
-    if (facing != point_direction(x,y,actionTargetX,actionTargetY)){
-        facing = rotate(facing,point_direction(x,y,actionTargetX,actionTargetY),turnSpeed/global.frameRate)        
-    }
-    
-    if(point_direction(x,y,actionTargetX,actionTargetY) > 1*metre){
+    if(point_direction(x,y,actionTargetX,actionTargetY) > 1*metre && canMove = true){
         var moveT = (movement*moveMult)
         moveT = moveT/(1+moveDT)
         
         hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetX,actionTargetY))
         vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetX,actionTargetY))
         
-        targetX = actionTargetX
-        targetY = actionTargetY 
+         
     }
+    
+    targetX = actionTargetX
+    targetY = actionTargetY
+    
     break;
 }
 
@@ -82,10 +82,8 @@ case 1:
     break;
     
 case 2:
-    if (facing != point_direction(x,y,actionTargetId.x,actionTargetId.y)){
-        facing = rotate(facing,point_direction(x,y,actionTargetId.x,actionTargetId.y),turnSpeed/global.frameRate)        
-    }
-    
+
+    if (canMove){
     if(actionTargetId.charge[1]>1 || actionTargetId.charge[2]>1){
         var moveT = (movement*moveMult)
         moveT = moveT/(1+moveDT)
@@ -107,6 +105,7 @@ case 2:
     hspd = -lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
     vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
     
+    }
     }
 
     targetX = actionTargetId.x
@@ -147,16 +146,15 @@ case 1:
     break;
     
 case 2:
-    
-    if (facing != point_direction(x,y,actionTargetId.x,actionTargetId.y)){
-        facing = rotate(facing,point_direction(x,y,actionTargetId.x,actionTargetId.y),turnSpeed/global.frameRate)        
-    }
-    
+
+    if (canMove){
     var moveT = (movement*moveMult)
     moveT = moveT/(1+moveDT)
     
     hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
     vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+    
+    }
 
     targetX = actionTargetId.x
     targetY = actionTargetId.y   
