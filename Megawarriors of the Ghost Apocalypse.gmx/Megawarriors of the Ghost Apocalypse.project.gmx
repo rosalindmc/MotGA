@@ -7,8 +7,6 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_mask</sprite>
-    <sprite>sprites\spr_reticle</sprite>
-    <sprite>sprites\spr_reticle2</sprite>
     <sprite>sprites\spr_humanoidArms</sprite>
     <sprite>sprites\spr_humanoidLegs</sprite>
     <sprite>sprites\spr_humanoidHead</sprite>
@@ -16,6 +14,8 @@
     <sprite>sprites\spr_humanoidBody</sprite>
     <sprite>sprites\spr_sword</sprite>
     <sprites name="HUD">
+      <sprite>sprites\spr_reticle2</sprite>
+      <sprite>sprites\spr_reticle</sprite>
       <sprite>sprites\spr_stamina</sprite>
       <sprite>sprites\spr_smallhealth</sprite>
       <sprite>sprites\spr_health</sprite>

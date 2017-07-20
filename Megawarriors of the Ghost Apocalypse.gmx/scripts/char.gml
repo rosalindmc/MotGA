@@ -327,6 +327,8 @@ draw_sprite(spr_shadow,0,round(x),round(y))
 //Draw Surface
 draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75))-z,1,1,0,c_white,1)
 
+draw_text(x,y+10,string(floor(x/metre))+string('m'))
+
 /*Temp just draw random stuff
 draw_set_colour(c_white)
 draw_rectangle(round(x)-4,round(y)-16,round(x)+4,round(y),false)
