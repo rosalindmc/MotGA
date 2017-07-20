@@ -192,6 +192,7 @@ hipsRot = 0
 bodyRot = 0
 hairRot = 0
 headRot = 0
+bodyTwist = 0
 
 switch(argument0)
 {
@@ -234,6 +235,7 @@ hipsRot = 0
 bodyRot = 0
 hairRot = 0
 headRot = 0
+bodyTwist = 0
 
 switch(argument0)
 {

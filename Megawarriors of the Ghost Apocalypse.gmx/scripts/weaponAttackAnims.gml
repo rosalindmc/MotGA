@@ -51,6 +51,10 @@ switch(argument0)
     {
         queuedAnim[argument1] = 2
     }
+    if greatWeapon = true
+    {
+        bodyTwist = meleeSwing[argument1]
+    }
     sweetSpot = true
     perfectHitSheen(argument1)
     break
@@ -83,6 +87,10 @@ switch(argument0)
     handHeightDest[argument1] = 4
     itemRotDest[argument1] = (120*meleeSwing[argument1])
     animDelay[argument1] = .03*s
+    if greatWeapon = true
+    {
+        bodyTwist = 0
+    }
     break
 
     case 1:
@@ -118,6 +126,11 @@ switch(argument0)
     handHeightDest[argument1] = 1
     itemRotDest[argument1] = (-75*meleeSwing[argument1])
     animDelay[argument1] = .1*s
+    
+    if greatWeapon = true
+    {
+        bodyTwist = -meleeSwing[argument1]
+    }
     break
     
     case 5:

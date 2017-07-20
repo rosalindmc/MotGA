@@ -263,6 +263,7 @@ if canMove = true
     if moving != 0
     {
         animIndex[0] = humanoidWalk
+        animSpeed[0] = max(abs(moving),1)
         if animStep[0] > 4
         {
             animStep[0] = 1
