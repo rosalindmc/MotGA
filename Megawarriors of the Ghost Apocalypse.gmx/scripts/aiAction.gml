@@ -23,17 +23,17 @@ argument0 is the check/set order/run switch
 */
 switch (argument0){
 case 0:
-    if(actionTargetX !=0 && actionTargetY != 0 && moved == false){
+    if(actionTargetX !=0 && actionTargetY != 0){
         //pathFind to the spot and check if you can get there
+        actionTargetX = ceil(x + irandom(4)*metre - 2*metre)
+        actionTargetY = ceil(y + irandom(4)*metre - 2*metre)
         
-        moved = true
         return 1;
     }
     else{
-        actionTargetX = x + random(2*metre) - metre
-        actionTargetY = y + random(2*metre) - metre  
-        
-        moved = false      
+        actionTargetX = ceil(x + irandom(4)*metre - 2*metre)
+        actionTargetY = ceil(y + irandom(4)*metre - 2*metre)  
+             
         
         return 0;  
     }
@@ -59,6 +59,58 @@ case 2:
     targetX = actionTargetX
     targetY = actionTargetY 
     
+    break;
+}
+
+#define actionDistance
+//argument0 is the check/set order/run switch
+switch (argument0){
+case 0:
+    if(actionTargetId != noone && point_distance(x,y,actionTargetId.x,actionTargetId.y) < 4*metre /*&& (life < lifeMax/2 || stam < stamMax/2)*/){
+        //pathFind to the spot and check if you can get there
+        return 1;
+    }
+    else{
+        actionTargetId = global.pc
+        return 0;
+    }
+    break;
+    
+case 1:
+    currentAction = actionDistance
+    break;
+    
+case 2:
+    if (facing != point_direction(x,y,actionTargetId.x,actionTargetId.y)){
+        facing = rotate(facing,point_direction(x,y,actionTargetId.x,actionTargetId.y),turnSpeed/global.frameRate)        
+    }
+    
+    if(actionTargetId.charge[1]>1 || actionTargetId.charge[2]>1){
+        var moveT = (movement*moveMult)
+        moveT = moveT/(1+moveDT)
+        
+        hspd = -lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+        vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+        
+        targetX = actionTargetId.x - hspd*2
+        targetY = actionTargetId.y - vspd*2
+        
+        dodgeRoll(facing)
+    }
+    else{
+    var moveT = (movement*moveMult)
+    moveT = moveT/(1+moveDT)
+    
+    if (point_distance(x,y,actionTargetId.x,actionTargetId.y)<3*metre){
+    
+    hspd = -lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+    vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+    
+    }
+
+    targetX = actionTargetId.x
+    targetY = actionTargetId.y
+    }
     break;
 }
 
@@ -95,7 +147,7 @@ case 1:
     
 case 2:
     
-    if (facing != point_direction(x,y,actionTargetX,actionTargetY)){
+    if (facing != point_direction(x,y,actionTargetId.x,actionTargetId.y)){
         facing = rotate(facing,point_direction(x,y,actionTargetId.x,actionTargetId.y),turnSpeed/global.frameRate)        
     }
     
