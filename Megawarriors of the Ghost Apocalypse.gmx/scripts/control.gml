@@ -99,7 +99,11 @@ if keyboard_check_pressed(ord('R'))
 //Adjust Camera Position
 if instance_exists(global.pc)
 {
+    ix = round((global.pc.x))
+    iy = round((global.pc.y))
     
+    x = floor((mouse_x+ix)/2)-shake+random(shake*2)
+    y = floor((mouse_y+iy)/2)-shake+random(shake*2)
     
     kick = global.pc.kick
 }
