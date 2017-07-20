@@ -51,9 +51,9 @@ if owner != noone
         if hand != 0
         {
             image_angle = (round(owner.facing/15)*15)+owner.itemRot[hand]+owner.bodyRot
-            x = owner.handX[hand]+owner.x-(owner.charSurfSize*.5)+lengthdir_x(holdPoint,image_angle)
-            z = (owner.charSurfSize*.75)-owner.bodyY+owner.handHeight[hand]+owner.z
-            y = owner.handY[hand]+owner.y-(owner.charSurfSize*.75)+lengthdir_y(holdPoint,image_angle)+z
+            x = owner.handX[hand]+round(owner.x)-(owner.charSurfSize*.5)+lengthdir_x(holdPoint,image_angle)
+            z = (owner.charSurfSize*.75)-round(owner.bodyY+owner.handHeight[hand]+owner.z)
+            y = owner.handY[hand]+round(owner.y)-(owner.charSurfSize*.75)+lengthdir_y(holdPoint,image_angle)+z
             image_index = 0
             isoDepth(0)
         }

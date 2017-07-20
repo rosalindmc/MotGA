@@ -342,7 +342,7 @@ switch(argument0)
     //Hit Ground
     if player = true
     {
-        obj_control.shake += 1
+        obj_control.shake += 2
     }
     break
     

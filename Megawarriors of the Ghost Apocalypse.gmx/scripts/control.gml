@@ -99,10 +99,7 @@ if keyboard_check_pressed(ord('R'))
 //Adjust Camera Position
 if instance_exists(global.pc)
 {
-    ix = (global.pc.x+global.pc.x+mouse_x)*.3333
-    iy = (global.pc.y+global.pc.y+mouse_y)*.3333
-    x = floor(((ix+x)*.5)-shake+random(shake*2))
-    y = floor(((iy+y)*.5)-shake+random(shake*2))
+    
     
     kick = global.pc.kick
 }
@@ -121,6 +118,8 @@ else
     shake = 0
 }
 
+
+//Global Timer
 global.timer += 1/global.frameRate
 if (global.timer > 30){
     global.timer -= 30
@@ -203,7 +202,6 @@ view_yview[]+(view_hview[]/2)+(270*(.5-(y/room_height))))
 
 
 #define controlDrawHUD
-
 //Draw Interact Tooltip
 if global.pc.pointInteract != noone
 {    
@@ -225,7 +223,7 @@ if global.pc.inventoryKey = true
 }
 
 //Draw Cursor
-draw_sprite(spr_reticle,0,mouse_x,mouse_y-5)
+draw_sprite(spr_reticle,0,mouse_x,mouse_y-8)
 draw_sprite_ext(spr_reticle2,0,mouse_x-kick,mouse_y-8-kick,1,1,0,c_white,1)
 draw_sprite_ext(spr_reticle2,0,mouse_x-kick,mouse_y-8+kick,1,1,90,c_white,1)
 draw_sprite_ext(spr_reticle2,0,mouse_x+kick,mouse_y-8+kick,1,1,180,c_white,1)
