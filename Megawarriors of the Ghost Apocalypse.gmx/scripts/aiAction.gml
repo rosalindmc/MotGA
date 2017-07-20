@@ -28,8 +28,10 @@ case 0:
         return 1;
     }
     else{
-        actionTargetX = x + random(3) - 2
-        actionTargetY = y + random(3) - 2            
+        actionTargetX = x + random(2) - 1
+        actionTargetY = y + random(2) - 1          
+        
+        return 0;  
     }
     
     break;
@@ -75,7 +77,9 @@ case 0:
         return 1;
     }
     else{
-        actionTargetId = global.player            
+        actionTargetId = global.player 
+        
+        return 0;           
     }
     
     break;

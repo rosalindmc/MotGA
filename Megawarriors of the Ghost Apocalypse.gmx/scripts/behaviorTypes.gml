@@ -3,5 +3,5 @@
 
 #define testBehavior
 aiMasterListGreen[0] = actionChase
-aiMasterListGreen[0] = actionMove
-aiMasterListGreen[1] = actionIdle
+aiMasterListGreen[1] = actionMove
+aiMasterListGreen[2] = actionIdle

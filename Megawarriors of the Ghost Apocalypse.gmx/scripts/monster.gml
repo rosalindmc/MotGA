@@ -6,6 +6,8 @@ controlScript = aiControl
 player = false
 controlScript = aiControl
 
+behaviorType = 'testBehavior'
+
 life = 5
 stam = 2
 
@@ -17,3 +19,5 @@ sideVisionRange = 5
 
 responseTime = 1
 responseStart = global.timer
+
+script_execute(behaviorType)

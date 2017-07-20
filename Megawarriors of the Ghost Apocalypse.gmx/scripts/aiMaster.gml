@@ -31,18 +31,18 @@ if(global.timer % (responceTime*global.frameRate) == 0){
             break 
         }
     }until (ret !=0)
-    
-    switch(alertState){
-        case 'green':
-            ret = script_execute(aiMasterListGreen[i], 1)   
-            break 
-        case 'yellow':
-            ret = script_execute(aiMasterListYellow[i], 1)   
-            break 
-        case 'red':
-            ret = script_execute(aiMasterListRed[i], 1)   
-            break 
-        }
+}
+
+switch(alertState){
+    case 'green':
+        ret = script_execute(aiMasterListGreen[i], 1)   
+        break 
+    case 'yellow':
+        ret = script_execute(aiMasterListYellow[i], 1)   
+        break 
+    case 'red':
+        ret = script_execute(aiMasterListRed[i], 1)   
+        break 
 }
 
 /*
