@@ -349,12 +349,45 @@ draw_sprite(spr_shadow,0,round(x),round(y))
 //Draw Surface
 draw_surface_ext(charSurf,round(x-(charSurfSize*.5)),round(y-(charSurfSize*.75))-z,1,1,0,c_white,1)
 
-draw_text(x,y+10,string(floor(hspd))+string('m'))
-draw_text(x,y+20,string(floor(vspd))+string('m'))
-draw_text(x,y+30,canMove)
+smallHealthBar()
+
+//draw_text(x,y+10,string(floor(hspd))+string('m'))
+//draw_text(x,y+20,string(floor(vspd))+string('m'))
+//draw_text(x,y+30,canMove)
 
 /*Temp just draw random stuff
 draw_set_colour(c_white)
 draw_rectangle(round(x)-4,round(y)-16,round(x)+4,round(y),false)
 draw_text(round(x),round(y)+20,global.frameRate)
 draw_text(round(x),round(y)+30,moving*global.frameRate/metre)
+
+#define smallHealthBar
+if player = false
+{
+    ix = round(x)
+    iy = round(y-(metre*2))
+    
+    i = 0
+    repeat(ceil(life))
+    {
+        draw_sprite_ext(spr_smallhealth,0,ix-10+(4*i),iy,1,1,0,c_white,global.pc.life-i)
+        i += 1
+    }
+    
+    //Outline
+    draw_set_colour(c_black)
+    draw_rectangle(ix-10,iy-3,ix-10+(4*lifeMax),iy+3,true)
+    
+    //Stamina
+    i = 0
+    repeat(ceil(stamMax))
+    {
+        draw_set_colour(c_green)
+        draw_rectangle(ix-10+(5*i)+(3*floor(i*.5)),iy+5,ix-10+(5*median(0,stam-i,1))+(5*i)+(3*floor(i*.5)),iy+7,false)
+        
+        //Outline
+        draw_set_colour(c_black)
+        draw_rectangle(ix-10+(5*i)+(3*floor(i*.5)),iy+5,ix-10+5+(5*i)+(3*floor(i*.5)),iy+7,true)        
+        i += 1
+    }
+}   
