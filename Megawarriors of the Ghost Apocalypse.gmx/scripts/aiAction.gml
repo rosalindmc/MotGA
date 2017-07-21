@@ -47,7 +47,7 @@ case 1:
 case 2:
 
     
-    if(point_direction(x,y,actionTargetX,actionTargetY) > 1*metre && canMove = true){
+    if(point_distance(x,y,actionTargetX,actionTargetY) > 1*metre && canMove = true){
         var moveT = (movement*moveMult)
         moveT = moveT/(1+moveDT)
         
@@ -109,6 +109,68 @@ case 2:
 }
 
 #define actionEquip
+//argument0 is the check/set order/run switch
+switch (argument0){
+case 0:
+
+//find the closest thing that it's able to pick up
+
+    tempWep = noone;
+
+    if(inventory[0] == noone){
+    
+        tempDist = 5*metre;
+        with(obj_interactable){
+            if(useType == pickUp){
+                if(point_distance(x,y,other.x,other.y) < other.tempDist){
+                    other.tempDist = point_distance(x,y,other.x,other.y);
+                    other.tempWep = id;
+                    
+                }
+            }
+        }
+    }
+    
+    if(tempWep != noone){
+        show_message('2');
+        actionTargetId = tempWep;
+        return 1;
+    }
+    else{
+        return 0;
+    }
+    break;
+    
+case 1:
+
+    currentAction = actionEquip;
+    break;
+    
+case 2:
+//go to the pickupable thing
+    targetX = actionTargetId.x;
+    targetY = actionTargetId.y;
+
+    if (point_distance(x,y,actionTargetId.x,actionTargetId.y) < 2*metre){
+        pointInteract = actionTargetId;
+        interact();
+        pointInteract = noone;
+        
+        show_message(tempWep);
+    }
+    
+    else if (canMove){
+    show_message('4');
+    
+    var moveT = (movement*moveMult)
+    moveT = moveT/(1+moveDT)
+    
+    hspd = lengthdir_x(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+    vspd = lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
+    }
+
+    break;
+}
 
 #define actionAttack
 
