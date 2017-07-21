@@ -133,5 +133,9 @@ if fumble = false
     {    
         i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],image_angle),owner.y+lengthdir_y(length+owner.handDist[argument0],image_angle),obj_particle)
         i.z = z
+        with(i)
+        {
+            partSheen()
+        }
     }
 }
