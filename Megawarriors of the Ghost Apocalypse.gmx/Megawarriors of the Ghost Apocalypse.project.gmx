@@ -32,6 +32,8 @@
     <sprite>sprites\spr_stab</sprite>
     <sprite>sprites\spr_shadow</sprite>
     <sprite>sprites\spr_sheen</sprite>
+    <sprite>sprites\spr_none</sprite>
+    <sprite>sprites\spr_blood</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\temp_bg</background>
@@ -109,6 +111,9 @@
     </scripts>
     <scripts name="Items">
       <script>scripts\meleeWeapons.gml</script>
+    </scripts>
+    <scripts name="Particles">
+      <script>scripts\particles.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

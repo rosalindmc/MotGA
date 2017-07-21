@@ -89,3 +89,18 @@ if place_meeting(x,y+(metre*vspd/global.frameRate),obj_solid) or collision_line(
 }
 
 y += metre*vspd/global.frameRate
+#define moveStepParticle
+//Gravity
+if z+max(0,zspd) > floorZ
+{
+    zspd -= grav/global.frameRate
+    z += zspd*metre/global.frameRate
+}
+else
+{
+    zspd = 0
+    z = floorZ
+}
+
+x += metre*hspd/global.frameRate
+y += metre*vspd/global.frameRate
