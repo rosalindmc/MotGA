@@ -34,6 +34,7 @@
     <sprite>sprites\spr_sheen</sprite>
     <sprite>sprites\spr_none</sprite>
     <sprite>sprites\spr_blood</sprite>
+    <sprite>sprites\spr_bloodSplat</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\temp_bg</background>
@@ -50,12 +51,13 @@
         <script>scripts\moveControl.gml</script>
         <script>scripts\moveLimit.gml</script>
         <script>scripts\moveStep.gml</script>
-        <script>scripts\dodgeRoll.gml</script>
         <script>scripts\useItem.gml</script>
         <script>scripts\interact.gml</script>
         <script>scripts\dropItem.gml</script>
         <script>scripts\inventoryControl.gml</script>
         <script>scripts\spendStamina.gml</script>
+        <script>scripts\damageChar.gml</script>
+        <script>scripts\dodgeRoll.gml</script>
         <scripts name="AI">
           <script>scripts\aiMaster.gml</script>
           <script>scripts\aiAction.gml</script>
@@ -113,7 +115,7 @@
       <script>scripts\meleeWeapons.gml</script>
     </scripts>
     <scripts name="Particles">
-      <script>scripts\particles.gml</script>
+      <script>scripts\particleTypes.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

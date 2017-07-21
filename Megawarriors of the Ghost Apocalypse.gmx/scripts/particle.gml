@@ -1,7 +1,17 @@
 #define particle
 
 #define createParticle
-//Create argument0 particles
+//Create particles (x,y,z,#,type,spec)
+
+repeat(argument3)
+{
+    i = instance_create(argument0, argument1, obj_particle)
+    i.z = argument2
+    with(i)
+    {
+        script_execute(argument4,argument5)
+    }
+}
 
 #define particleInitialize
 dir = 0
@@ -20,6 +30,7 @@ animDelay = 1
 
 onDeath = -4
 splatDecal = spr_none
+impactDeath = false
 
 life = 10
 
@@ -49,6 +60,10 @@ if life <= 0
 }
 
 #define particleDraw
-draw_sprite_ext(sprite_index,image_index,x,y-z,1,1,image_angle,c_white,image_alpha)
+draw_sprite_ext(sprite_index,image_index,x,y-z,image_xscale,image_yscale,image_angle,c_white,image_alpha)
 
 #define particleDestroy
+if onDeath != -4
+{
+    script_execute(onDeath)
+}

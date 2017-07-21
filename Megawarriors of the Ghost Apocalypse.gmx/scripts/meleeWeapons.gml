@@ -17,7 +17,7 @@ switch(argument0)
     //Weapon Stats
     meleePow = 1
     meleeRate = 1
-    meleeImpact = 5
+    meleeImpact = 3
     meleeLunge = 4
     meleeSlow = .5
     meleeSize = 1

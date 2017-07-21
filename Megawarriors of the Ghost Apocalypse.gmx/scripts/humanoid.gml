@@ -70,6 +70,7 @@ handDir[1] = 0
 handDirDest[1] = 0
 handHeight[1] = 2
 handHeightdest[1] = 2
+
 itemRot[1] = 0
 itemRotDest[1] = 0
 itemSprite[1] = spr_sword
@@ -95,6 +96,29 @@ headRot = 0
 
 xAdj = 0
 yAdj = 0
+
+hipsX = 0
+hipsY = 0
+
+bodyX = 0
+bodyY = 0
+
+chstX = 0
+chstY = 0
+
+headX = 0
+headY = 0
+
+shldrX[1] = 0
+shldrY[1] = 0
+
+shldrX[2] = 0
+shldrY[2] = 0
+
+handX[1] = 0
+handY[1] = 0
+handX[2] = 0
+handY[2] = 0
 
 #define humanoidDraw
 //Establish bone information

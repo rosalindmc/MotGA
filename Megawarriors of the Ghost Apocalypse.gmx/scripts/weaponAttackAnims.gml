@@ -1,5 +1,6 @@
 #define weaponAttackAnims
 
+
 #define weaponIdle
 animDelay[argument1] = 1
 animSpeed[argument1] = 1
@@ -14,7 +15,7 @@ if greatWeapon = false
 }
 
 #define weaponSlashHold
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -80,7 +81,7 @@ switch(argument0)
 
 
 #define weaponSlash
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -161,7 +162,7 @@ switch(argument0)
 }
 
 #define weaponStabHold
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -225,7 +226,7 @@ switch(argument0)
 
 
 #define weaponStab
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -297,7 +298,7 @@ switch(argument0)
 }
 
 #define weaponHiltHold
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -360,7 +361,7 @@ switch(argument0)
 
 
 #define weaponHilt
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -436,7 +437,7 @@ switch(argument0)
 #define throwAnim
 
 #define weaponChopHold
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
@@ -500,7 +501,7 @@ switch(argument0)
 
 
 #define weaponChop
-s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate)
+s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {

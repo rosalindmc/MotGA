@@ -99,7 +99,14 @@ if z+max(0,zspd) > floorZ
 else
 {
     zspd = 0
+    hspd = 0
+    vspd = 0
     z = floorZ
+    
+    if impactDeath = true
+    {
+        instance_destroy()
+    }
 }
 
 x += metre*hspd/global.frameRate

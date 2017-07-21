@@ -97,8 +97,8 @@ hold[argument0] = 0
 animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
 
 //Lunge
-hspd += lengthdir_x((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge)),facing)
-vspd += lengthdir_y((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge)),facing)
+hspd += lengthdir_x((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge*(1+((greatWeapon*handItem[argument0].gwLungeMult)-greatWeapon)))),facing)
+vspd += lengthdir_y((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge*(1+((greatWeapon*handItem[argument0].gwLungeMult)-greatWeapon)))),facing)
 moveTimer = .1
 canMove = false
 
@@ -113,13 +113,13 @@ with(handItem[argument0])
     i.originY = y
     i.dist = (length/2)+owner.handDist[argument0]+holdPoint
     i.image_angle = owner.facing
-    i.dmg = meleePow*meleePowMult[argument1]*(1+((owner.charge[argument0]-1)*meleeChargePowMult[argument1]))
-    i.impact = meleeImpact*meleeImpactMult[argument1]*owner.charge[argument0]
+    i.dmg = meleePow*meleePowMult[argument1]*(1+((owner.charge[argument0]-1)*meleeChargePowMult[argument1]))*(1+((owner.greatWeapon*gwPowMult)-owner.greatWeapon))
+    i.impact = meleeImpact*meleeImpactMult[argument1]*owner.charge[argument0]*(1+((owner.greatWeapon*gwImpactMult)-owner.greatWeapon))
     i.z = z
     i.dmgType = meleeType[argument1]
     i.sprite_index = meleeAttackMask[argument1]
-    i.image_yscale = meleeSize*meleeSizeMult[argument1]*owner.meleeSwing[argument0]
-    i.image_xscale = meleeSize*meleeSizeMult[argument1]
+    i.image_yscale = meleeSize*meleeSizeMult[argument1]*owner.meleeSwing[argument0]*(1+((owner.greatWeapon*gwSizeMult)-owner.greatWeapon))
+    i.image_xscale = meleeSize*meleeSizeMult[argument1]*(1+((owner.greatWeapon*gwSizeMult)-owner.greatWeapon))
 }
 
 #define meleeEnd
@@ -131,11 +131,6 @@ if fumble = false
 {
     with(handItem[argument0])
     {    
-        i = instance_create(owner.x+lengthdir_x(length+owner.handDist[argument0],image_angle),owner.y+lengthdir_y(length+owner.handDist[argument0],image_angle),obj_particle)
-        i.z = z
-        with(i)
-        {
-            partSheen()
-        }
+        createParticle(owner.x+lengthdir_x(length+owner.handDist[argument0],image_angle),owner.y+lengthdir_y(length+owner.handDist[argument0],image_angle),z,1,partSheen,0)
     }
 }

@@ -132,7 +132,6 @@ case 0:
     }
     
     if(tempWep != noone){
-        show_message('2');
         actionTargetId = tempWep;
         return 1;
     }
@@ -155,12 +154,10 @@ case 2:
         pointInteract = actionTargetId;
         interact();
         pointInteract = noone;
-        
-        show_message(tempWep);
+        actionTargetId = noone;
     }
     
     else if (canMove){
-    show_message('4');
     
     var moveT = (movement*moveMult)
     moveT = moveT/(1+moveDT)

@@ -7,6 +7,7 @@ global.frameRate = 60
 room_speed = global.frameRate
 global.timeMult = 1
 enumerators();
+global.decalSurf = -1
 
 //Screen Stuff (later handle in main menu)
 screenScale()
@@ -201,6 +202,21 @@ with(global.currLevel){
         }
     }
 }
+
+//Decals
+if surface_exists(global.decalSurf )
+{
+    draw_surface(global.decalSurf , 0, 0)
+}
+else
+{
+    global.decalSurf  = surface_create(room_width, room_height)
+    surface_set_target(global.decalSurf )
+    draw_clear_alpha(c_black, 0)
+    surface_reset_target()
+}
+
+
     
 /*Draw Backdrops
 draw_sprite(spr_backdrop,0,
