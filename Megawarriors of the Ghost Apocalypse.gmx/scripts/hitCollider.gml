@@ -15,9 +15,12 @@ depth = -y
 audio_play_sound(snd_swing,0,false)
 
 #define hitColliderCollisionChar
-if danger = true
+if owner != other
 {
-    damageChar(other)
+    if danger = true
+    {
+        damageChar(other)
+    }
 }
 
 #define hitColliderCollisionTerrain

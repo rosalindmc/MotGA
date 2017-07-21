@@ -88,7 +88,7 @@ switch(argument1)
 //Spend Stamina
 
 //Stamina Cost
-spendStamina(handItem[argument0].meleeCost*handItem[argument0].meleeCostMult[queuedAnim[argument0]]/(1+(sweetSpot*perfectTimeMod)),1)
+spendStamina(handItem[argument0].meleeCost*handItem[argument0].meleeCostMult[queuedAnim[argument0]]/(1+(sweetSpot*perfectTimeMod))*(1+((greatWeapon*handItem[argument0].gwCostMult)-greatWeapon)),1)
 
 //Anim and Essentials
 sweetSpot = false
