@@ -69,7 +69,7 @@ runs for every npc every x frames based on some AI thought speed variable AND
 #define tempAiFullPlan
 /*
 three levels
-    master - behavior tree
+    master - behavior list
     
     runs for every npc every x frames based on some AI thought speed variable AND 
         whenever they finish an order

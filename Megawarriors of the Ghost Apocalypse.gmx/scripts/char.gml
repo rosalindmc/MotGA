@@ -50,6 +50,7 @@ canMove = true      //Can move check
 moveTimer = 0
 canAttack = true    //Can attack check
 
+canRoll = true
 dodgeCost = 1
 dodgeSpeed = 16
 dodgeTimer = 0

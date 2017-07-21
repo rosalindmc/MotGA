@@ -108,7 +108,7 @@ case 2:
     break;
 }
 
-#define actionInteract
+#define actionEquip
 
 #define actionAttack
 
