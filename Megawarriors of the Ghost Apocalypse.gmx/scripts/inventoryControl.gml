@@ -103,58 +103,36 @@ for(i = 1; i <= inventorySize; i++)
 #define scrollItems
 if mouse_wheel_up()
 {
-    for(i = handItemSlot[1]; i < inventorySize; i++)
+    for(i = handItemSlot[1]+1; i < inventorySize; i++)
     {
         if inventory[i] != noone
         {
             switchItem(i,1)
             break
         }
-        
-        switchItem(-1,1)
+        else
+        {
+            switchItem(-1,1)
+        }
     }
 }
 
-
-
-//Mouse Wheel up to make right hand switch to next item, cycling
-//Mouse Wheel down to cycle left hand
-
-/*
-invSelect += argument0
-
-if invSelect > array_length_1d(invSlot)-2
+if mouse_wheel_down()
 {
-    invSelect = 1 
-}
-if invSelect < 1
-{
-    invSelect = array_length_1d(invSlot)-1
-}
-
-
-repeat(array_length_1d(invSlot)-2)
-{
-    if !instance_exists(invSlot[invSelect])
+    for(i = handItemSlot[2]+1; i < inventorySize; i++)
     {
-        invSelect += argument0
-        
-        if invSelect > array_length_1d(invSlot)-2
+        if inventory[i] != noone
         {
-            invSelect = 1 
+            switchItem(i,2)
+            break
         }
-        if invSelect < 1
+        else
         {
-            invSelect = array_length_1d(invSlot)-1
+            switchItem(-1,2)
         }
-    }   
-}   
-        
-if instance_exists(invSlot[invSelect])
-{
-    anim[1] = invSlot[invSelect].anim[0]
-<<<<<<< HEAD
+    }
 }
+
 
 #define switchItem
 //Clear item currently held in hand
@@ -169,7 +147,6 @@ if handItem[argument1] != noone
         handItem[argument1].hand = 3-argument1
     }
 }
-
 if argument0 != -1
 {
     //Switch to new item
@@ -184,8 +161,18 @@ if argument0 != -1
     else
     {
         handItemSlot[argument1] = -1
+        handItem[argument1] = noone
     }
 }
+else
+{
+    handItemSlot[argument1] = -1    
+    handItem[argument1] = noone
+}
+
+
+
+
 
 //If both hands are on the same item wield it in two hands
 if handItemSlot[1] = handItemSlot[2] and handItem[1] != noone

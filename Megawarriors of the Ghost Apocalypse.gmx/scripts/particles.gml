@@ -1,6 +1,7 @@
 #define particles
 
 #define partBlood
+sprite_index = spr_blood
 
 #define partSheen
 life = .50

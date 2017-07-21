@@ -23,6 +23,14 @@ switch(argument0)
     meleeSize = 1
     meleeCost = 1
     
+    gwPowMult = 1.5
+    gwRateMult = .8
+    gwImpactMult = 1.5
+    gwLungeMult = 1.2
+    gwSlowMult = 1.2
+    gwSizeMult = 1.2
+    gwCostMult = 1.2
+    
     throwPow = 1
     throwRate = 1
     throwImpact = 1
@@ -39,6 +47,7 @@ switch(argument0)
     anim[5] = weaponHilt    //Close attack    
     anim[6] = weaponSlash    //Special Slot, called by some items
     anim[7] = throwAnim     //Throw
+    
     animHold[0] = weaponSlashHold//Basic Hold Anim (basic+power)
     animHold[1] = weaponChopHold//Alt Hold Anim 
     animHold[2] = weaponStabHold//Roll Hold Anim 

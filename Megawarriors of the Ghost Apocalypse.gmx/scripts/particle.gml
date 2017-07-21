@@ -1,6 +1,11 @@
 #define particle
 
+#define createParticle
+//Create argument0 particles
+
 #define particleInitialize
+dir = 0
+
 z = 0
 zspd = 0
 hspd = 0
@@ -16,7 +21,7 @@ animDelay = 1
 onDeath = -4
 splatDecal = spr_none
 
-life = .50
+life = 10
 
 image_angle = 0
 image_speed = 0
