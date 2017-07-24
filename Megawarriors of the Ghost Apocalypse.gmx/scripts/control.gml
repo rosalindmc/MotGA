@@ -419,6 +419,9 @@ enum bossType{
     none = 0,
     champion = 1
 }
+
+
+
 #define controls
 global.upKey = ord('W')
 global.leftKey = ord('A')

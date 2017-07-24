@@ -163,9 +163,27 @@
   <rooms name="rooms">
     <room>rooms\rom_game</room>
   </rooms>
-  <constants number="2">
+  <constants number="20">
     <constant name="metre">16</constant>
     <constant name="grav">20</constant>
+    <constant name="skinTan">make_colour_rgb(216,182,108)</constant>
+    <constant name="skinDark">make_colour_rgb(157,119,38)</constant>
+    <constant name="skinBrown">make_colour_rgb(187,150,71)</constant>
+    <constant name="skinPink">make_colour_rgb(255,215,179)</constant>
+    <constant name="skinPale">make_colour_rgb(255,235,216)</constant>
+    <constant name="skinFireRed">make_colour_rgb(205,54,2)</constant>
+    <constant name="skinBurntRed">make_colour_rgb(180,68,29)</constant>
+    <constant name="skinAshRed">make_colour_rgb(121,93,84)</constant>
+    <constant name="skinLeafGreen">make_colour_rgb(115,161,50)</constant>
+    <constant name="skinGhostBlue">make_colour_rgb(164,236,219)</constant>
+    <constant name="skinMetalGrey">make_colour_rgb(229,229,229)</constant>
+    <constant name="skinVampirePale">make_colour_rgb(253,231,211)</constant>
+    <constant name="skinDemonRed">make_colour_rgb(194,89,76)</constant>
+    <constant name="skinDemonPale">make_colour_rgb(215,135,126)</constant>
+    <constant name="skinFishBlue">make_colour_rgb(170,212,224)</constant>
+    <constant name="skinFishRed">make_colour_rgb(224,170,171)</constant>
+    <constant name="skinFishGreen">make_colour_rgb(170,224,190)</constant>
+    <constant name="skinFishYellow">make_colour_rgb(235,230,158)</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
