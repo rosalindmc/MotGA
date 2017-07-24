@@ -150,6 +150,7 @@ interactId = noone
 
 
 
+
 #define charStep
 //MoveLimit
 moveLimit()
@@ -352,7 +353,7 @@ else
 
 if (stability < 0 && interactId == noone){
     staggerStart()
-    stabilityDelay = stability*5
+    stabilityDelay = abs(stability*5)
     stability = 0
 }
 else if (stabilityDelay > 0)
@@ -376,7 +377,14 @@ else if(staggerRecovery <= 0 && staggered = true && grappled = false){
 }
 
 if (grappled = true){
-    
+    if instance_exists(grappler)
+    {
+        facing = (round(grappler.facing/15)*15)+grappler.itemRot[2]+grappler.bodyRot
+        x = grappler.handX[2]*3+round(grappler.x)-(grappler.charSurfSize*1.5)//+lengthdir_x(holdPoint,image_angle)
+        //z = (grappler.charSurfSize*.75)-round(grappler.bodyY+grappler.handHeight[2]+grappler.z)
+        y = grappler.handY[2]*3+round(grappler.y)-(grappler.charSurfSize*1.5)//+lengthdir_y(holdPoint,image_angle)+z
+        isoDepth(0)
+    }
 }
 
 
@@ -470,4 +478,6 @@ moveMult = 1.0
 canAttack = true
 canDodge = true
 staggered = false
+
+
 
