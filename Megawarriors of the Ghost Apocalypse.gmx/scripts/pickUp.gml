@@ -32,3 +32,14 @@ switchItem(-1,2);
 other.handItem[2] = owner
 
 other.grappling = true
+
+other.moveMult = 0.5
+other.canRoll = false
+other.canInv = false
+
+instance_destroy()
+
+
+
+
+#define grappleEnd

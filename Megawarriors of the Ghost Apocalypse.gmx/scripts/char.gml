@@ -133,6 +133,7 @@ grappler = noone        //person grappling you
 grappleTarg = noone     //person you are grappling
 
 //Inventory
+canInv = true
 inventorySize = 10
 for(i = 0; i < inventorySize; i++)
 {
@@ -478,6 +479,5 @@ moveMult = 1.0
 canAttack = true
 canDodge = true
 staggered = false
-
 
 

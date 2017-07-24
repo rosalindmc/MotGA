@@ -137,7 +137,7 @@ if mouse_wheel_down()
 #define switchItem
 //argument0 is which function you're using, argument1 is which limb you're using
 
-if charge[1] = 0 and charge[2] = 0
+if charge[1] = 0 and charge[2] = 0 && canInv
 {
     //Clear item currently held in hand
     if handItem[argument1] != noone
