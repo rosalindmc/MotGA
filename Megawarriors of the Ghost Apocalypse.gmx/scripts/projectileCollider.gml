@@ -6,4 +6,3 @@
 #define projectileColliderDraw
 
 #define projectileColliderStep
-

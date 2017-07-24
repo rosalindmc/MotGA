@@ -31,4 +31,3 @@ if owner != other
 
 //draw this collider
 #define hitColliderStep
-
