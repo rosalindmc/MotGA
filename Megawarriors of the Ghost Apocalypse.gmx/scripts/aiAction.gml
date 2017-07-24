@@ -235,5 +235,3 @@ case 2:
 #define actionOrderFormation
 
 #define actionOrderGuard
-
-#define actionOrderSearch

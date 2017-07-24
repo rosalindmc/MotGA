@@ -96,5 +96,3 @@ switch(argument0)
         attackReset()
     break
 }
-
-
