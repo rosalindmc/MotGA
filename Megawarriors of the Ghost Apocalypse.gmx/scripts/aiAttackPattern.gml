@@ -33,8 +33,6 @@ attackIndex = attackIdle
 attackPattern = attackIdle
 attackStep = 0
 
-show_message(1)
-
 
 
 
@@ -98,6 +96,5 @@ switch(argument0)
         attackReset()
     break
 }
-
 
 
