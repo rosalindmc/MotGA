@@ -37,8 +37,22 @@ charSurf = surface_create(charSurfSize,charSurfSize)
 //Gender
 gender = 0
 
-//Bone Information
+//Appearance Info
+clothingSprite = spr_cBarbarian
+skirtSprite = spr_sBarbarian
+hairSprite = spr_longHair
+hairColour = hairBlack
+skinTone = choose(skinTan,skinDark,skinBrown,skinPink,skinPale,skinFireRed,skinBurntRed,skinAshRed)
+
+//Anim
+legLength = 4
 bounce = 0
+bounceTimer = 0
+flow = 0        //0 basic, 1 bounce, 2 flow left, 3 flow right
+flowTimer = 0
+hairRot = 0
+
+//Bone Information
 
 hipsImage = 0
 hipsSprite = spr_humanoidLegs
@@ -176,28 +190,25 @@ if surface_exists(charSurf)
     armStretch[2] = max(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength+1)/(armSpriteLength+1)
     
     //Hips and Legs
-    draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
+    draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,skinTone,1)
     
     //Body
     if bodyVFacing = 1{
-    draw_sprite_ext(chstSprite,gender,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
-    draw_sprite_ext(bodySprite,bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,c_white,1)
+    draw_sprite_ext(chstSprite,gender,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)}
+    draw_sprite_ext(bodySprite,bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,skinTone,1)
     if bodyVFacing = 0{
-    draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
+    draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)}
     
     //Right Arm
-    draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
+    draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],skinTone,1)
     
     //Left Arm
-    draw_sprite_ext(armSprite,armLength[2]+armSpriteLength+1,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_white,1)
+    draw_sprite_ext(armSprite,armLength[2]+armSpriteLength+1,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],skinTone,1)
     
     //Head
-    draw_sprite_ext(headSprite,headImage+vFacing,headX,headY,hFacing,1,headRot,c_white,1)
-    
-    //draw_set_colour(c_red)
-    //draw_point(shldrX[1+shldrSwap],shldrY[1+shldrSwap])
-    //draw_set_colour(c_green)
-    //draw_point(shldrX[2-shldrSwap],shldrY[2-shldrSwap])
+    draw_sprite_ext(hairSprite,4+bounce,headX,headY,hFacing,1,hairRot,hairColour,1)
+    draw_sprite_ext(headSprite,headImage+vFacing,headX,headY,hFacing,1,headRot,skinTone,1)
+    draw_sprite_ext(hairSprite,(bounce*2)+vFacing,headX,headY,hFacing,1,headRot,hairColour,1)
     
     surface_reset_target()
 }
