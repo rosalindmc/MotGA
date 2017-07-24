@@ -32,4 +32,3 @@ sprite_index = spr_sheen
 surface_set_target(global.decalSurf)
 draw_sprite_ext(splatDecal,random(100),x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)    
 surface_reset_target()
-

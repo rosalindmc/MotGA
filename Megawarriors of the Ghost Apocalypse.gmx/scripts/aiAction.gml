@@ -89,6 +89,10 @@ case 2:
             attackPattern = attackDodgeStep
             hasDodged = true
         }
+        else if (actionTargetId.stam < actionTargetId.stamMax/2) {
+            attackPattern =  attackPowerAttack
+            
+        }
         else{
             var moveT = (movement*moveMult)
             moveT = moveT/(1+moveDT)
@@ -101,6 +105,7 @@ case 2:
             }
         }
     }
+    
     
     targetX = actionTargetId.x
     targetY = actionTargetId.y

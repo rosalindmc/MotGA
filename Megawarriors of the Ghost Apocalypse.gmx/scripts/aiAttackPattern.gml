@@ -1,56 +1,56 @@
 #define aiAttackPattern
-if (attackStep != 0){
+if (attackStarted == true){
     attackPatternStep()
 }
 else{
     attackPatternStart(attackPattern)
+    attackStarted = true
 }
 
 
 
 #define attackPatternStart
 attackStep = 0
-attackIndex= argument0
+attackDelay = 0
+attackIndex = argument0
 script_execute(attackIndex,attackStep)
+
 
 #define attackPatternStep
-script_execute(attackIndex,attackStep)
+attackDelay -= attackSpeed/global.frameRate
+
+if (attackDelay <=0){
+    attackStep += 1
+    script_execute(attackIndex,attackStep)
+}
+
+
 
 #define attackReset
+attackStarted = false
+
+attackIndex = attackIdle
 attackPattern = attackIdle
 attackStep = 0
+
+show_message(1)
+
+
+
+
 
 #define attackIdle
 
 #define attackDodgeStep
 
+
 switch(argument0)
 {
     case 0:
-        
+        attackDelay = 0.2
     break
 
     case 1:
-   
-    break
-    
-    case 2:
-    
-    break
-    
-    case 3:
-    
-    break
-    
-    case 4:
-    
-    break
-    
-    case 5:
-    
-    break
-    
-    case 10:
         var moveT = (movement*moveMult)
         moveT = moveT/(1+moveDT)
         
@@ -58,16 +58,14 @@ switch(argument0)
         vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y))
         
         
-        dodgeRoll(facing +30 + random(300))  
+        dodgeRoll(facing +30 + random(300))
+        attackDelay = 0.33
     break
     
-    case 28:
+    case 2:
         attackReset()
     break
-}
-
-if (attackPattern != attackIdle){
-    attackStep++
+    
 }
 
 
@@ -80,3 +78,26 @@ vspd = -lengthdir_y(moveT,point_direction(x,y,actionTargetId.x,actionTargetId.y)
 
 
 dodgeRoll(facing +30 + random(300))
+
+#define attackPowerAttack
+throwKey = false
+
+switch(argument0)
+{
+    case 0:
+        useItem(1,0)
+        attackDelay = 1.1
+    break
+
+    case 1:
+        useItem(1,1)
+        attackDelay = 0.25
+    break
+    
+    case 2:
+        attackReset()
+    break
+}
+
+
+

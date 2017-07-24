@@ -28,6 +28,8 @@ aiMasterListYellow[0] = actionIdle
 aiMasterListRed[0] = actionIdle
 
 attackPattern = attackIdle
+attackStarted = false
+attackSpeed = 1
 
 hasDodged = false
 
