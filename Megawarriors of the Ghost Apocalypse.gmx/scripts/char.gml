@@ -50,6 +50,8 @@ canMove = true      //Can move check
 moveTimer = 0
 canAttack = true    //Can attack check
 
+staggered = false
+
 canRoll = true
 dodgeCost = 1
 dodgeSpeed = 16
@@ -99,6 +101,13 @@ stamMax = 4
 stamRegen = 3.0   //per second
 stamDelay = 0.0
 
+stability = 1.0
+stabilityMax = 1.0
+stabilityRegen = 3.0
+stabilityDelay = 0.0
+recovery = 5.0
+staggerRecovery = 0.0
+
 //Character stats
 stealth = 1
 
@@ -118,6 +127,11 @@ fumble = false
 perfectTimeMod = .5
 kick = 0
 
+grappling = false
+grappled = false
+grappler = noone        //person grappling you
+grappleTarg = noone     //person you are grappling
+
 //Inventory
 inventorySize = 10
 for(i = 0; i < inventorySize; i++)
@@ -131,6 +145,8 @@ handItemSlot[2] = -1
 
 hoverItem = 0
 pointInteract = noone
+
+interactId = noone
 
 
 
@@ -332,6 +348,39 @@ else
     stamDelay = max(0,stamDelay-(1/global.frameRate))
 }
 
+
+
+if (stability < 0 && interactId == noone){
+    staggerStart()
+    stabilityDelay = stability*5
+    stability = 0
+}
+else if (stabilityDelay > 0)
+{
+    stabilityDelay = max(0,stabilityDelay-(1/global.frameRate))
+}
+else if (stabilityDelay = 0 && stability != stabilityMax)
+{
+    stability = min(stabilityMax,stability+(stabilityRegen/global.frameRate))
+    if moving = 0
+    {
+        stability = min(stabilityMax,stability+(stabilityRegen/global.frameRate))
+    }
+}
+
+if (staggerRecovery > 0 && staggered = true){
+    staggerRecovery = max(0,staggerRecovery-(1/global.frameRate))
+}
+else if(staggerRecovery <= 0 && staggered = true && grappled = false){
+    staggerEnd()
+}
+
+if (grappled = true){
+    
+}
+
+
+
 #define charDestroy
 //Clear the drawing surface
 surface_free(charSurf)
@@ -392,3 +441,33 @@ if player = false
         i += 1
     }
 }   
+#define staggerStart
+
+moveMult = 0.25
+canAttack = false
+canDodge = false
+staggered = true
+
+i = instance_create(x,y,obj_interactable)
+i.name = 'Grapple'
+i.owner = id
+i.useType = grappleStart
+interactId = i
+
+staggerRecovery = recovery
+
+
+
+#define staggerEnd
+with(interactId){
+    instance_destroy()
+}
+
+interactId = noone
+
+moveMult = 1.0
+
+canAttack = true
+canDodge = true
+staggered = false
+

@@ -10,6 +10,7 @@ t.hspd += lengthdir_x(impact,point_direction(originX,originY,t.x,t.y))
 t.vspd += lengthdir_y(impact,point_direction(originX,originY,t.x,t.y))
 t.moveTimer += .2
 t.canMove = false
+t.stability -= impact
 
 //Shake
 if owner.player = true or t.player = true

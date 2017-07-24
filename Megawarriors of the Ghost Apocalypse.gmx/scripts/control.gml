@@ -70,7 +70,7 @@ with (global.currLevel){
         riverMaker(floorLayout[rivers[i,0],rivers[i,1]],floorLayout[rivers[i,2],rivers[i,3]])
     }
     
-    createChar(100,100,darkSoldier,noone)
+    createChar(500,500,darkSoldier,noone)
     
 }
 

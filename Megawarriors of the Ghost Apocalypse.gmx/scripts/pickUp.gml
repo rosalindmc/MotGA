@@ -1,3 +1,4 @@
+#define pickUp
 //pickUp(character)
 //REMINDER this script is run by the interact flag
 for(i = 0; i < argument0.inventorySize; i++)
@@ -17,3 +18,17 @@ for(i = 0; i < argument0.inventorySize; i++)
         break
     }
 }
+
+#define grappleStart
+owner.canMove = false
+
+owner.grappled = true
+owner.grappler = other
+other.grappleTarg = owner
+
+with(other){
+switchItem(-1,2);
+}
+other.handItem[2] = owner
+
+other.grappling = true
