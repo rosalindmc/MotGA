@@ -308,7 +308,7 @@ if black > 0
     i = 0
     repeat(ceil(global.pc.stamMax))
     {
-        draw_set_colour(c_green)
+        draw_set_colour(uiStaminaGreen)
         draw_rectangle(view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+24,view_xview[0]+15+(10*median(0,global.pc.stam-i,1))+(10*i)+(5*floor(i*.5)),view_yview[0]+29,false)
 
         //if global.pc.stam-i > 0

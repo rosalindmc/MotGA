@@ -383,7 +383,7 @@ if player = false
     i = 0
     repeat(ceil(stamMax))
     {
-        draw_set_colour(c_green)
+        draw_set_colour(uiStaminaGreen)
         draw_rectangle(ix-10+(5*i)+(3*floor(i*.5)),iy+5,ix-10+(5*median(0,stam-i,1))+(5*i)+(3*floor(i*.5)),iy+7,false)
         
         //Outline
