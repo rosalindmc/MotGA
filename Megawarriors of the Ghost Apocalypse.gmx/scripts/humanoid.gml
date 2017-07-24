@@ -53,7 +53,6 @@ flowTimer = 0
 hairRot = 0
 
 //Bone Information
-
 hipsImage = 0
 hipsSprite = spr_humanoidLegs
 hipsRot = 0
@@ -134,6 +133,51 @@ handY[1] = 0
 handX[2] = 0
 handY[2] = 0
 
+//Body Variants
+gender = choose(0,1)
+
+if gender = 1
+{
+    clothingSprite = spr_none
+}
+
+switch(choose(0,1,2))
+{
+case 0:
+//Small
+
+break
+
+case 1:
+//Medium
+bodyImage = 2
+chstImage = 1
+chstXAdjust = 1
+chstYAdjust = -1
+shldrXAdjust[1] = 2
+shldrYAdjust[1] = 1
+shldrXAdjust[2] = 3
+shldrYAdjust[2] = 1
+headXAdjust = 0
+headYAdjust = 4
+break
+
+case 2: 
+//Large
+bodyImage = 4
+chstImage = 2
+chstXAdjust = 0
+chstYAdjust = -1
+shldrXAdjust[1] = 3
+shldrYAdjust[1] = 2
+shldrXAdjust[2] = 4
+shldrYAdjust[2] = 2
+headXAdjust = 0
+headYAdjust = 4
+break
+}
+
+
 #define humanoidDraw
 //Establish bone information
 //Draw All Details to Char Surface
@@ -195,22 +239,32 @@ if surface_exists(charSurf)
     }
     
     //Hips and Legs
-    draw_sprite_ext(skirtSprite,(flow*2)+1-hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
+    draw_sprite_ext(skirtSprite,(flow*2)+1-hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_gray,1)
     draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,skinTone,1)
+    draw_sprite_ext(clothingSprite,20+hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
     draw_sprite_ext(skirtSprite,(flow*2)+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
     
     //Body
-    if bodyVFacing = 1{
-    draw_sprite_ext(chstSprite,gender,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)}
+    if bodyVFacing = 1 and gender = 0
+    {
+        draw_sprite_ext(chstSprite,chstImage,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)
+        draw_sprite_ext(clothingSprite,7+chstImage,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)
+    }
     draw_sprite_ext(bodySprite,bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,skinTone,1)
-    if bodyVFacing = 0{
-    draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)}
+    draw_sprite_ext(clothingSprite,1+bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,c_white,1)
+    if bodyVFacing = 0 and gender = 0
+    {
+        draw_sprite_ext(chstSprite,chstImage,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)
+        draw_sprite_ext(clothingSprite,7+chstImage,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)
+    }
     
     //Right Arm
     draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],skinTone,1)
+    draw_sprite_ext(clothingSprite,10+armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
     
     //Left Arm
     draw_sprite_ext(armSprite,armLength[2]+armSpriteLength+1,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],skinTone,1)
+    draw_sprite_ext(clothingSprite,10+armLength[2]+armSpriteLength+1,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_white,1)
     
     //Head
     draw_sprite_ext(headSprite,headImage+vFacing,headX,headY,hFacing,1,headRot,skinTone,1)
@@ -219,6 +273,14 @@ if surface_exists(charSurf)
     {
         draw_sprite_ext(hairSprite,4+bounce,headX,headY,hFacing,1,hairRot,hairColour,1)    
     }
+            
+    draw_set_colour(c_red)
+    //draw_line(shldrX[2-shldrSwap],shldrY[2-shldrSwap],handX[2-shldrSwap],handY[2-shldrSwap])
+    //draw_point(shldrX[2-shldrSwap],shldrY[2-shldrSwap])
+    draw_set_colour(c_green)
+    //draw_line(shldrX[1+shldrSwap],shldrY[1+shldrSwap],handX[1+shldrSwap],handY[1+shldrSwap])
+    //draw_point(shldrX[1+shldrSwap],shldrY[1+shldrSwap])
+    
     
     surface_reset_target()
 }

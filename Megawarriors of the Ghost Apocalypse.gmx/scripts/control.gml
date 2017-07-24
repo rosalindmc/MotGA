@@ -3,6 +3,7 @@
 
 #define controlInitialize
 //Essentials
+randomize()
 global.frameRate = 60
 room_speed = global.frameRate
 global.timeMult = 1
