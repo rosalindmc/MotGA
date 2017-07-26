@@ -5,7 +5,8 @@
 animDelay[argument1] = 1
 animSpeed[argument1] = 1
 
-handDirDest[argument1] = 15*meleeSwing[argument1]
+handDistDest[argument1] = 2
+handDirDest[argument1] = ((60*greatWeapon)+15)*meleeSwing[argument1]
 handHeightDest[argument1] = 0
 itemRotDest[argument1] = ((120*greatWeapon)+30)*meleeSwing[argument1]
 
@@ -14,21 +15,26 @@ if greatWeapon = false
     meleeSwing[argument1] = 3-(argument1*2)
 }
 
+if argument1 = 1
+{
+    bodyTwist = 0
+}
+
 #define weaponSlashHold
 s = 1/(handItem[argument1].meleeRateMult[queuedAnim[argument1]]*handItem[argument1].meleeRate*(1+((greatWeapon*handItem[argument1].gwRateMult)-greatWeapon)))
 
 switch(argument0)
 {
     case 0:    
-    handDistDest[argument1] = 4
+    handDistDest[argument1] = 2
     handDirDest[argument1] = (45*meleeSwing[argument1])
     handHeightDest[argument1] = 4
-    itemRotDest[argument1] = (90*meleeSwing[argument1])
+    itemRotDest[argument1] = (120*meleeSwing[argument1])
     animDelay[argument1] = .1*s
     break
 
     case 1:
-    handDistDest[argument1] = 4
+    handDistDest[argument1] = 2
     handDirDest[argument1] = (135*meleeSwing[argument1])
     handHeightDest[argument1] = 4
     itemRotDest[argument1] = (150*meleeSwing[argument1])
@@ -36,15 +42,20 @@ switch(argument0)
     break
 
     case 2:
-    handDistDest[argument1] = 4
+    handDistDest[argument1] = 2
     handDirDest[argument1] = (135*meleeSwing[argument1])
     handHeightDest[argument1] = 4
     itemRotDest[argument1] = (225*meleeSwing[argument1])
     animDelay[argument1] = .3*s
+    
+    if greatWeapon = true
+    {
+        bodyTwist = meleeSwing[argument1]
+    }
     break
     
     case 3:
-    handDistDest[argument1] = 4
+    handDistDest[argument1] = 2
     handDirDest[argument1] = (150*meleeSwing[argument1])
     handHeightDest[argument1] = 5
     itemRotDest[argument1] = (225*meleeSwing[argument1])
@@ -55,16 +66,13 @@ switch(argument0)
     {
         queuedAnim[argument1] = 2
     }
-    if greatWeapon = true
-    {
-        bodyTwist = meleeSwing[argument1]
-    }
+
     sweetSpot = true
     perfectHitSheen(argument1)
     break
     
     case 4:
-    handDistDest[argument1] = 4
+    handDistDest[argument1] = 2
     handDirDest[argument1] = (150*meleeSwing[argument1])
     handHeightDest[argument1] = 5
     itemRotDest[argument1] = (240*meleeSwing[argument1])

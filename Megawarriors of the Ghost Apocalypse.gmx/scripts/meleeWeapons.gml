@@ -12,7 +12,7 @@ switch(argument0)
     
     //Item Stats
     length = 25
-    holdPoint = 7
+    holdPoint = 9
     
     //Weapon Stats
     meleePow = 1

@@ -479,5 +479,3 @@ moveMult = 1.0
 canAttack = true
 canDodge = true
 staggered = false
-
-
