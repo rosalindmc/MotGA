@@ -108,11 +108,14 @@
       <script>scripts\drawText.gml</script>
     </scripts>
     <scripts name="Level Generation">
-      <script>scripts\levelGenMaster.gml</script>
-      <script>scripts\pointOfInterest.gml</script>
-      <script>scripts\level.gml</script>
-      <script>scripts\renameThisScriptLater3.gml</script>
       <script>scripts\biomeDungeon.gml</script>
+      <script>scripts\level.gml</script>
+      <script>scripts\levelGenMaster.gml</script>
+      <script>scripts\pod.gml</script>
+      <script>scripts\podTypes.gml</script>
+      <script>scripts\pointOfInterest.gml</script>
+      <script>scripts\world.gml</script>
+      <script>scripts\worldNode.gml</script>
     </scripts>
     <scripts name="Items">
       <script>scripts\meleeWeapons.gml</script>
