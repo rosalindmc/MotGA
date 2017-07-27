@@ -80,6 +80,9 @@ with (global.currLevel){
 shake = 0
 kick = 0
 
+global.currNode = noone
+worldInit()
+
 
 /*
 x = room_width/2

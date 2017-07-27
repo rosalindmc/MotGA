@@ -4,29 +4,29 @@
 #define levelInitialize
 //levelInitialize
 //we need to make a world to pass information into this script
-var currNode = argument0
+var global.currNode = argument0
 
 currLevel = instance_create(0,0,obj_level)
 
 with (currLevel){
-    biomeType = currNode.biomeType
-    elements[0] = currNode.elements[]
-    sizeX = currNode.sizeX
-    sizeY = currNode.sizeY
+    biomeType = global.currNode.biomeType
+    elements[0] = global.currNode.elements[]
+    sizeX = global.currNode.sizeX
+    sizeY = global.currNode.sizeY
     
-    critPoi = currNode.critPoi     //the type of the critical point of interest
-    poiDensity = currNode.poiDensity //number of points of interest on the map
-    numEntrances = currNode.numEntrances
-    pois[]=currNode.pois[]
-    numRivers=currNode.numRivers
+    critPoi = global.currNode.critPoi     //the type of the critical point of interest
+    poiDensity = global.currNode.poiDensity //number of points of interest on the map
+    numEntrances = global.currNode.numEntrances
+    pois[]=global.currNode.pois[]
+    numRivers=global.currNode.numRivers
     rivers[numRivers,4] = 0
     
-    critPods = currNode.critPods    //number of pods on the critical path
-    podDensity = currNode.podDensity  //number of pods on the map
+    critPods = global.currNode.critPods    //number of pods on the critical path
+    podDensity = global.currNode.podDensity  //number of pods on the map
     
-    itemDensity = currNode.itemDensity //number of item spawns on the map
+    itemDensity = global.currNode.itemDensity //number of item spawns on the map
     
-    specialAreas = currNode.specialAreas    //number of special areas to spawn
+    specialAreas = global.currNode.specialAreas    //number of special areas to spawn
     
     floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
     

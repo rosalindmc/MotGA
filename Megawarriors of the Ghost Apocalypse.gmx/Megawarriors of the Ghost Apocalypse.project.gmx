@@ -164,6 +164,8 @@
     <objects name="Level Generation">
       <object>objects\obj_level</object>
       <object>objects\obj_poi</object>
+      <object>objects\obj_world</object>
+      <object>objects\obj_node</object>
     </objects>
   </objects>
   <rooms name="rooms">
