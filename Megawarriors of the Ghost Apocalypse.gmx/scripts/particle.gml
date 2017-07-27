@@ -42,7 +42,7 @@ image_speed = 0
 #define particleStep
 image_angle += spin/global.frameRate
 moveStepParticle()
-isoDepth(-5)
+isoDepth(0)
 
 animDelay -= animSpeed/global.frameRate
 

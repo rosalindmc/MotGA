@@ -135,53 +135,58 @@ if mouse_wheel_down()
 
 
 #define switchItem
-//Clear item currently held in hand
-if handItem[argument1] != noone
+//argument0 is which function you're using, argument1 is which limb you're using
+
+if charge[1] = 0 and charge[2] = 0 && canInv
 {
-    if greatWeapon = false
-    {
-        handItem[argument1].hand = 0
-    }
-    else
-    {
-        handItem[argument1].hand = 3-argument1
-    }
-}
-if argument0 != -1
-{
-    //Switch to new item
-    handItem[argument1] = inventory[argument0]
-    
-    //Assign new item to hand and hand to new item
+    //Clear item currently held in hand
     if handItem[argument1] != noone
     {
-        handItemSlot[argument1] = argument0
-        inventory[argument0].hand = argument1
+        if greatWeapon = false
+        {
+            handItem[argument1].hand = 0
+        }
+        else
+        {
+            handItem[argument1].hand = 3-argument1
+        }
+    }
+    if argument0 != -1
+    {
+        //Switch to new item
+        handItem[argument1] = inventory[argument0]
+        
+        //Assign new item to hand and hand to new item
+        if handItem[argument1] != noone
+        {
+            handItemSlot[argument1] = argument0
+            inventory[argument0].hand = argument1
+        }
+        else
+        {
+            handItemSlot[argument1] = -1
+            handItem[argument1] = noone
+        }
     }
     else
     {
-        handItemSlot[argument1] = -1
+        handItemSlot[argument1] = -1    
         handItem[argument1] = noone
     }
-}
-else
-{
-    handItemSlot[argument1] = -1    
-    handItem[argument1] = noone
-}
-
-
-
-
-
-//If both hands are on the same item wield it in two hands
-if handItemSlot[1] = handItemSlot[2] and handItem[1] != noone
-{
-    greatWeapon = true
-    greatWeaponSize = 1
-    handItem[1].hand = 1
-}
-else
-{
-    greatWeapon = false
+    
+    
+    
+    
+    
+    //If both hands are on the same item wield it in two hands
+    if handItemSlot[1] = handItemSlot[2] and handItem[1] != noone
+    {
+        greatWeapon = true
+        greatWeaponSize = 1
+        handItem[1].hand = 1
+    }
+    else
+    {
+        greatWeapon = false
+    }
 }

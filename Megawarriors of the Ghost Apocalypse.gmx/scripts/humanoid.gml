@@ -37,9 +37,22 @@ charSurf = surface_create(charSurfSize,charSurfSize)
 //Gender
 gender = 0
 
-//Bone Information
-bounce = 0
+//Appearance Info
+clothingSprite = spr_cBerzerk
+skirtSprite = spr_sBarbarian
+hairSprite = spr_longHair
+hairColour = hairBlack
+skinTone = choose(skinTan,skinDark,skinBrown,skinPink,skinPale,skinFireRed,skinBurntRed,skinAshRed)
 
+//Anim
+legLength = 4
+bounce = 0
+bounceTimer = 0
+flow = 0        //0 basic, 1 bounce, 2 flow left, 3 flow right
+flowTimer = 0
+hairRot = 0
+
+//Bone Information
 hipsImage = 0
 hipsSprite = spr_humanoidLegs
 hipsRot = 0
@@ -49,7 +62,7 @@ hipsHFacing = 1
 bodyImage = 0
 bodySprite = spr_humanoidBody
 bodyXAdjust = 0
-bodyYAdjust = 8
+bodyYAdjust = 4
 bodyRot = 0
 bodyVFacing = 0
 bodyHFacing = 1
@@ -120,9 +133,76 @@ handY[1] = 0
 handX[2] = 0
 handY[2] = 0
 
+//Body Variants
+gender = choose(0,1)
+
+if gender = 1
+{
+    clothingSprite = spr_none
+}
+
+switch(choose(0,1,2))
+{
+case 0:
+//Small
+
+break
+
+case 1:
+//Medium
+bodyImage = 2
+chstImage = 1
+chstXAdjust = 1
+chstYAdjust = -1
+shldrXAdjust[1] = 2
+shldrYAdjust[1] = 1
+shldrXAdjust[2] = 3
+shldrYAdjust[2] = 1
+headXAdjust = 0
+headYAdjust = 4
+break
+
+case 2: 
+//Large
+bodyImage = 4
+chstImage = 2
+chstXAdjust = 0
+chstYAdjust = -1
+shldrXAdjust[1] = 3
+shldrYAdjust[1] = 2
+shldrXAdjust[2] = 4
+shldrYAdjust[2] = 2
+headXAdjust = 0
+headYAdjust = 4
+break
+}
+
+
 #define humanoidDraw
 //Establish bone information
 //Draw All Details to Char Surface
+
+//Special Timers
+if bounceTimer > 0
+{
+    bounceTimer -= 1/global.frameRate
+    if bounceTimer <= 0
+    {
+        bounceTimer = 0
+        bounce = 0
+    }
+}
+
+if flowTimer > 0
+{
+    flowTimer -= 1/global.frameRate
+    if flowTimer <= 0
+    {
+        flowTimer = 0
+        flow = 0
+    }
+}
+
 if surface_exists(charSurf)  
 {        
     surface_set_target(charSurf)
@@ -132,8 +212,8 @@ if surface_exists(charSurf)
     twist(bodyTwist)
     
     //Bone Locations
-    hipsX = round(charSurfSize*.5)+xAdj
-    hipsY = round(charSurfSize*.75)-yAdj
+    hipsX = round(charSurfSize*.5)+lengthdir_x(legLength, hipsRot+90)+xAdj
+    hipsY = round(charSurfSize*.75)+lengthdir_y(legLength, hipsRot+90)-yAdj
     
     bodyX = hipsX+lengthdir_x(bodyYAdjust, hipsRot+90)+lengthdir_x(bodyXAdjust*bodyHFacing, hipsRot)
     bodyY = hipsY+lengthdir_y(bodyYAdjust, hipsRot+90)+lengthdir_y(bodyXAdjust*bodyHFacing, hipsRot)
@@ -144,10 +224,10 @@ if surface_exists(charSurf)
     headX = bodyX+lengthdir_x(headYAdjust, bodyRot+90)+lengthdir_x(headXAdjust*bodyHFacing, bodyRot)
     headY = bodyY+lengthdir_y(headYAdjust, bodyRot+90)+lengthdir_y(headXAdjust*bodyHFacing, bodyRot)
     
-    shldrX[1] = bodyX+lengthdir_x(shldrYAdjust[1], bodyRot+90)+lengthdir_x(shldrXAdjust[1]*bodyHFacing, bodyRot)
+    shldrX[1] = bodyX+lengthdir_x(shldrYAdjust[1], bodyRot+90)+lengthdir_x(shldrXAdjust[1]*bodyHFacing, bodyRot)+min(bodyHFacing,0)
     shldrY[1] = bodyY+lengthdir_y(shldrYAdjust[1], bodyRot+90)+lengthdir_y(shldrXAdjust[1]*bodyHFacing, bodyRot)
     
-    shldrX[2] = bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*bodyHFacing, bodyRot+180)
+    shldrX[2] = bodyX+lengthdir_x(shldrYAdjust[2], bodyRot+90)+lengthdir_x(shldrXAdjust[2]*bodyHFacing, bodyRot+180)+min(bodyHFacing,0)
     shldrY[2] = bodyY+lengthdir_y(shldrYAdjust[2], bodyRot+90)+lengthdir_y(shldrXAdjust[2]*bodyHFacing, bodyRot+180)
     
     handX[1] = round(bodyX+lengthdir_x(handDist[1], (round(facing/15)*15)+handDir[1]))
@@ -160,44 +240,94 @@ if surface_exists(charSurf)
     //If using a great weapon, move second hand
     if greatWeapon = true
     {
-        handX[2] = round(handX[1]+lengthdir_x(greatWeaponSize*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
-        handY[2] = round(handY[1]+lengthdir_y(greatWeaponSize*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
+        handX[2] = round(handX[1]+lengthdir_x(greatWeaponSize, (round(facing/15)*15)+(itemRot[1])))
+        handY[2] = round(handY[1]+lengthdir_y(greatWeaponSize, (round(facing/15)*15)+(itemRot[1])))
         
-        handX[1] = round(handX[1]+lengthdir_x(greatWeaponSize*-1*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
-        handY[1] = round(handY[1]+lengthdir_y(greatWeaponSize*-1*((shldrSwap*2)-1), (round(facing/15)*15)+(itemRot[1])))
+        handX[1] = round(handX[1]+lengthdir_x(greatWeaponSize*-1, (round(facing/15)*15)+(itemRot[1])))
+        handY[1] = round(handY[1]+lengthdir_y(greatWeaponSize*-1, (round(facing/15)*15)+(itemRot[1])))
     }
     
     //Arm Directions
     handPoint[1] = point_direction(shldrX[1+shldrSwap],shldrY[1+shldrSwap],handX[1],handY[1])
     handPoint[2] = point_direction(shldrX[2-shldrSwap],shldrY[2-shldrSwap],handX[2],handY[2])
-    armLength[1] = min(floor(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap])),armSpriteLength)
-    armStretch[1] = max(floor(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap])),armSpriteLength+1)/(armSpriteLength+1)
-    armLength[2] = min(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength)
-    armStretch[2] = max(floor(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap])),armSpriteLength+1)/(armSpriteLength+1)
+    armLength[1] = min(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap]),armSpriteLength-1)
+    armStretch[1] = max(point_distance(handX[1],handY[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap]),armSpriteLength)/(armSpriteLength)
+    armLength[2] = min(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap]),armSpriteLength-1)
+    armStretch[2] = max(point_distance(handX[2],handY[2],shldrX[2-shldrSwap],shldrY[2-shldrSwap]),armSpriteLength)/(armSpriteLength)
+    
+    if vFacing = 0
+    {
+        draw_sprite_ext(hairSprite,4+bounce,headX,headY,hFacing,1,hairRot,hairColour,1)    
+    }
+    
+    if handDir[1] < 180
+    {
+    //Right Arm
+    draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],skinTone,1)
+    draw_sprite_ext(clothingSprite,10+armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
+    }
+    
+    if handDir[2] < 180
+    {
+    //Left Arm
+    draw_sprite_ext(armSprite,armLength[2]+armSpriteLength,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],skinTone,1)
+    draw_sprite_ext(clothingSprite,10+armLength[2]+armSpriteLength,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_white,1)
+    }
     
     //Hips and Legs
-    draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
+    draw_sprite_ext(skirtSprite,(flow*2)+1-hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_gray,1)
+    draw_sprite_ext(hipsSprite,hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,skinTone,1)
+    draw_sprite_ext(clothingSprite,20+hipsImage+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
+    draw_sprite_ext(skirtSprite,(flow*2)+hipsVFacing,hipsX,hipsY,hipsHFacing,1,hipsRot,c_white,1)
     
     //Body
-    if bodyVFacing = 1{
-    draw_sprite_ext(chstSprite,gender,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
-    draw_sprite_ext(bodySprite,bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,c_white,1)
-    if bodyVFacing = 0{
-    draw_sprite_ext(chstSprite,chstImage+bodyVFacing,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)}
+    if bodyVFacing = 1 and gender = 0
+    {
+        draw_sprite_ext(chstSprite,chstImage,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)
+        draw_sprite_ext(clothingSprite,7+chstImage,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)
+    }
     
-    //Right Arm
-    draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
+    draw_sprite_ext(bodySprite,bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,skinTone,1)
+    draw_sprite_ext(clothingSprite,1+bodyImage+bodyVFacing,bodyX,bodyY,bodyHFacing,1,bodyRot,c_white,1)
     
-    //Left Arm
-    draw_sprite_ext(armSprite,armLength[2]+armSpriteLength+1,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_white,1)
-    
+    if bodyVFacing = 0 and gender = 0
+    {
+        draw_sprite_ext(chstSprite,chstImage,chstX,chstY,bodyHFacing,1,bodyRot,skinTone,1)
+        draw_sprite_ext(clothingSprite,7+chstImage,chstX,chstY,bodyHFacing,1,bodyRot,c_white,1)
+    }
+        
     //Head
-    draw_sprite_ext(headSprite,headImage+vFacing,headX,headY,hFacing,1,headRot,c_white,1)
+    draw_sprite_ext(headSprite,headImage+vFacing,headX,headY,hFacing,1,headRot,skinTone,1)
+    draw_sprite_ext(hairSprite,(bounce*2)+vFacing,headX,headY,hFacing,1,headRot,hairColour,1)
+    if vFacing = 1
+    {
+        draw_sprite_ext(hairSprite,4+bounce,headX,headY,hFacing,1,hairRot,hairColour,1)    
+    }
     
-    //draw_set_colour(c_red)
-    //draw_point(shldrX[1+shldrSwap],shldrY[1+shldrSwap])
-    //draw_set_colour(c_green)
+    if handDir[1] >= 180
+    {
+    //Right Arm
+    draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],skinTone,1)
+    draw_sprite_ext(clothingSprite,10+armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
+    }
+    
+    if handDir[2] >= 180
+    {
+    //Left Arm
+    draw_sprite_ext(armSprite,armLength[2]+armSpriteLength,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],skinTone,1)
+    draw_sprite_ext(clothingSprite,10+armLength[2]+armSpriteLength,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],c_white,1)
+    }
+            
+    draw_set_colour(c_red)
+    //draw_line(shldrX[2-shldrSwap],shldrY[2-shldrSwap],shldrX[2-shldrSwap]+lengthdir_x(armStretch[2]*armSpriteLength,handPoint[2]),shldrY[2-shldrSwap]+lengthdir_y(armStretch[2]*armSpriteLength,handPoint[2]))
+    draw_set_colour(c_green)
     //draw_point(shldrX[2-shldrSwap],shldrY[2-shldrSwap])
+    //draw_point(handX[2],handY[2])
+    //draw_line(shldrX[2-shldrSwap],shldrY[2-shldrSwap],handX[2],handY[2])
+
+    //draw_line(shldrX[1+shldrSwap],shldrY[1+shldrSwap],handX[1+shldrSwap],handY[1+shldrSwap])
+    //draw_point(shldrX[1+shldrSwap],shldrY[1+shldrSwap])
+    
     
     surface_reset_target()
 }
@@ -207,7 +337,6 @@ else
 }
 
 #define humanoidWalk
-animDelay[argument1] = 2
 animSpeed[argument1] = max(abs(moving),1)
 xAdj = 0
 yAdj = 0
@@ -216,42 +345,61 @@ hipsRot = 0
 bodyRot = 0
 hairRot = 0
 headRot = 0
-bodyTwist = 0
 
 switch(argument0)
 {
     case 0:
-    hipsImage = 4
     humanoidWalk(3,argument1)
-    animStep[argument1] = 4
+    animStep[argument1] = 3
     break
     
     case 1:
     hipsImage = 6
-    bounce = 0
+    legLength = 4
+    animDelay[argument1] = 2
+    flow = 3
+    if moving < 0
+    {
+        flow = 2
+    }
+    flowTimer = .2
+    footStep(0)
     break
     
     case 2:
-    hipsImage = 4
+    hipsImage = 8
+    legLength = 3
     bounce = 1
+    bounceTimer = .2
+    animDelay[argument1] = 1
+    flow = 1
+    flowTimer = .2
+    footStep(0)
     break
     
     case 3:
-    hipsImage = 2
-    bounce = 0
+    hipsImage = 4
+    legLength = 4
+    bounce = 1
+    bounceTimer = .2
+    animDelay[argument1] = 1
+    flow = 3
+    if moving < 0
+    {
+        flow = 2
+    }
+    flowTimer = .2
     break
     
     case 4:
-    hipsImage = 6
     humanoidWalk(1,argument1)
-    animStep[argument1] = 0
+    animStep[argument1] = 1
     break
 }
 
 #define humanoidIdle
 animDelay[argument1] = .3
 animSpeed[argument1] = 1
-hipsImage = 2-(gender*2)
 xAdj = 0
 yAdj = 0
 
@@ -259,24 +407,34 @@ hipsRot = 0
 bodyRot = 0
 hairRot = 0
 headRot = 0
-bodyTwist = 0
 
 switch(argument0)
 {
     case 0:
-    
+    hipsImage = 2-(gender*2)
+    legLength = 4
     break
     
     case 1:
+    hipsImage = 8
+    legLength = 3
     bounce = 1
+    bounceTimer = .2
+    flow = 2
+    flowTimer = .2
     break
     
     case 2:
-    bounce = 0
+    hipsImage = 2-(gender*2)
+    legLength = 4
+    bounce = 1
+    bounceTimer = .2
+    flow = 1
+    flowTimer = .2
     break
     
     case 3:
-    humanoidWalk(0,argument1)
+    humanoidIdle(0,argument1)
     animStep[argument1] = 0
     break
 }
@@ -289,33 +447,40 @@ switch(argument0)
     case 0:
     z += 4
     zspd += 2
-    hipsImage = 2
+    if sign(hspd) = sign(hFacing)
+    {
+        hipsImage = 12
+    }
+    else
+    {
+        hipsImage = 14
+    }
     hairRot = -45*sign(hspd)
     
+    footStep(0)
     animDelay[argument1] = .1
     break
     
     case 1:
-    hipsImage = 4
     hipsRot = -30*sign(hspd)
     bodyRot = -30*sign(hspd)
     hairRot = -90*sign(hspd)
     headRot = 0
+    bounce = 1
+    bounceTimer = .2
     
     animDelay[argument1] = .1
     break
     
     case 2:
-    hipsImage = 10
+    hipsImage = 8
+    legLength = 3
     hipsRot = 0
     hairRot = -45*sign(hspd)
     animDelay[argument1] = .1
     
     //Hit Ground
-    if player = true
-    {
-        obj_control.shake += 1
-    }
+    footStep(1)
     break
     
     case 3:
@@ -336,6 +501,9 @@ switch(argument0)
     bodyRot = -30*hFacing
     hairRot = -45*hFacing
     animDelay[argument1] = .05
+    
+    bounce = 1
+    bounceTimer = .2
     break
     
     case 1:
@@ -359,6 +527,9 @@ switch(argument0)
     headRot = -270*hFacing
     animDelay[argument1] = .04
     
+    bounce = 1
+    bounceTimer = .2
+    
     xAdj = -3*hFacing
     yAdj = 10
     
@@ -366,10 +537,8 @@ switch(argument0)
     vspd = lengthdir_y(dodgeSpeed,facing)
     
     //Hit Ground
-    if player = true
-    {
-        obj_control.shake += 2
-    }
+    footStep(2)
+    
     break
     
     case 3:
@@ -434,10 +603,123 @@ switch(argument0)
     xAdj = 5*hFacing
     yAdj = 1
     
+    bounce = 1
+    bounceTimer = .2
+    
     animDelay[argument1] = .1
     break
     
     case 8:
     animationReset(0)
     break
+}
+
+#define humanoidFlinchForward
+animSpeed[argument1] = 1
+
+switch(argument0)
+{
+    case 0:
+    hipsImage = 12
+    hipsRot = -30*hFacing
+    bodyRot = -30*hFacing
+    hairRot = -90*hFacing
+    
+    bounce = 1
+    bounceTimer = .2
+    flow = 2
+    flowTimer = .1
+    
+    animDelay[argument1] = .1
+    footStep(1)
+    break
+
+    case 1:
+    hipsRot = -15*hFacing
+    bodyRot = -15*hFacing
+    hairRot = -45*hFacing
+
+    animDelay[argument1] = .1
+    break
+
+    case 2:
+    hipsImage = 4
+    hipsRot = -15*hFacing
+    bodyRot = -15*hFacing
+    hairRot = -15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 3:
+    hipsImage = 2
+    hipsRot = -15*hFacing
+    bodyRot = 0
+    hairRot = 15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 4:
+    animationReset(0)
+    break
+}
+
+
+#define humanoidFlinchBackward
+animSpeed[argument1] = 1
+
+switch(argument0)
+{
+    case 0:
+    hipsImage = 10
+    hipsRot = 30*hFacing
+    bodyRot = 30*hFacing
+    hairRot = 90*hFacing
+    
+    bounce = 1
+    bounceTimer = .2
+    flow = 3
+    flowTimer = .1
+    
+    animDelay[argument1] = .1
+    footStep(1)
+    break
+
+    case 1:
+    hipsRot = 15*hFacing
+    bodyRot = 15*hFacing
+    hairRot = 45*hFacing
+
+    animDelay[argument1] = .1
+    break
+
+    case 2:
+    hipsImage = 4
+    hipsRot = 15*hFacing
+    bodyRot = 15*hFacing
+    hairRot = 15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 3:
+    hipsImage = 2
+    hipsRot = 15*hFacing
+    bodyRot = 0
+    hairRot = -15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 4:
+    animationReset(0)
+    break
+}
+
+
+#define footStep
+//Check floor and make relvent sound+particles
+
+createParticle(x,y,z,1,partDust,hFacing)
+
+if player = true
+{
+    obj_control.shake += argument0
 }

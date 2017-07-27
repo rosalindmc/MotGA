@@ -3,6 +3,7 @@
 
 #define controlInitialize
 //Essentials
+randomize()
 global.frameRate = 60
 room_speed = global.frameRate
 global.timeMult = 1
@@ -28,56 +29,28 @@ repeat(10)
 }
 
 //temp node
-global.currLevel = instance_create(0,0,obj_level)
 
-with (global.currLevel){
-    biomeType = 4
-    elements[0] = 0
-    sizeX = 50
-    sizeY = 50
-    
-    room_height = sizeY*metre
-    room_width = sizeX*metre
-    
-    critPoi = 1     //the type of the critical point of interest
-    poiDensity = 13 //number of points of interest on the map
-    numEntrance = 3
-    pois[0]=0
-    numRivers = 4
-
-    rivers[numRivers,4] = 0    
-    
-    
-    critPods =0    //number of pods on the critical path
-    podDensity = 0  //number of pods on the map
-    
-    itemDensity = 0 //number of item spawns on the map
-    
-    specialAreas = 0   //number of special areas to spawn
-    
-    for (i = 0; i < sizeX; i++){
-        for(j = 0; j < sizeY; j++){
-            floorLayout[i,j] = 0    //the map of floors and walls
-        }
-    }
-            
-    
-    genLevel()
-    for(i = 0; i < array_length_1d(pois)-1; i++){
-        roadMaker(floorLayout[pois[i].gridX,pois[i].gridY],floorLayout[pois[i+1].gridX,pois[i+1].gridY])
-    }
-    for(i=0;i<numRivers;i++){
-        riverMaker(floorLayout[rivers[i,0],rivers[i,1]],floorLayout[rivers[i,2],rivers[i,3]])
-    }
-    
-    createChar(100,100,darkSoldier,noone)
-    
-}
 
 
 //Camera
 shake = 0
 kick = 0
+
+//global.currNode = noone
+worldInit()
+
+global.currLevel = instance_create(0,0,obj_level)
+
+with (global.currLevel){
+
+    levelInitialize()
+    
+    room_height = sizeY*metre
+    room_width = sizeX*metre
+    
+    createChar(500,500,darkSoldier,noone)
+    
+}
 
 
 /*
@@ -308,7 +281,7 @@ if black > 0
     i = 0
     repeat(ceil(global.pc.stamMax))
     {
-        draw_set_colour(c_green)
+        draw_set_colour(uiStaminaGreen)
         draw_rectangle(view_xview[0]+15+(10*i)+(5*floor(i*.5)),view_yview[0]+24,view_xview[0]+15+(10*median(0,global.pc.stam-i,1))+(10*i)+(5*floor(i*.5)),view_yview[0]+29,false)
 
         //if global.pc.stam-i > 0
@@ -419,6 +392,9 @@ enum bossType{
     none = 0,
     champion = 1
 }
+
+
+
 #define controls
 global.upKey = ord('W')
 global.leftKey = ord('A')

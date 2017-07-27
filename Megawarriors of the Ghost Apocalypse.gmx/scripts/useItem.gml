@@ -88,7 +88,7 @@ switch(argument1)
 //Spend Stamina
 
 //Stamina Cost
-spendStamina(handItem[argument0].meleeCost*handItem[argument0].meleeCostMult[queuedAnim[argument0]]/(1+(sweetSpot*perfectTimeMod)),1)
+spendStamina(handItem[argument0].meleeCost*handItem[argument0].meleeCostMult[queuedAnim[argument0]]/(1+(sweetSpot*perfectTimeMod))*(1+((greatWeapon*handItem[argument0].gwCostMult)-greatWeapon)),1)
 
 //Anim and Essentials
 sweetSpot = false
@@ -99,7 +99,13 @@ animationStart(handItem[argument0].anim[queuedAnim[argument0]],argument0)
 //Lunge
 hspd += lengthdir_x((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge*(1+((greatWeapon*handItem[argument0].gwLungeMult)-greatWeapon)))),facing)
 vspd += lengthdir_y((4+(charge[argument0]*handItem[argument0].meleeLungeMult[queuedAnim[argument0]]*handItem[argument0].meleeLunge*(1+((greatWeapon*handItem[argument0].gwLungeMult)-greatWeapon)))),facing)
-moveTimer = .1
+
+if charge[argument0] = 2
+{
+    animationStart(humanoidFlinchForward,0)
+}
+
+moveTimer = .2
 canMove = false
 
 #define meleeHit
@@ -114,7 +120,7 @@ with(handItem[argument0])
     i.dist = (length/2)+owner.handDist[argument0]+holdPoint
     i.image_angle = owner.facing
     i.dmg = meleePow*meleePowMult[argument1]*(1+((owner.charge[argument0]-1)*meleeChargePowMult[argument1]))*(1+((owner.greatWeapon*gwPowMult)-owner.greatWeapon))
-    i.impact = meleeImpact*meleeImpactMult[argument1]*owner.charge[argument0]*(1+((owner.greatWeapon*gwImpactMult)-owner.greatWeapon))
+    i.impact = meleeImpact*meleeImpactMult[argument1]*(1+((owner.charge[argument0]-1)*.5))*(1+((owner.greatWeapon*gwImpactMult)-owner.greatWeapon))
     i.z = z
     i.dmgType = meleeType[argument1]
     i.sprite_index = meleeAttackMask[argument1]
