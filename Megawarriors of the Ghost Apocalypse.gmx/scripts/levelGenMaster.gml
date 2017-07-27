@@ -100,33 +100,39 @@ riverGen()
 
 #define poiGen
 //set up the positions of points of interests
-
+var i = 0
 //critical at index 0
-pois[0] = instance_create(irandom(sizeX-5)+2,irandom(sizeY-5)+2,obj_poi)
+for (i = i;i < array_length_1d(critPoi[]);i++){
+    pois[i] = instance_create(0,0,obj_poi)
+    //poiImport(critPoi[i])
+}
 //pois[0] = poiImport(critPoi) // set up so we can eventually save all the PoIs on the map and import them later
 
 //others at index 1 to x
-for (var i = 1; i<=poiDensity;i++){
-    pois[i] = instance_create(irandom(sizeX-5)+2,irandom(sizeY-5)+2,obj_poi)
+for (i = i; i < array_length_1d(critPoi[]) + poiDensity;i++){
+    pois[i] = instance_create(0,0,obj_poi)
 }
 
 //entrances from x+1 on
-for (var i = 1; i<=numEntrance;i++){
+for (i = i; i < numEntrance + array_length_1d(critPoi[]) + poiDensity; i++){
     switch(i%4){
         case 0:
-            pois[i+poiDensity] = instance_create(irandom(sizeX-5)+2,0,obj_poi)
+            pois[i] = instance_create(0,0,obj_poi)
             break
         case 1:
-            pois[i+poiDensity] = instance_create(0,irandom(sizeY-5)+2,obj_poi)
+            pois[i] = instance_create(0,0,obj_poi)
             break
         case 2:
-            pois[i+poiDensity] = instance_create(irandom(sizeX-5)+2,sizeY-1,obj_poi)
+            pois[i] = instance_create(0,0,obj_poi)
             break
         case 3:
-            pois[i+poiDensity] = instance_create(sizeX-1,irandom(sizeY-5)+2,obj_poi)
+            pois[i] = instance_create(0,0,obj_poi)
             break
             
     }
+    pois[i].entrance = true;
+    pois[i].spaceX = 3
+    pois[i].spaceY = 3
 }
 
 
@@ -141,62 +147,102 @@ with(obj_poi){
 
     genned = false    
     while (genned = false){
-    
-        tempX = irandom(array_height_2d(other.poiPoints)-1)
-        tempY = irandom(array_length_2d(other.poiPoints,0)-1)
-        
-        if(other.poiPoints[tempX,tempY].available = true){
+        if (!entrance){
+            tempX = irandom(array_height_2d(other.poiPoints)-1)
+            tempY = irandom(array_length_2d(other.poiPoints,0)-1)   //chooses a random poiPoint (every 5 spaces starting 10 from the edge of the map)
             
-            gridX = (tempX*5)+5
-            gridY = (tempY*5)+5
+            if(other.poiPoints[tempX,tempY].available = true){
+                
+                gridX = (tempX*5)+5
+                gridY = (tempY*5)+5
+            
+                other.floorLayout[gridX,gridY].weight = 1
+                other.floorLayout[gridX,gridY].hasPoi = true
+                other.floorLayout[gridX,gridY].poi = id             //sets the point of this PoI to the earlier random poiPoint
+                
+                for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
+                    for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
+                        if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
+                            other.floorLayout[i,j].weight = 2
+                            other.floorLayout[i,j].hasPoi = true
+                            other.floorLayout[i,j].poi = id         //claims all the tiles in it's space
+                        }
+                    }
+                }
+                genned = true
+                
+                other.poiPoints[tempX,tempY].available = false //stops other PoIs from claiming it's space
+                
+                if(tempX-1 >= 0){
+                    other.poiPoints[tempX-1,tempY].available = false
+                }
+                
+                if(tempX+1 <= array_height_2d(other.poiPoints)-1){
+                    other.poiPoints[tempX+1,tempY].available = false
+                }
+                
+                if(tempY-1 >= 0){   
+                    other.poiPoints[tempX,tempY-1].available = false
+                }
+                    
+                if(tempY+1 <= array_length_2d(other.poiPoints,0)-1){
+                    other.poiPoints[tempX,tempY+1].available = false        //stops other PoIs from generating in adjacent spaces
+                }
+                
+            }
+            
+            else{           
+                for(i = 0;i < array_height_2d(other.poiPoints);i++){
+                    for(j = 0;j < array_length_2d(other.poiPoints,0);j++){
+                        if(other.poiPoints[i,j].available = true){
+                            tempX = i
+                            tempY = j                                       //if its chosen space is taken, it will just claim the point nearest to the top left
+                            break 
+                            break
+                        }
+                    }
+                }        
+            }  
+        }
+        else {
+            var tempSide = choose(0,1,2,3)
+            
+            tempX = irandom(array_height_2d(other.poiPoints)-1)
+            tempY = irandom(array_length_2d(other.poiPoints,0)-1)
+            
+            switch(tempSide){
+                case 0:
+                    tempX = 0
+                    break
+                case 1:
+                    tempX = array_height_2d(other.poiPoints)+0.8
+                    break
+                case 2:
+                    tempY = 0
+                    break
+                case 3:
+                    tempY = array_length_2d(other.poiPoints,0)+0.8
+                    break
+        
+            }
+            gridX = (tempX*5)
+            gridY = (tempY*5)
         
             other.floorLayout[gridX,gridY].weight = 1
             other.floorLayout[gridX,gridY].hasPoi = true
-            other.floorLayout[gridX,gridY].poi = id
+            other.floorLayout[gridX,gridY].poi = id             //sets the point of this PoI to the earlier random poiPoint
             
             for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
                 for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
                     if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
                         other.floorLayout[i,j].weight = 2
                         other.floorLayout[i,j].hasPoi = true
-                        other.floorLayout[i,j].poi = id
+                        other.floorLayout[i,j].poi = id         //claims all the tiles in it's space
                     }
                 }
             }
             genned = true
-            
-            other.poiPoints[tempX,tempY].available = false
-            
-            if(tempX-1 >= 0){
-                other.poiPoints[tempX-1,tempY].available = false
-            }
-            
-            if(tempX+1 <= array_height_2d(other.poiPoints)-1){
-                other.poiPoints[tempX+1,tempY].available = false
-            }
-            
-            if(tempY-1 >= 0){   
-                other.poiPoints[tempX,tempY-1].available = false
-            }
-                
-            if(tempY+1 <= array_length_2d(other.poiPoints,0)-1){
-                other.poiPoints[tempX,tempY+1].available = false
-            }
-            
         }
-        
-        else{           
-            for(i = 0;i < array_height_2d(other.poiPoints);i++){
-                for(j = 0;j < array_length_2d(other.poiPoints,0);j++){
-                    if(other.poiPoints[i,j].available = true){
-                        tempX = i
-                        tempY = j
-                        break 
-                        break
-                    }
-                }
-            }        
-        }   
     }
 }
 

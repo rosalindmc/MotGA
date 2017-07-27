@@ -12,6 +12,8 @@ spaceY = 5  //needed space
 
 buffer = 0  //the amount of space this has around it before it should generate walls.
 
+entrance = false
+
 critical = false    //whether or not this is the critical PoI
 
 podSpawn = 0    //whether or not this has a pod spawn

@@ -7,8 +7,8 @@
     sizeX = 50
     sizeY = 50
     
-    critPoi = 1     //the type of the critical point of interest
-    poiDensity = 13 //number of points of interest on the map
+    critPoi [0] = 1     //the type of the critical point of interest
+    poiDensity = 10     //number of non-critical points of interest on the map
     numEntrance = 3
     pois[0]=0
     numRivers = 4
@@ -26,4 +26,3 @@
     floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
 
 #define nodeGen
-
