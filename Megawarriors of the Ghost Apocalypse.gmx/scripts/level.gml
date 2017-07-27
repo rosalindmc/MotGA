@@ -4,11 +4,7 @@
 #define levelInitialize
 //levelInitialize
 //we need to make a world to pass information into this script
-var global.currNode = argument0
 
-currLevel = instance_create(0,0,obj_level)
-
-with (currLevel){
     biomeType = global.currNode.biomeType
     elements[0] = global.currNode.elements[]
     sizeX = global.currNode.sizeX
@@ -16,10 +12,18 @@ with (currLevel){
     
     critPoi = global.currNode.critPoi     //the type of the critical point of interest
     poiDensity = global.currNode.poiDensity //number of points of interest on the map
-    numEntrances = global.currNode.numEntrances
+    numEntrance = global.currNode.numEntrance
     pois[]=global.currNode.pois[]
     numRivers=global.currNode.numRivers
-    rivers[numRivers,4] = 0
+    
+    
+    for (var i = 0; i< numRivers;i++){
+        for(var j = 0; j < 4; j++){
+            rivers[i,j] = 0
+        }
+    }
+    
+    
     
     critPods = global.currNode.critPods    //number of pods on the critical path
     podDensity = global.currNode.podDensity  //number of pods on the map
@@ -28,17 +32,19 @@ with (currLevel){
     
     specialAreas = global.currNode.specialAreas    //number of special areas to spawn
     
-    floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
+    for (var i = 0; i< sizeX;i++){
+        for(var j = 0; j < sizeY; j++){
+            floorLayout[i,j] = 0    //the map of floors and walls
+        }
+    }
     
     genLevel()
     for(i = 0; i < array_length_1d(pois)-1; i++){
         roadMaker(floorLayout[pois[i].gridX,pois[i].gridY],floorLayout[pois[i+1].gridX,pois[i+1].gridY])
     }
     for(i=0;i<numRivers;i++){
-    riverMaker(floorLayout[rivers[i,0],river[i,1]],floorLayout[rivers[i,2],rivers[i,3]])
+        riverMaker(floorLayout[rivers[i,0],rivers[i,1]],floorLayout[rivers[i,2],rivers[i,3]])
     }
-    
-}
 
 
 #define roadMaker
