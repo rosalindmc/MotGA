@@ -22,6 +22,13 @@ splatDecal = spr_bloodSplat
 
 sprite_index = spr_blood
 
+#define partDust
+life = .25
+animSpeed = 20
+animDelay = 1
+image_xscale = argument0
+sprite_index = spr_dust
+
 #define partSheen
 life = .50
 animSpeed = 10

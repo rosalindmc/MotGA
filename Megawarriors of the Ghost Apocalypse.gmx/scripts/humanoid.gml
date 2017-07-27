@@ -38,7 +38,7 @@ charSurf = surface_create(charSurfSize,charSurfSize)
 gender = 0
 
 //Appearance Info
-clothingSprite = spr_cBarbarian
+clothingSprite = spr_cBerzerk
 skirtSprite = spr_sBarbarian
 hairSprite = spr_longHair
 hairColour = hairBlack
@@ -363,6 +363,7 @@ switch(argument0)
         flow = 2
     }
     flowTimer = .2
+    footStep(0)
     break
     
     case 2:
@@ -373,6 +374,7 @@ switch(argument0)
     animDelay[argument1] = 1
     flow = 1
     flowTimer = .2
+    footStep(0)
     break
     
     case 3:
@@ -445,14 +447,21 @@ switch(argument0)
     case 0:
     z += 4
     zspd += 2
-    hipsImage = 2
+    if sign(hspd) = sign(hFacing)
+    {
+        hipsImage = 12
+    }
+    else
+    {
+        hipsImage = 14
+    }
     hairRot = -45*sign(hspd)
     
+    footStep(0)
     animDelay[argument1] = .1
     break
     
     case 1:
-    hipsImage = 4
     hipsRot = -30*sign(hspd)
     bodyRot = -30*sign(hspd)
     hairRot = -90*sign(hspd)
@@ -464,16 +473,14 @@ switch(argument0)
     break
     
     case 2:
-    hipsImage = 10
+    hipsImage = 8
+    legLength = 3
     hipsRot = 0
     hairRot = -45*sign(hspd)
     animDelay[argument1] = .1
     
     //Hit Ground
-    if player = true
-    {
-        obj_control.shake += 1
-    }
+    footStep(1)
     break
     
     case 3:
@@ -530,10 +537,8 @@ switch(argument0)
     vspd = lengthdir_y(dodgeSpeed,facing)
     
     //Hit Ground
-    if player = true
-    {
-        obj_control.shake += 2
-    }
+    footStep(2)
+    
     break
     
     case 3:
@@ -607,4 +612,114 @@ switch(argument0)
     case 8:
     animationReset(0)
     break
+}
+
+#define humanoidFlinchForward
+animSpeed[argument1] = 1
+
+switch(argument0)
+{
+    case 0:
+    hipsImage = 12
+    hipsRot = -30*hFacing
+    bodyRot = -30*hFacing
+    hairRot = -90*hFacing
+    
+    bounce = 1
+    bounceTimer = .2
+    flow = 2
+    flowTimer = .1
+    
+    animDelay[argument1] = .1
+    footStep(1)
+    break
+
+    case 1:
+    hipsRot = -15*hFacing
+    bodyRot = -15*hFacing
+    hairRot = -45*hFacing
+
+    animDelay[argument1] = .1
+    break
+
+    case 2:
+    hipsImage = 4
+    hipsRot = -15*hFacing
+    bodyRot = -15*hFacing
+    hairRot = -15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 3:
+    hipsImage = 2
+    hipsRot = -15*hFacing
+    bodyRot = 0
+    hairRot = 15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 4:
+    animationReset(0)
+    break
+}
+
+
+#define humanoidFlinchBackward
+animSpeed[argument1] = 1
+
+switch(argument0)
+{
+    case 0:
+    hipsImage = 10
+    hipsRot = 30*hFacing
+    bodyRot = 30*hFacing
+    hairRot = 90*hFacing
+    
+    bounce = 1
+    bounceTimer = .2
+    flow = 3
+    flowTimer = .1
+    
+    animDelay[argument1] = .1
+    footStep(1)
+    break
+
+    case 1:
+    hipsRot = 15*hFacing
+    bodyRot = 15*hFacing
+    hairRot = 45*hFacing
+
+    animDelay[argument1] = .1
+    break
+
+    case 2:
+    hipsImage = 4
+    hipsRot = 15*hFacing
+    bodyRot = 15*hFacing
+    hairRot = 15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 3:
+    hipsImage = 2
+    hipsRot = 15*hFacing
+    bodyRot = 0
+    hairRot = -15*hFacing
+    animDelay[argument1] = .1
+    break
+
+    case 4:
+    animationReset(0)
+    break
+}
+
+
+#define footStep
+//Check floor and make relvent sound+particles
+
+createParticle(x,y,z,1,partDust,hFacing)
+
+if player = true
+{
+    obj_control.shake += argument0
 }

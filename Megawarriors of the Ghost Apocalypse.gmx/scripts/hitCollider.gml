@@ -2,7 +2,7 @@
 
 
 #define hitColliderInitialize
-danger = true
+danger = 2
 
 /*scr_projectile_initialize()
 colour = c_white
@@ -17,7 +17,7 @@ audio_play_sound(snd_swing,0,false)
 #define hitColliderCollisionChar
 if owner != other
 {
-    if danger = true
+    if danger = 1
     {
         damageChar(other)
     }

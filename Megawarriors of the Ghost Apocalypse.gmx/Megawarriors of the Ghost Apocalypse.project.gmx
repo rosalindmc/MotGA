@@ -33,11 +33,13 @@
     <sprite>sprites\spr_shadow</sprite>
     <sprite>sprites\spr_sheen</sprite>
     <sprite>sprites\spr_none</sprite>
+    <sprite>sprites\spr_dust</sprite>
     <sprite>sprites\spr_blood</sprite>
     <sprite>sprites\spr_bloodSplat</sprite>
     <sprite>sprites\spr_sBarbarian</sprite>
     <sprite>sprites\spr_longHair</sprite>
     <sprite>sprites\spr_cBarbarian</sprite>
+    <sprite>sprites\spr_cBerzerk</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\temp_bg</background>

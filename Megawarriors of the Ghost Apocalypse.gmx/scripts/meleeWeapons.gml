@@ -1,5 +1,6 @@
 #define meleeWeapons
 
+
 #define sword
 switch(argument0)
 {
@@ -16,8 +17,8 @@ switch(argument0)
     
     //Weapon Stats
     meleePow = 1
-    meleeRate = 1
-    meleeImpact = 3
+    meleeRate = 1.2
+    meleeImpact = 7
     meleeLunge = 4
     meleeSlow = .5
     meleeSize = 1
@@ -25,7 +26,7 @@ switch(argument0)
     
     gwPowMult = 1.5
     gwRateMult = .8
-    gwImpactMult = 1.5
+    gwImpactMult = 1.3
     gwLungeMult = 1.2
     gwSlowMult = 1.2
     gwSizeMult = 1.2
@@ -72,6 +73,6 @@ switch(argument0)
     meleeAttackMask[4] = spr_stab
     meleeLungeMult[3] = 0
     meleeRateMult[4] = 2
-    meleeLungeMult[4] = 3
+    meleeLungeMult[4] = 0
     break
 }
