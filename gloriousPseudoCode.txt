@@ -1,0 +1,39 @@
+Set up "rings":
+
+Array of nodes [9]
+arrayNodes[i].canConnect[j] lets you know connections between nodes
+
+To create a node:
+	First:
+Generate list of biomeGen and a second list of biomeElem (with # occurances = rarity)
+
+	Then, for each arraryNodes[i]:
+Randomly choose an index, then delete it from list so it can't be chosen again (both lists)
+Generate difficulty based on i's choose function
+
+Based on the above, generate numRivers, numPoi, numEntrance, numPods etc. using the following:
+biomeGen = min, biomeElem = mandatory additions, += difficulty
+
+Set up arraryNodes[i].canConnect[j] (based on i) -- might be hard-coded in globals
+
+Generate gfx
+
+
+					**********
+
+Throwing shit:
+
+When you press the throw key (t + offhand charge) and your grappling == true, then run 
+	grappleEnd(0) instead of throwItem
+	t + offhand click will simply drop grappled (grappleEnd(1))
+
+Calculate angle between mouse and character (there's probably a thing for that already)
+	and start the pullback animation
+Do the charge up timer function thing, like for attacks (copy pasta)
+
+Based on the size/weight of the grappled, calculate how far they'd get thrown on release
+
+Reset all of your grappling variables and their staggered+grappling variables
+
+Throw them (with animation), and if they collide with an enemy, damage them equal to some
+	value relative to size/weight and distance they flew before impact
