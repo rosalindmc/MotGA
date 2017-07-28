@@ -41,7 +41,7 @@ if canAttack = true and inventoryKey = false
         interact()  
     }
     
-    //Use Item
+    //Use Item (argument0)
     if lftclickedKey = true
     {
         useItem(1,0)  
@@ -52,7 +52,7 @@ if canAttack = true and inventoryKey = false
     }
 }
 
-//Release Use Item
+//Release Use Item (argument1)
 if lftreleaseKey = true
 {
     useItem(1,1)  

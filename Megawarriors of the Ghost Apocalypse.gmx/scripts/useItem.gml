@@ -1,7 +1,9 @@
 #define useItem
-//Run the use script of the item in hand argument0
+//Run the use script of the item in hand at argument0
 //Run the second use script if right clicking w/ two hands
 //Input argument 1 to script for press vs release
+    //argument1: 0 is click, 1 is release
+
 
 if throwKey = true
 {
