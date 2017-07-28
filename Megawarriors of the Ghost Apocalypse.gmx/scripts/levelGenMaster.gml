@@ -400,7 +400,7 @@ for (var i = 0;i < numRivers;i++){
         floorLayout[i,j].isRiver = false
         floorLayout[i,j].hasPoi = false*/
         
-with(obj_floor){      
+with(obj_tile){      
     weight = choose(2,2,2,2,2,2,3,3,6,7,8,8)
     rWeight = choose(1,1,2,2,3,3,4)
     g = 0
@@ -410,4 +410,3 @@ with(obj_floor){
     isRiver = false
     hasPoi = false     
     }   
-

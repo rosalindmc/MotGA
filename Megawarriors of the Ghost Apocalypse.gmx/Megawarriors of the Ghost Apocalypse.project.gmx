@@ -118,7 +118,7 @@
       <script>scripts\pointOfInterest.gml</script>
       <script>scripts\world.gml</script>
       <script>scripts\worldNode.gml</script>
-      <script>scripts\floorMaster.gml</script>
+      <script>scripts\tile.gml</script>
     </scripts>
     <scripts name="Items">
       <script>scripts\meleeWeapons.gml</script>
@@ -150,7 +150,7 @@
     </objects>
     <objects name="Environment">
       <object>objects\obj_solid</object>
-      <object>objects\obj_floor</object>
+      <object>objects\obj_tile</object>
       <object>objects\obj_terrain</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_door</object>

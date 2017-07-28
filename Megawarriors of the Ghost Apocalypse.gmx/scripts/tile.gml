@@ -1,6 +1,6 @@
-#define floorMaster
+#define tile
 
-#define floorInit
+#define tileInit
 weight = 0
 rWeight = 0
 g = 0
@@ -9,3 +9,5 @@ gridY = y
 isPath = false
 isRiver = false
 hasPoi = false
+
+

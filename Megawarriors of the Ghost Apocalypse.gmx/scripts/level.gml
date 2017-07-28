@@ -34,7 +34,7 @@
     
     for (var i = 0; i < sizeX;i++){
         for(var j = 0; j < sizeY; j++){
-            floorLayout[i,j] = instance_create(i,j,obj_floor)    //the map of floors and walls
+            floorLayout[i,j] = instance_create(i,j,obj_tile)    //the map of floors and walls
         }
     }
     
@@ -178,7 +178,7 @@ while(current.pathParent != noone)
 
 
 #define wipeTiles
-with (obj_floor){
+with (obj_tile){
     g = 0
     pathParent=noone
 }
