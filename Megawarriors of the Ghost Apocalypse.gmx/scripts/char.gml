@@ -92,12 +92,12 @@ controlScript = playerControl       //Temp, replace with ai control
 player = true                       //Change to false in type script
 
 //Vitals
-life = 12
-lifeMax = 12
+life = 38
+lifeMax = 38
 lifeRegen = 0.0 //per second
 
-stam = 4
-stamMax = 4    
+stam = 8
+stamMax = 8    
 stamRegen = 3.0   //per second
 stamDelay = 0.0
 
