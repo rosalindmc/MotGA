@@ -118,6 +118,7 @@
       <script>scripts\pointOfInterest.gml</script>
       <script>scripts\world.gml</script>
       <script>scripts\worldNode.gml</script>
+      <script>scripts\floorMaster.gml</script>
     </scripts>
     <scripts name="Items">
       <script>scripts\meleeWeapons.gml</script>

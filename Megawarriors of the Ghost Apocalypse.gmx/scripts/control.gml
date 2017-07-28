@@ -37,7 +37,12 @@ shake = 0
 kick = 0
 
 //global.currNode = noone
-worldInit()
+global.numNodes = 9
+mainWorld = instance_create(0,0,obj_world)
+with (mainWorld){
+    worldGen()
+}
+
 
 global.currLevel = instance_create(0,0,obj_level)
 
@@ -138,8 +143,7 @@ with(global.currLevel){
             //if floorLayout[i,j].pathParent != noone
             //{
             //    draw_arrow(floorLayout[i,j].x*metre*2+15,floorLayout[i,j].y*metre*2+15,floorLayout[i,j].pathParent.x*metre*2+10,floorLayout[i,j].pathParent.y*metre*2+10,7)
-            //}
-            
+            //}          
             if(floorLayout[i,j].isRiver == true && floorLayout[i,j].isPath == true){
                 draw_sprite(spr_bridge,i+j,i*metre+10,j*metre+10)
                 //drawText(c_black,c_orange,i*metre*2+10,j*metre*2+10,'B')
@@ -318,35 +322,40 @@ if black > 0
 
 
 #define enumerators
+
+
+
+
 enum biomeGen{
     none = 0,
-    swamp = 1,
-    mountain = 2,
+    normalForest = 1
+    /*mountain = 2,
     plain = 3,
-    forest = 4,
+    swamp = 4,
     cave = 10,
     temple = 11,
-    dungeon = 12
-}
+    dungeon = 12*/
+};
 
-enum biomeElem{
+enum biomeQualifiers{
     none = 0,
-    ghost = 1,
-    metal = 2,
+    outlaw = 1,           //bandits and stuff
+    villainous = 2        //more minions of evil
+    /*metal = 2,
     leaf = 3,
     fire = 4,
     chaos = 10,
     law = 11,
     good = 12,
     evil = 13,
-    debrah = 14
-}
+    debrah = 14*/
+};
 
 enum levelSize{
     small = 40,
     medium = 60,
     large = 80
-}
+};
 
 enum poiType{
     none = 0,
@@ -358,7 +367,7 @@ enum poiType{
     specChar = 12,
     dungeonPort = 13
     //Doors and Keysssss?
-}
+};
 
 enum dmgType{
     normal = 0,
@@ -375,18 +384,18 @@ enum dmgType{
     blood = 11,
     mind = 12,
     thunder = 13
-}
+};
 
 
 enum podType{
     none = 0,
     minions = 1   
-}
+};
 
 enum itemType{
     none = 0,
     knife = 1
-}
+};
 
 enum bossType{
     none = 0,

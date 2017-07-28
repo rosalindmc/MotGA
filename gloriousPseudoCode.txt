@@ -35,5 +35,10 @@ Based on the size/weight of the grappled, calculate how far they'd get thrown on
 
 Reset all of your grappling variables and their staggered+grappling variables
 
+
+
+
+Fire aspect challenge rating in hot peppers
+
 Throw them (with animation), and if they collide with an enemy, damage them equal to some
 	value relative to size/weight and distance they flew before impact

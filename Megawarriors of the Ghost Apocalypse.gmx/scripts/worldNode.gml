@@ -2,8 +2,8 @@
 
 
 #define nodeInit
-    biomeType = 4
-    elements[0] = 0
+    biomeType = 1
+    element = 0
     sizeX = 50
     sizeY = 50
     
@@ -13,10 +13,10 @@
     pois[0]=0
     numRivers = 4
 
-    rivers[numRivers,4] = 0    
+    rivers[numRivers,4] = 0    //number of indexes is to support x1,y1,x2,y2 for each river
     
     
-    critPods =0    //number of pods on the critical path
+    critPods = 0    //number of pods on the critical path
     podDensity = 0  //number of pods on the map
     
     itemDensity = 0 //number of item spawns on the map
@@ -26,3 +26,6 @@
     floorLayout[sizeX,sizeY] = 0    //the map of floors and walls
 
 #define nodeGen
+// set up critPods based on challenge
+// itemDensity
+// specialAreas

@@ -88,12 +88,16 @@ Connect points of interest with paths and generate paths
 #define genLevel
 randomize()
 switch(biomeType){
-case 4:
+case 1:
     forestGen(id)
 
 }
+
 poiGen()
+
 riverGen() 
+
+
 
 
 
@@ -106,12 +110,16 @@ for (i = i;i < array_length_1d(critPoi[]);i++){
     pois[i] = instance_create(0,0,obj_poi)
     //poiImport(critPoi[i])
 }
+
 //pois[0] = poiImport(critPoi) // set up so we can eventually save all the PoIs on the map and import them later
+
+
 
 //others at index 1 to x
 for (i = i; i < array_length_1d(critPoi[]) + poiDensity;i++){
     pois[i] = instance_create(0,0,obj_poi)
 }
+
 
 //entrances from x+1 on
 for (i = i; i < numEntrance + array_length_1d(critPoi[]) + poiDensity; i++){
@@ -143,10 +151,13 @@ for(i =0;i <= ceil(sizeX/5)- 2;i++){
     }
 }
 
+
 with(obj_poi){
 
     genned = false    
-    while (genned = false){
+    reps = 0
+    while (genned = false && reps <= 10){
+        reps++
         if (!entrance){
             tempX = irandom(array_height_2d(other.poiPoints)-1)
             tempY = irandom(array_length_2d(other.poiPoints,0)-1)   //chooses a random poiPoint (every 5 spaces starting 10 from the edge of the map)
@@ -194,10 +205,10 @@ with(obj_poi){
             else{           
                 for(i = 0;i < array_height_2d(other.poiPoints);i++){
                     for(j = 0;j < array_length_2d(other.poiPoints,0);j++){
-                        if(other.poiPoints[i,j].available = true){
+                        if(other.poiPoints[i,j].available == true){
                             tempX = i
-                            tempY = j                                       //if its chosen space is taken, it will just claim the point nearest to the top left
-                            break 
+                            tempY = j
+                            break
                             break
                         }
                     }
@@ -212,16 +223,16 @@ with(obj_poi){
             
             switch(tempSide){
                 case 0:
-                    tempX = 0
+                    tempX = 0.2
                     break
                 case 1:
-                    tempX = array_height_2d(other.poiPoints)+0.8
+                    tempX = array_height_2d(other.poiPoints)+0.6
                     break
                 case 2:
-                    tempY = 0
+                    tempY = 0.2
                     break
                 case 3:
-                    tempY = array_length_2d(other.poiPoints,0)+0.8
+                    tempY = array_length_2d(other.poiPoints,0)+0.6
                     break
         
             }
@@ -242,7 +253,58 @@ with(obj_poi){
                 }
             }
             genned = true
+            
         }
+        
+        if (reps = 10){
+            for(i = 0;i < array_height_2d(other.poiPoints);i++){
+                    for(j = 0;j < array_length_2d(other.poiPoints,0);j++){
+                        if(other.poiPoints[i,j].available == true){
+                            tempX = i
+                            tempY = j
+                            
+                            gridX = (tempX*5)+5
+                            gridY = (tempY*5)+5
+                        
+                            other.floorLayout[gridX,gridY].weight = 1
+                            other.floorLayout[gridX,gridY].hasPoi = true
+                            other.floorLayout[gridX,gridY].poi = id             //sets the point of this PoI to the earlier random poiPoint
+                            
+                            for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
+                                for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
+                                    if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
+                                        other.floorLayout[i,j].weight = 2
+                                        other.floorLayout[i,j].hasPoi = true
+                                        other.floorLayout[i,j].poi = id         //claims all the tiles in it's space
+                                    }
+                                }
+                            }
+                            genned = true
+                            break 
+                            break
+                        }
+                    }
+                }
+        }
+    }
+    if (genned != true){
+        gridX = irandom(other.sizeX-10)+5
+        gridY = irandom(other.sizeY-10)+5
+        
+        other.floorLayout[gridX,gridY].weight = 1
+        other.floorLayout[gridX,gridY].hasPoi = true
+        other.floorLayout[gridX,gridY].poi = id             //sets the point of this PoI to the earlier random poiPoint
+        
+        for(i = gridX-(ceil(spaceX/2)-1);i <= gridX+(floor(spaceX/2));i++){
+            for(j = gridY-(ceil(spaceY/2)-1);j <= gridY+(floor(spaceY/2));j++){
+                if(i >= 0 && j >= 0 && i < other.sizeX && j < other.sizeY){
+                    other.floorLayout[i,j].weight = 2
+                    other.floorLayout[i,j].hasPoi = true
+                    other.floorLayout[i,j].poi = id         //claims all the tiles in it's space
+                }
+            }
+        }
+        genned = true
     }
 }
 
@@ -327,16 +389,25 @@ for (var i = 0;i < numRivers;i++){
 
 
 //floor tile setup
-for (var i=0; i<sizeX; i++){
-    for (var j=0; j<sizeY; j++){
-        floorLayout[i,j]= instance_create(i,j,obj_floor)
-        floorLayout[i,j].weight = choose(2,2,2,2,2,2,3,3,6,7,8,8)
+//for (var i=0; i<sizeX; i++){
+   // for (var j=0; j<sizeY; j++){
+        /*floorLayout[i,j].weight = choose(2,2,2,2,2,2,3,3,6,7,8,8)
         floorLayout[i,j].rWeight = choose(1,1,2,2,3,3,4)
         floorLayout[i,j].g = 0
         floorLayout[i,j].gridX = i
         floorLayout[i,j].gridY = j
         floorLayout[i,j].isPath = false
         floorLayout[i,j].isRiver = false
-        floorLayout[i,j].hasPoi = false
-    }
-}
+        floorLayout[i,j].hasPoi = false*/
+        
+with(obj_floor){      
+    weight = choose(2,2,2,2,2,2,3,3,6,7,8,8)
+    rWeight = choose(1,1,2,2,3,3,4)
+    g = 0
+    gridX = x
+    gridY = y
+    isPath = false
+    isRiver = false
+    hasPoi = false     
+    }   
+
