@@ -6,13 +6,7 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_mask</sprite>
-    <sprite>sprites\spr_humanoidArms</sprite>
-    <sprite>sprites\spr_humanoidLegs</sprite>
-    <sprite>sprites\spr_humanoidHead</sprite>
-    <sprite>sprites\spr_humanoidChest</sprite>
-    <sprite>sprites\spr_humanoidBody</sprite>
-    <sprite>sprites\spr_sword</sprite>
+    <sprite>sprites\spr_none</sprite>
     <sprites name="HUD">
       <sprite>sprites\spr_reticle2</sprite>
       <sprite>sprites\spr_reticle</sprite>
@@ -28,18 +22,50 @@
       <sprite>sprites\spr_tree</sprite>
       <sprite>sprites\spr_grass</sprite>
     </sprites>
-    <sprite>sprites\spr_slash</sprite>
-    <sprite>sprites\spr_stab</sprite>
-    <sprite>sprites\spr_shadow</sprite>
-    <sprite>sprites\spr_sheen</sprite>
-    <sprite>sprites\spr_none</sprite>
-    <sprite>sprites\spr_dust</sprite>
-    <sprite>sprites\spr_blood</sprite>
-    <sprite>sprites\spr_bloodSplat</sprite>
-    <sprite>sprites\spr_sBarbarian</sprite>
-    <sprite>sprites\spr_longHair</sprite>
-    <sprite>sprites\spr_cBarbarian</sprite>
-    <sprite>sprites\spr_cBerzerk</sprite>
+    <sprites name="Characters">
+      <sprites name="Model">
+        <sprite>sprites\spr_humanoidLegs</sprite>
+        <sprite>sprites\spr_shadow</sprite>
+        <sprite>sprites\spr_humanoidBody</sprite>
+        <sprite>sprites\spr_humanoidHead</sprite>
+        <sprite>sprites\spr_humanoidChest</sprite>
+        <sprite>sprites\spr_humanoidArms</sprite>
+      </sprites>
+      <sprites name="Hair">
+        <sprite>sprites\spr_longHair</sprite>
+      </sprites>
+      <sprites name="Class Clothes">
+        <sprite>sprites\spr_cBerzerk</sprite>
+        <sprite>sprites\spr_cBerzerkM</sprite>
+        <sprite>sprites\spr_sBarbarian</sprite>
+        <sprite>sprites\spr_cBarbarian</sprite>
+        <sprite>sprites\spr_cAssassin</sprite>
+        <sprite>sprites\spr_cBurglar</sprite>
+        <sprite>sprites\spr_cDandy</sprite>
+        <sprite>sprites\spr_cDesperado</sprite>
+        <sprite>sprites\spr_cScoundrel</sprite>
+        <sprite>sprites\spr_cFighter</sprite>
+        <sprite>sprites\spr_sFighter</sprite>
+        <sprite>sprites\spr_cGhostHunter</sprite>
+        <sprite>sprites\spr_cScavenger</sprite>
+        <sprite>sprites\spr_cWarrior</sprite>
+        <sprite>sprites\spr_cWarriorM</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="Particles">
+      <sprite>sprites\spr_dust</sprite>
+      <sprite>sprites\spr_sheen</sprite>
+      <sprite>sprites\spr_blood</sprite>
+      <sprite>sprites\spr_bloodSplat</sprite>
+    </sprites>
+    <sprites name="Hitbox">
+      <sprite>sprites\spr_stab</sprite>
+      <sprite>sprites\spr_mask</sprite>
+      <sprite>sprites\spr_slash</sprite>
+    </sprites>
+    <sprites name="Items">
+      <sprite>sprites\spr_sword</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\temp_bg</background>

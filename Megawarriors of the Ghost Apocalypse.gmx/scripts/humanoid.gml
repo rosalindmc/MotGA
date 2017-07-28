@@ -38,8 +38,8 @@ charSurf = surface_create(charSurfSize,charSurfSize)
 gender = 0
 
 //Appearance Info
-clothingSprite = spr_cBerzerk
-skirtSprite = spr_sBarbarian
+clothingSprite = spr_cAssassin
+skirtSprite = spr_none
 hairSprite = spr_longHair
 hairColour = hairBlack
 skinTone = choose(skinTan,skinDark,skinBrown,skinPink,skinPale,skinFireRed,skinBurntRed,skinAshRed)
@@ -133,13 +133,8 @@ handY[1] = 0
 handX[2] = 0
 handY[2] = 0
 
-//Body Variants
+//Body Variants+Temp Randomization
 gender = choose(0,1)
-
-if gender = 1
-{
-    clothingSprite = spr_none
-}
 
 switch(choose(0,1,2))
 {
@@ -177,6 +172,26 @@ headYAdjust = 4
 break
 }
 
+//Temp Rando Clothes
+switch(choose(0,1,2,3,4,5,6,7,8,9,10))
+{
+case 0: clothingSprite = spr_cBerzerk
+skirtSprite = spr_sBarbarian break
+case 1:  clothingSprite = spr_cBarbarian
+skirtSprite = spr_sBarbarian break
+case 2:  clothingSprite = spr_cWarrior
+skirtSprite = spr_sBarbarian break
+case 3:  clothingSprite = spr_cFighter
+skirtSprite = spr_sFighter break
+case 4:  clothingSprite = spr_cScavenger
+skirtSprite = spr_sBarbarian break
+case 5:  clothingSprite = spr_cScoundrel break
+case 6:  clothingSprite = spr_cDandy break
+case 7:  clothingSprite = spr_cAssassin break
+case 8:  clothingSprite = spr_cBurglar break
+case 9:  clothingSprite = spr_cDesperado break
+case 10: clothingSprite = spr_cGhostHunter break
+}
 
 #define humanoidDraw
 //Establish bone information
@@ -260,14 +275,14 @@ if surface_exists(charSurf)
         draw_sprite_ext(hairSprite,4+bounce,headX,headY,hFacing,1,hairRot,hairColour,1)    
     }
     
-    if handDir[1] < 180
+    if facing+handDir[1] < 180
     {
     //Right Arm
     draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],skinTone,1)
     draw_sprite_ext(clothingSprite,10+armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
     }
     
-    if handDir[2] < 180
+    if (greatWeapon = false and facing+handDir[2] < 180) or (greatWeapon = true and facing+handDir[1] < 180)
     {
     //Left Arm
     draw_sprite_ext(armSprite,armLength[2]+armSpriteLength,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],skinTone,1)
@@ -304,14 +319,14 @@ if surface_exists(charSurf)
         draw_sprite_ext(hairSprite,4+bounce,headX,headY,hFacing,1,hairRot,hairColour,1)    
     }
     
-    if handDir[1] >= 180
+    if facing+handDir[1] >= 180
     {
     //Right Arm
     draw_sprite_ext(armSprite,armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],skinTone,1)
     draw_sprite_ext(clothingSprite,10+armLength[1],shldrX[1+shldrSwap],shldrY[1+shldrSwap],armStretch[1],bodyHFacing,handPoint[1],c_white,1)
     }
     
-    if handDir[2] >= 180
+    if (greatWeapon = false and facing+handDir[2] >= 180) or (greatWeapon = true and facing+handDir[1] >= 180)
     {
     //Left Arm
     draw_sprite_ext(armSprite,armLength[2]+armSpriteLength,shldrX[2-shldrSwap],shldrY[2-shldrSwap],armStretch[2],bodyHFacing,handPoint[2],skinTone,1)
