@@ -102,6 +102,53 @@ riverGen()
 
 
 
+
+#define podGen
+
+critPathTiles = ds_list_create()
+openTiles = ds_list_create()
+
+with(obj_tile){
+   
+    if(critPath){
+        ds_list_add(other.critPathTiles, id)
+    }
+    else if (isPath){
+        ds_list_add(other.openTiles, id)
+    }
+    
+}
+
+
+k = 0
+podList[k] = noone
+
+for(i = 0; i<critPods;i++){
+    var rando = irandom(ds_list_size(critPathTiles));
+    podList[k] = instance_create(0,0,obj_pod)
+    idTemp = ds_list_find_value(critPathTiles, rando)
+    podList[k].gridX = idTemp.gridX
+    podList[k].gridY = idTemp.gridY
+    ds_list_delete(critPathTiles, rando);
+    k++
+}
+
+for(i = critPods; i<critPods+numPods;i++){
+    var rando = irandom(ds_list_size(openTiles));
+    podList[k] = instance_create(0,0,obj_pod)
+    idTemp = ds_list_find_value(openTiles, rando)
+    podList[k].gridX = idTemp.gridX;
+    podList[k].gridY = idTemp.gridY;
+    ds_list_delete(openTiles, rando);
+    k++
+}
+
+ds_list_destroy(critPathTiles)
+
+ds_list_destroy(openTiles)
+
+
+
 #define poiGen
 //set up the positions of points of interests
 var i = 0
