@@ -9,4 +9,3 @@ global.currNode = map[0]
 
 
 #define worldGen
-
