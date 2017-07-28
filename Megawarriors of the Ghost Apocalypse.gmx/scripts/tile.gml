@@ -10,4 +10,6 @@ isPath = false
 isRiver = false
 hasPoi = false
 
+critPath = false
+
 

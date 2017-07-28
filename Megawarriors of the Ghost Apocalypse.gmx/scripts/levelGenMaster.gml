@@ -108,6 +108,7 @@ var i = 0
 //critical at index 0
 for (i = i;i < array_length_1d(critPoi[]);i++){
     pois[i] = instance_create(0,0,obj_poi)
+    pois[i].critical = true;
     //poiImport(critPoi[i])
 }
 
@@ -408,5 +409,7 @@ with(obj_tile){
     gridY = y
     isPath = false
     isRiver = false
-    hasPoi = false     
+    hasPoi = false   
+    
+    critPath = false  
     }   

@@ -47,6 +47,37 @@
     for(i=0;i<numRivers;i++){
         riverMaker(floorLayout[rivers[i,0],rivers[i,1]],floorLayout[rivers[i,2],rivers[i,3]])
     }
+    
+    var k = 0
+    critLength[k] = instance_create(0,0,obj_flag)
+    critLength[k].start = pois[array_length_1d(pois)-1]
+    
+    for(i = 0; i < array_length_1d(pois)-1; i++){
+        for(j = 0; j < array_length_1d(pois)-1; j++){
+            if(pois[i].entrance = true){
+                if (pois[j].critical = true){
+                    critLength[k] = critPather(floorLayout[pois[i].gridX,pois[i].gridY],floorLayout[pois[j].gridX,pois[j].gridY])
+                    k++
+                }
+            }
+        }
+    }
+    
+    var j = 0
+    
+    for(i = 0; i < array_length_1d(critLength)-1; i++){
+        if (critLength[i].finalWeight>critLength[i+1].finalWeight){
+            j = i
+        }
+        else{
+            j = i+1
+        }
+    }
+    
+    global.pc.x = critLength[j].start.gridX*16+8
+    global.pc.y = critLength[j].start.gridY*16+8
+
+    
    
 
 
@@ -174,6 +205,65 @@ while(current.pathParent != noone)
     current = current.pathParent
 }
 
+
+
+
+#define critPather
+wipeTiles()
+        
+var start
+var finalWeight = 0
+
+start = argument0
+finish = argument1
+        
+open = ds_priority_create()
+ds_priority_add(open,start,0)
+
+closed = ds_list_create()
+current = start;
+//start pathing
+
+while(current != finish){
+    current = ds_priority_delete_min(open);
+    ds_list_add(closed, current);
+    
+    //show_debug_message(current.x)
+    //show_debug_message(current.y)
+    
+    //step through all neighbours
+    if (current.gridX - 1 != -1){
+        algoCheckNeighbours(floorLayout[current.gridX-1, current.gridY],0);
+    }
+    if (current.gridX + 1 != sizeX){
+        algoCheckNeighbours(floorLayout[current.gridX+1, current.gridY],0);
+    }
+    if (current.gridY - 1 != -1){
+        algoCheckNeighbours(floorLayout[current.gridX, current.gridY-1],0);
+    }
+    if (current.gridY + 1 != sizeY){
+        algoCheckNeighbours(floorLayout[current.gridX, current.gridY+1],0);
+    }
+}
+
+ds_priority_destroy(open)
+ds_list_destroy(closed)
+
+
+returnFlag = instance_create(0,0,obj_flag)
+returnFlag.start = argument0
+returnFlag.finalWeight = 0
+
+current = finish
+while(current.pathParent != noone)
+{
+    current.critPath = true
+    returnFlag.finalWeight += current.weight
+    current.pathParent.critPath = true
+    current = current.pathParent
+}
+
+return returnFlag
 
 
 
