@@ -90,6 +90,8 @@ randomize()
 switch(biomeType){
 case 1:
     forestGen(id)
+default:
+    forestGen(id)
 
 }
 
